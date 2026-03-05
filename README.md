@@ -6,7 +6,7 @@ This repo contains all codes and data associated with our study exploring macrog
 -  The main branch should always be deployable - create branches for specific tasks (like obj. 1 analysis, obj. 2 analysis, etc)
 - Before beginning work, always "fetch/pull origin" through GitHub Desktop to reduce merge conflicts
 - At a minimum, you should be pushing your changes to the branch you are working on **once a day**.
-- Only one person should be merging completed branches into the main branch\
+- Only one person should be merging completed branches into the main branch
 - Once branches are merged, delete branches to keep the repo tidy
 
 ## The daily flow for GitHub using GitHub Desktop
