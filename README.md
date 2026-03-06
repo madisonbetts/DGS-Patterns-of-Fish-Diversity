@@ -30,14 +30,6 @@ Create a new branch when:
 5) Choose where on your computer you want to save it (the "Local Path")
 6) Click "Clone"
 
-### How to create a new branch with GitHub Desktop
-1) Click the "Current Branch" dropdown at the top
-2) Click "New Branch"
-3) Type your branch name (e.g. feature/objective-yourname)
-4) Click "Create Branch"
-5) Then publish it to GitHub, click "Publish Branch" so your group can see it
-- Reminder: Make sure you pull main first before creating your branch so you start with the latest version including the folder structure. Each person should create their own branch before touching any files
-
 ### How to push/pull using GitHub Desktop
 #### Pulling (getting changes from GitHub)
 1) Make sure you're on the right branch (check the "Current Branch" dropdown)
@@ -48,5 +40,13 @@ Create a new branch when:
 1) Make your changes in your code editor and save them
 2) GitHub Desktop will automatically detect the changes in the "Changes" tab
 3) Write a commit message in the bottom left (summary box is required, description is optional)
-4) Click "Commit to branch-name"
-5) Click "Push Origin" at the top right to send it to GitHub
+
+### ONLY IF NEEDED: How to create a new branch with GitHub Desktop
+1) Click the "Current Branch" dropdown at the top
+2) Click "New Branch"
+3) Type your branch name (e.g. feature/objective-yourname)
+4) Click "Create Branch"
+5) Then publish it to GitHub, click "Publish Branch" so your group can see it
+- Reminder: Make sure you pull main first before creating your branch so you start with the latest version including the folder structure
+5) Click "Commit to branch-name"
+6) Click "Push Origin" at the top right to send it to GitHub
