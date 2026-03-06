@@ -1,6 +1,14 @@
 # DGS-Patterns-of-Fish-Diversity
 This repo contains all codes and data associated with our study exploring macrogenetic patterns of riverine fish genetic diversity across the United States.
 
+## Navigation of Repository
+
+| Folder | File | Contents |
+| --- | --- | --- |
+| Obj 1 > Data |  | Raw data associated with Obj 1 |
+| Obj 2 > Data |  | Raw data associated with Obj 2 |
+| Obj 3 > Data|  | Raw data associated with Obj 3 |
+
 ## Ground rules for contributing to this repo:
 - As a contributor, *clone* this repo onto your personal device, **do not fork it**
 - Create logical subfolders/scripts for your work and name them clearly
