@@ -23,7 +23,10 @@ pop <- pop %>%
   filter(Geog_1 == "United States of America", Latitude < 50, Latitude > 25)
 # return only freshwater fishes
 sp <- sp %>% 
-  filter(Life_form == "Fishes", Habitat_breeding == "Freshwater", Habitat_adulthood == "Freshwater")
+  filter(Life_form == "Fishes", 
+         Habitat_breeding == "Freshwater", 
+         Habitat_adulthood == "Freshwater",
+         BIOME != "Lake")
 # merge pop and dat by dat$Study_id
 dat <- inner_join(sp, pop, by = "Study_id")
 # write it to csv
@@ -37,14 +40,14 @@ He_lat <- ggplot(dat, aes(x = Latitude, y = He)) +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Expected Heterozygosity (He)") +
   theme_classic()
-ggsave(He_lat, filename = "Figures/He_lat.png", width = 6, height = 4, dpi = 300)
+ggsave(He_lat, filename = "Figures/He_lat.pdf", width = 6, height = 4, dpi = 300)
 
 Ho_lat <- ggplot(dat, aes(x = Latitude, y = Ho)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Observed Heterozygosity (Ho)") +
   theme_classic()
-ggsave(Ho_lat, filename = "Figures/Ho_lat.png", width = 6, height = 4, dpi = 300)
+ggsave(Ho_lat, filename = "Figures/Ho_lat.pdf", width = 6, height = 4, dpi = 300)
 
 
 # shape files for maps
@@ -62,10 +65,10 @@ He_gdr <- ggplot() +
   scale_color_viridis_c(
     option = "magma",
     limits = c(min(dat$He), max(dat$He)),
-    breaks = seq(0.3, 0.7, by = 0.05)
+    breaks = seq(0.3, 0.7, by = 0.1)
   ) +
   theme_void()
-ggsave(He_gdr, filename = "Figures/He_gdr.png", width = 6, height = 4, dpi = 300)
+ggsave(He_gdr, filename = "Figures/He_gdr.pdf", width = 6, height = 4, dpi = 300)
 
 # but dont include populations who do not have an Ho value
 Ho_gdr <- ggplot() +
@@ -74,10 +77,9 @@ Ho_gdr <- ggplot() +
   geom_point(data = dat %>% filter(!is.na(Ho)), aes(x = Longitude, y = Latitude, color = Ho))+
   scale_color_viridis_c(
     option = "magma",
-    breaks = seq(0.3, 0.7, by = 0.05)
-  ) +
+    breaks = seq(0.3, 0.7, by = 0.1)) +
   theme_void()
-ggsave(Ho_gdr, filename = "Figures/Ho_gdr.png", width = 6, height = 4, dpi = 300)
+ggsave(Ho_gdr, filename = "Figures/Ho_gdr.pdf", width = 6, height = 4, dpi = 300)
   
 ####################### pull phylogeny and summarize He/Ho ################################################
 
@@ -100,9 +102,7 @@ for (i in 1:nrow(summary)){
 }
 
 # ensure the order of the summary matches the order of the tips in the phylogeny
-summary <- summary[
-  match(phy$tip.label, summary$Spec_Latin_GenDivRange),
-]
+summary <- summary[match(phy$tip.label, summary$Spec_Latin_GenDivRange),]
 
 # pull taxonomy and species names
 order_vec <- summary$tax
@@ -195,7 +195,7 @@ for(i in seq_along(yy)) {
 }
 
 mtext(
-  "Heterozygosity of Select North American Freshwater Fishes"
+  "Heterozygosity of Select North American \n Freshwater Fishes"
 )
 
 dev.off()
