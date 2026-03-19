@@ -1,0 +1,33 @@
+site,basin,ecoregion,site_name,lat,lon,individuals
+A1,ACF,CP,Aycocks Creek,31.1085,-84.7644,4
+A2,ACF,CP,Sawhatchee Creek,31.1808,-85.0435,4
+A3,ACF,CP,Cooleewahee Creek,31.4052,-84.3001,4
+A4,ACF,PD,Centralhatchee Creek,33.3111,-85.1047,5
+A5,ACF,PD,New River,33.2489,-84.9353,4
+A6,ACF,MT,Soque River,34.6182,-83.5294,4
+A7,ACF,MT,Chattahoochee River,34.6873,-83.7101,4
+A8,ACF,MT,Chestatee Creek,34.5278,-83.94,5
+S1,Savannah,CP,Beaverdam Creek (A),32.8213,-81.6229,4
+S2,Savannah,CP,Beaverdam Creek (B),32.9373,-81.8152,4
+S3,Savannah,CP,Ebenezer Creek,32.3648,-81.2315,3
+S4,Savannah,PD,Horn Creek,33.6642,-82.0679,4
+S5,Savannah,PD,Steven's Creek,33.7946,-82.1454,4
+S6,Savannah,MT,Chauga River,34.8331,-83.1748,3
+S7,Savannah,MT,Chattooga River (A),34.9734,-83.1158,1
+S8,Savannah,MT,Chattooga River (B),34.8154,-83.3066,5
+R1,Roanoke,CP,Lee's Creek,36.4931,-77.6297,7
+R2,Roanoke,CP,Roanoke River side channel,36.4321,-77.5872,6
+R3,Roanoke,CP,Quankey Creek,36.3183,-77.5947,7
+R4,Roanoke,PD,Goose Creek,37.2666,-79.5875,5
+R5,Roanoke,PD,Roanoke Creek,36.9309,-78.665,5
+R6,Roanoke,MT,North Fork Roanoke River,37.1869,-80.3525,5
+R7,Roanoke,MT,South Fork Roanoke River,37.1625,-80.2418,3
+R8,Roanoke,MT,Tinker Creek,37.2846,-79.9196,3
+J1,James,CP,Chickahominy River,37.5757,-77.3367,4
+J2,James,CP,Falling Creek,37.4393,-77.4391,5
+J3,James,CP,Swift Creek,37.3139,-77.4943,5
+J4,James,PD,Hardware River,37.8125,-78.455,5
+J5,James,PD,Willis River,37.667,-78.1655,5
+J6,James,MT,John's Creek,37.5064,-80.106,5
+J7,James,MT,Dunlap Creek,37.8008,-80.0473,4
+J8,James,MT,Calfpasture River,37.967,-79.4966,4
