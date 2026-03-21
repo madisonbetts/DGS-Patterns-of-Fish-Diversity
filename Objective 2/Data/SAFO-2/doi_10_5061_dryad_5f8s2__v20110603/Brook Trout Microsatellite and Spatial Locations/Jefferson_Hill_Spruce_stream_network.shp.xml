@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--<!DOCTYPE metadata SYSTEM "http://www.esri.com/metadata/esriprof80.dtd">-->
+<metadata xml:lang="en">
+	<idinfo>
+		<citation>
+			<citeinfo>
+				<origin>State of Connecticut, Department of Environmental Protection (data editor, publisher, compiler)</origin>
+				<origin>U.S. Geological Survey, National Mapping Program (data compiler)</origin>
+				<pubdate>20000101</pubdate>
+				<title>Hydrography Network Line</title>
+				<edition>2005</edition>
+				<geoform>vector digital data</geoform>
+				<pubinfo>
+					<pubplace>Hartford, Connecticut, USA</pubplace>
+					<publish>State of Connecticut, Department of Environmental Protection</publish>
+				</pubinfo>
+				<othercit>The USGS is the collector of the data (compiler) that is the basis for Hydrography Network. The State of Connecticut, Department of Environmental Protection is the creator and maintainer of the data layer (editor) and producer (publisher) of this information for use. The 2005 Edition essentially includes the same set of geographic features published in 2000. However, the 2005 Edition differs from information published in 2000 primarily as a result of the addition of metadata. This layer includes information that is relatively static and does not change over time. Data compiled at 1:24,000 scale. The 2005 Edition is the last version of this data layer.</othercit>
+				<onlink>http://www.dep.state.ct.us/gis</onlink>
+				<ftname Sync="TRUE">jeffspruce</ftname>
+			</citeinfo>
+		</citation>
+		<descript>
+			<abstract>Hydrography Network is a 1:24,000-scale, line feature-based layer that is composed of line hydrography features and centerlines for polygon hydrography features depicted on the U.S. Geological Survey (USGS) 7.5 minute topographic quadrangle maps for the State of Connecticut. It is a single-line model of Connecticut's hydrography indicating hydrologic connectivity and direction of flow. This data layer is a subset of hydrography features from the 1:24,000-scale DEP Hydrography layer (based on the topographic maps) plus connecting lines in place of marshes, small ponds and gaps. There are no polygon features. The Hydrography Network is composed of three sets of lines: 1) line hydrography features for single-line rivers, streams, canals and ditches, 2) computer generated centerline representations for the polygon hydrography features for rivers, streams, brooks, reservoirs, lakes, ponds, bays, coves, and harbors  and 3) digitized centerlines for the polygon hydrography feature for marshes and connectors where the actual stream channel does not appear in the Hydrography layer but can be inferred reasonably from the topographic maps. Only hydrography features that are part of the surface water drainage are included. Isolated lakes and ponds without obvious or inferable connection to the streams, marshes at headwaters, and manmade features such as aqueducts or canals were not centerlined or included. In cases of multiple paths through a section of hydrography (i.e. multiple outlets from a lake to the same river or a braided stream), a single path was chosen and used. For lake headwaters the centerline begins at the center of the far shore. The centerlines were generated based on the shoreline of water polygons after removal of island, rocks, tidal flats, etc., consequently lines will run across some islands when displayed with the Hydrography layer. All line features are oriented from headwater to outlet (in the ArcInfo coverage) for use in upstream/downstream tracing. The Hydrography Network layer is based on Hydrography layer information from USGS topographic quadrangle maps published between 1969 and 1984 so it does not depict conditions at any one particular point in time. Also, the layer does not reflect recent changes with the course of streams or location of shorelines impacted by natural events or changes in development since the time the USGS 7.5 minute topographic quadrangle maps were published. Attribute information is composed of codes to identify hydrography network features by major drainage basin. The layer does not include reach code or stream order attribute information. The Hydrography Network is fully hydrologically connected within each major basin and where major basins flow into each other within the State of Connecticut. This layer was originally published in 2000. The 2005 edition includes the same water features published in 2000. For stream modeling, routing, and analysis work this data is supplanted by the more detailed National Hydrography Dataset (NHD) published by the U.S. Geological Survey. The 2005 Edition is the last version of the DEP Hydrography Network data layer.</abstract>
+			<purpose>Hydrography Network is 1:24,000-scale hydrologic model data. It represents a hydrologically connected, directional model of the hydrography information published on the USGS topographic quadrangle maps. Use this layer with other 1:24,000-scale base map data such as Roads and Trails, Railroads, Airports, and Towns. The Hydrography Network layer is not intended for maps printed at map scales greater or more detailed than 1:24,000 scale (1 inch = 2,000 feet). For stream modeling, routing, and analysis work this data is supplanted by the more detailed National Hydrography Dataset (NHD) published by the U.S. Geological Survey. The Hydrography Network layer could be used for simple applications where stream connectivity and flow direction (in the ArcInfo coverage) are important but the detail, attributes and complexity of NHD are not needed.</purpose>
+			<langdata Sync="TRUE">en</langdata>
+		</descript>
+		<timeperd>
+			<timeinfo>
+				<rngdates>
+					<begdate>1969</begdate>
+					<enddate>1984</enddate>
+				</rngdates>
+			</timeinfo>
+			<current>Publication dates of the USGS 7.5 minute topographic quadrangle maps for the State of Connecticut through 1984.</current>
+		</timeperd>
+		<status>
+			<progress>Complete</progress>
+			<update>None planned</update>
+		</status>
+		<spdom>
+			<bounding>
+				<westbc>
+-73.745929</westbc>
+				<eastbc>
+-71.737585</eastbc>
+				<northbc>
+42.128775</northbc>
+				<southbc>
+40.957919</southbc>
+			</bounding>
+			<lboundng>
+				<leftbc Sync="TRUE">729811.562500</leftbc>
+				<rightbc Sync="TRUE">1274661.500000</rightbc>
+				<bottombc Sync="TRUE">546974.312500</bottombc>
+				<topbc Sync="TRUE">972035.375000</topbc>
+			</lboundng>
+		</spdom>
+		<keywords>
+			<theme>
+				<themekt>None</themekt>
+				<themekey>centerline</themekey>
+				<themekey>flow direction</themekey>
+				<themekey>large scale</themekey>
+				<themekey>hydrography</themekey>
+				<themekey>network</themekey>
+			</theme>
+		</keywords>
+		<accconst>None. The data is in the public domain and may be redistributed. </accconst>
+		<useconst>No restrictions or legal prerequisites for using the data. The data is suitable for use at appropriate scale, and is not intended for maps printed at scales greater or more detailed than 1:24,000 scale (1 inch = 2,000 feet). Although this data set  has been used by the State of Connecticut, Department of Environmental Protection, no warranty, expressed or implied, is made by the State of Connecticut, Department of Environmental Protection as to the accuracy of the data and or related materials.  The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the State of Connecticut, Department of Environmental Protection in the use of these data or related materials. The user assumes the entire risk related to the use of these data. Once the data is distributed to the user, modifications made to the data by the user should be noted in the metadata. When printing this data on a map or using it in a software application, analysis, or report, please acknowledge the State of Connecticut, Department of Environmental Protection as the source for this information. For example, include the following data source description when printing this layer on a map: Hydrography - From the Hydrography Network layer, compiled and published by CT DEP and USGS. Source map scale is 1:24,000.</useconst>
+		<ptcontac>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+					<cntper>Diana Danenberg</cntper>
+				</cntorgp>
+				<cntaddr>
+					<addrtype>mailing and physical address</addrtype>
+					<address>79 Elm Street</address>
+					<city>Hartford</city>
+					<state>Connecticut</state>
+					<postal>06106</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>860-424-3540</cntvoice>
+				<cntfax>860-424-4058</cntfax>
+				<cntemail>dep.gisdata@po.state.ct.us</cntemail>
+				<hours>Monday to Friday, 08:30 to 16:30 Eastern Standard Time</hours>
+			</cntinfo>
+		</ptcontac>
+		<browse>
+			<browsen>http://www.dep.state.ct.us/gis/dataguides/dep/layers/images/hydronetworkdetail.gif</browsen>
+			<browsed>Detail view of Hydrography Network</browsed>
+			<browset>GIF</browset>
+		</browse>
+		<native Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcCatalog 9.3.1.3000</native>
+		<natvform Sync="TRUE">Shapefile</natvform>
+	</idinfo>
+	<dataqual>
+		<attracc>
+			<attraccr>The MBAS_NO and MAJOR fields were populated by overlaying Hydrography Network layer with 1:24,000-scale Major Drainage Basin layer published by the State of Connecticut, Department of Environmental Protection.</attraccr>
+		</attracc>
+		<logic>Line features conform to the following topological rules. Lines are single part. There are no duplicate lines. Lines do not self overlap. Lines do not overlap other lines. Lines intersect only at nodes, and nodes anchor the ends of all lines. Lines do not overshoot or undershoot other lines they are supposed to meet and intersect. The orientation of the line features reflects the direction of stream flow. The tests of logical consistency were performed by the State of Connecticut using ESRI ArcInfo software to maintain feature topology in ArcInfo coverage format. The data is topologically clean. The ArcInfo Clean function was repeatedly used following edits to verify topology and enforce a minimum distance between vertices of 4 feet (fuzzy tolerance) and a minimum allowed overshoot length of 10 feet (dangle length).</logic>
+		<complete>For the water features that were copied from the 1:24,000-scale Hydrography layer the completeness of the data reflects the USGS National Mapping Division standards for feature content of the data sources, which are the Large Scale (7.5 minute) Digital Line Graph (DLG) files available from the USGS. For Connecticut, the Large Scale DLG files used to create this layer are for the 1:24,000-scale topographic quadrangle maps published between 1969 and 1984. The digitized connector lines and the computer generated centerlines do not reflect these standards. The Hydrography Network layer is incomplete in the sense that it does not include all the hydrography features found in the original Hydrography layer. More recent quadrangle maps have been published by the USGS since 1984; however, the State of Connecticut did not incorporate this information into the Hydrography Network layer. So compared to the most recent set of topographic quadrangle maps available today, the Hydrography Network layer is incomplete, and substantially incomplete when compared to waterbodies present today. This data is not updated.</complete>
+		<posacc>
+			<horizpa>
+				<horizpar>The features copied directly from the 1:24,000-scale Hydrography comply with United States National Map Accuracy Standards for 1:24,000 scale maps. According to this standard, not more than 10 percent of the points tested are to be in error by more than 1/50 inch (40 feet) measured on the publication scale of a USGS 7.5 minute topographic quadrangle map. This standard does not apply to the computer generated centerlines and the digitized centerlines. The computer generated centerlines and the digitized centerlines added to the Hydrography Network connect to the end points of existing hydrography features but do not represent actual paths of rivers or streams.</horizpar>
+			</horizpa>
+		</posacc>
+		<lineage>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>State of Connecticut, Department of Environmental Protection</origin>
+						<pubdate>1994</pubdate>
+						<title>Hydrography</title>
+					</citeinfo>
+				</srccite>
+				<srcscale>24000</srcscale>
+				<typesrc>disc</typesrc>
+				<srctime>
+					<timeinfo>
+						<rngdates>
+							<begdate>1969</begdate>
+							<enddate>1984</enddate>
+						</rngdates>
+					</timeinfo>
+					<srccurr>publication date</srccurr>
+				</srctime>
+				<srccitea>Source 1 - Hydrography</srccitea>
+				<srccontr>A selection of single-line hydrography features incorporated into Hydrography Network and polygon features used to guide centerline creation. Source 1 refers to the edition of Hydrography in place at the time that Hydrography Network was created. The Hydrography is in ArcInfo Coverage format.</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>State of Connecticut, Department of Environmental Protection</origin>
+						<pubdate>1994</pubdate>
+						<title>Hydrography Subset</title>
+					</citeinfo>
+				</srccite>
+				<srcscale>24000</srcscale>
+				<typesrc>disc</typesrc>
+				<srctime>
+					<timeinfo>
+						<rngdates>
+							<begdate>1969</begdate>
+							<enddate>1984</enddate>
+						</rngdates>
+					</timeinfo>
+					<srccurr>publication date</srccurr>
+				</srctime>
+				<srccitea>Source 2 - Hydrography Subset</srccitea>
+				<srccontr>This data source is a subset of hydrography features from the Hydrography layer plus connecting lines in place of marshes, small ponds and gaps. The connectors in marshes and bridging gaps in the hydrography  were originally compiled and mapped by James Bogar, a Cartographer with the State of Connecticut, Department of Environmental Protection. The Hydrography Subset is in ArcInfo Coverage format.</srccontr>
+			</srcinfo>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<origin>State of Connecticut, Department of Environmental Protection</origin>
+						<pubdate>1994</pubdate>
+						<title>Hydrography Network</title>
+					</citeinfo>
+				</srccite>
+				<srcscale>24000</srcscale>
+				<typesrc>disc</typesrc>
+				<srctime>
+					<timeinfo>
+						<rngdates>
+							<begdate>1969</begdate>
+							<enddate>1984</enddate>
+						</rngdates>
+					</timeinfo>
+					<srccurr>publication date</srccurr>
+				</srctime>
+				<srccitea>Source 3 - Hydrography Network</srccitea>
+				<srccontr>Various editions of the Hydrography Network layer are identified as both a Source Used and a Source Produced during the Process Steps. The Hydrography Network is in ArcInfo Coverage format.</srccontr>
+			</srcinfo>
+			<procstep>
+				<procdesc>Production of centerlines - A copy of the Hydrography was thinned of unneeded features. Marsh polygons, lakes or ponds that were not part of the stream network, islands and any features seaward of the Connecticut coastline were removed. The water polygons were dissolved to remove any internal features (e.g. tidal flats or rocks) that would interfere with centerline creation. The new coverage contained lake, pond and double-line river/stream polygon features and shorelines and single-line river/stream line features. The line features were unsplit to remove pseudonodes. Shorelines of headwater lakes/ponds were split at a point opposite to the outlet. Closure lines (e.g. the artificial line separating a double-line stream polygon from a bay polygon) were split at the midpoint. Single-line streams were removed from the polygon coverage and placed in their own coverage. The shorelines (line features) of the water polygons were assigned unique id numbers. At this point there were only water polygons with their shorelines in the coverage. The line features had no dangles, pseudonodes existed where streams entered a lake/pond or at the headwater or in the middle of a closure line, and all lines had a unique id number. The lines of the water polygons were converted to raster format and processed in ESRI Spatial Analyst 7.3 (Grid) software using the Eucallocation (Euclidean Allocation) analysis with a small cell resolution of 10 feet and nodata assigned to cells that are not part of a shoreline. This process assigned cells around each unique shoreline cell the same id number as the shoreline cell, spreading outward in all directions from each shoreline. When the process ended all cells had been assigned an id number and the boundaries between the unique id number areas represented the midpoint between each shoreline. The resulting grid was converted to vector polygons. The geometry of the outlines of these polygons was special because it represented the centerlines through each waterbody. The line features from this polygon coverage were clipped with the water polygons. The result was the start of the Hydrography Network, a line coverage containing the centerlines for each water polygon including the connectors to each single-line stream that enters the water polygon.</procdesc>
+				<srcused>Source 1 - Hydrography</srcused>
+				<procdate>1969-1984</procdate>
+				<srcprod>Source 3 - Hydrography Network</srcprod>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+			</procstep>
+			<procstep>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+				<procdesc>Smooth the centerlines - To remove the stairstep effect seen on the centerlines (an artifact of raster cell to vector conversion of line features) they were smoothed using ESRI ArcInfo 7.3 editing tools using the spline command and an appropriate grain tolerance. The smoothed lines were visually checked on-screen with the water polygons and vertices were added or moved as necessary to ensure that the centerline remained inside its parent water polygon. This was especially important for very narrow water polygons where the 10 foot cell size used in the Grid (raster)  processing was near the width of the water polygon. </procdesc>
+				<srcused>Source 3 - Hydrography Network</srcused>
+				<srcprod>Source 3 - Hydrography Network</srcprod>
+				<procdate>2000</procdate>
+			</procstep>
+			<procstep>
+				<procdesc>Addition of single-line features - The single-line features for rivers and streams from the Hydrography, previously processed and selected during the centerline creation, were added to the centerline features of the Hydrography Network coverage. Editing was done to connect the single-line rivers/streams to the centerlines.</procdesc>
+				<srcused>Source 1 - Hydrography</srcused>
+				<procdate>2000</procdate>
+				<srcprod>Source 3 - Hydrography Network</srcprod>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+				<srcused>Source 3 - Hydrography Network</srcused>
+			</procstep>
+			<procstep>
+				<procdesc>Marsh centerlines - The connectors through marshes and miscellaneous features were selected from the Hydrography Subset by values in the attribute field HSARC_COD and copied to the Hydrography Network to form  centerlines through marshes and to complete stream connectivity of the hydrography features.</procdesc>
+				<srcused>Source 2 - Hydrography Subset</srcused>
+				<procdate>2000</procdate>
+				<srcprod>Source 3 - Hydrography Network</srcprod>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+				<srcused>Source 3 - Hydrography Network</srcused>
+			</procstep>
+			<procstep>
+				<srcused>Source 3 - Hydrography Network</srcused>
+				<procdate>2000</procdate>
+				<srcprod>Source 3 - Hydrography Network</srcprod>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+				<srcused>Source 4 - Major Drainage Basins</srcused>
+				<procdesc>Flow direction and attributes -  Using ESRI ArcInfo 7.3 ArcPlot and ArcEdit tools such as trace network and flip line, all lines were processed to flow in the same direction from upstream to downstream. The line direction and connectivity was visually checked on-screen. The Hydrography Network was overlaid with the Major Drainage Basins to add the attributes for MBAS_NO and MAJOR to identify which major basin each part of the network drains.</procdesc>
+			</procstep>
+			<srcinfo>
+				<srccite>
+					<citeinfo>
+						<title>Source 4 - Major Drainage Basins</title>
+						<origin>State of Connecticut, Department of Environmental Protection</origin>
+						<pubdate>1988</pubdate>
+						<geoform>vector digital data</geoform>
+						<pubinfo>
+							<publish>State of Connecticut</publish>
+						</pubinfo>
+					</citeinfo>
+				</srccite>
+				<srcscale>24000</srcscale>
+				<typesrc>disc</typesrc>
+				<srccitea>Source 4 - Major Drainage Basins</srccitea>
+				<srccontr>This data source provided the names of the major drainage basins used as an attribute on the Hydrography Network. The Major Drainage Basins is in ArcInfo Coverage format.</srccontr>
+				<srctime>
+					<timeinfo>
+						<sngdate>
+							<caldate>1988</caldate>
+						</sngdate>
+					</timeinfo>
+					<srccurr>publication date</srccurr>
+				</srctime>
+			</srcinfo>
+			<srcinfo>
+				<srcscale>24000</srcscale>
+				<typesrc>disc</typesrc>
+				<srccitea>Source 5 - HydrographyNetwork_Line.shp</srccitea>
+				<srccite>
+					<citeinfo>
+						<origin>State of Connecticut, Department of Environmental </origin>
+						<title>HydrographyNetwork_Line.shp</title>
+						<onlink>http://www.dep.state.ct.us/gis</onlink>
+						<pubdate>1994</pubdate>
+						<pubinfo>
+							<publish>State of Connecticut</publish>
+						</pubinfo>
+					</citeinfo>
+				</srccite>
+				<srccontr>All line features exported from Hydrography Network. The HydrographyNetwork_Line.shp is in Shapefile format.</srccontr>
+			</srcinfo>
+			<procstep>
+				<proccont>
+					<cntinfo>
+						<cntorgp>
+							<cntorg>State of Connecticut, Department of Environmental Protection </cntorg>
+							<cntper>Diana Danenberg</cntper>
+						</cntorgp>
+					</cntinfo>
+				</proccont>
+				<procdesc>Export to Shapefile Format - Converted data from ArcInfo Coverage to Shapefile format and named the shapefile HydrographyNetwork_Line.shp. Excluded the FNODE#, TNODE#, LPOLY#, RPOLY#, LENGTH, HYDRO#, HYDRO-ID attributes from the Shapefile because their values are only maintained by ArcInfo software with data that is in ArcInfo Coverage format.</procdesc>
+				<srcused>Source 3 - Hydrography Network</srcused>
+				<procdate>20050412</procdate>
+				<srcprod>Source 5 - HydrographyNetwork_Line.shp</srcprod>
+			</procstep>
+			<procstep><procdesc Sync="TRUE">Dataset copied.</procdesc><srcused Sync="TRUE">M:\Brook trout GIS\Dissertation proposal\Study segments\jeffspruce</srcused><procdate Sync="TRUE">20110603</procdate><proctime Sync="TRUE">12170600</proctime></procstep></lineage>
+	</dataqual>
+	<spdoinfo>
+		<direct>Vector</direct>
+		<ptvctinf>
+			<sdtsterm Name="jeffspruce">
+				<sdtstype>Complete chain</sdtstype>
+				<ptvctcnt>29146</ptvctcnt>
+			</sdtsterm>
+			<esriterm Name="jeffspruce">
+				<efeatyp Sync="TRUE">Simple</efeatyp>
+				<efeageom Sync="TRUE">Polyline</efeageom>
+				<esritopo Sync="TRUE">FALSE</esritopo>
+				<efeacnt Sync="TRUE">0</efeacnt>
+				<spindex Sync="TRUE">FALSE</spindex>
+				<linrefer Sync="TRUE">FALSE</linrefer>
+			</esriterm>
+		</ptvctinf>
+	</spdoinfo>
+	<spref>
+		<horizsys>
+			<planar>
+				<planci>
+					<plance>coordinate pair</plance>
+					<coordrep>
+						<absres>0.001024</absres>
+						<ordres>0.001024</ordres>
+					</coordrep>
+					<plandu>survey feet</plandu>
+				</planci>
+				<mapproj><mapprojn Sync="TRUE">Lambert Conformal Conic</mapprojn><lambertc><stdparll Sync="TRUE">41.200000</stdparll><stdparll Sync="TRUE">41.866667</stdparll><longcm Sync="TRUE">-72.750000</longcm><latprjo Sync="TRUE">40.833333</latprjo><feast Sync="TRUE">999999.999996</feast><fnorth Sync="TRUE">499999.999998</fnorth></lambertc></mapproj></planar>
+			<geodetic>
+				<horizdn>North American Datum of 1983</horizdn>
+				<ellips>Geodetic Reference System 80</ellips>
+				<semiaxis>6378137.000000</semiaxis>
+				<denflat>298.257222</denflat>
+			</geodetic>
+			<cordsysn>
+				<geogcsn Sync="TRUE">GCS_North_American_1983</geogcsn>
+				<projcsn Sync="TRUE">NAD_1983_StatePlane_Connecticut_FIPS_0600_Feet</projcsn>
+			</cordsysn>
+		</horizsys>
+	</spref>
+	<eainfo>
+		<detailed Name="jeffspruce">
+			<enttyp>
+				<enttypl>Hydrography Network Line</enttypl>
+				<enttypd>Hydrography as line features</enttypd>
+				<enttypt Sync="TRUE">Feature Class</enttypt>
+				<enttypc Sync="TRUE">0</enttypc>
+			</enttyp>
+			<attr>
+				<attrlabl>FID</attrlabl>
+				<attrdef>Internal feature number.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Sequential unique whole numbers that are automatically generated.</udom>
+				</attrdomv>
+				<attalias Sync="TRUE">FID</attalias>
+				<attrtype Sync="TRUE">OID</attrtype>
+				<attwidth Sync="TRUE">4</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl>Shape</attrlabl>
+				<attrdef>Feature geometry.</attrdef>
+				<attrdefs>ESRI</attrdefs>
+				<attrdomv>
+					<udom>Coordinates defining the features.</udom>
+				</attrdomv>
+				<attalias Sync="TRUE">Shape</attalias>
+				<attrtype Sync="TRUE">Geometry</attrtype>
+				<attwidth Sync="TRUE">0</attwidth>
+				<atprecis Sync="TRUE">0</atprecis>
+				<attscale Sync="TRUE">0</attscale>
+			</attr>
+			<attr>
+				<attrlabl>MBAS_NO</attrlabl>
+				<attrdef>Major basin code. Numeric values that identify major basins.</attrdef>
+				<attrdefs>State of Connecticut, Department of Environmental Protection</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>1</edomv>
+						<edomvd>Pawcatuck</edomvd>
+					</edom>
+					<edom>
+						<edomv>2</edomv>
+						<edomvd>Southeast Coast</edomvd>
+					</edom>
+					<edom>
+						<edomv>3</edomv>
+						<edomvd>Thames</edomvd>
+					</edom>
+					<edom>
+						<edomv>4</edomv>
+						<edomvd>Connecticut</edomvd>
+					</edom>
+					<edom>
+						<edomv>5</edomv>
+						<edomvd>South Central Coast</edomvd>
+					</edom>
+					<edom>
+						<edomv>6</edomv>
+						<edomvd>Housatonic</edomvd>
+					</edom>
+					<edom>
+						<edomv>7</edomv>
+						<edomvd>Southwest Coast</edomvd>
+					</edom>
+					<edom>
+						<edomv>8</edomv>
+						<edomvd>Hudson</edomvd>
+					</edom>
+				</attrdomv>
+				<attwidth Sync="TRUE">1</attwidth>
+				<atoutwid Sync="TRUE">1</atoutwid>
+				<attrtype Sync="TRUE">Number</attrtype>
+				<attalias Sync="TRUE">MBAS_NO</attalias>
+			</attr>
+			<attr>
+				<attrlabl>MAJOR</attrlabl>
+				<attrdef>Major basin name. Text values that correspond to the numeric MBAS_NO attribute values. MAJOR is the English language equivalent of (decodes) the MBAS_NO field.</attrdef>
+				<attrdefs>State of Connecticut, Department of Environmental Protection</attrdefs>
+				<attrdomv>
+					<edom>
+						<edomv>See Enumerated Domain Value Definitions for MBAS_NO</edomv>
+					</edom>
+				</attrdomv>
+				<attwidth Sync="TRUE">20</attwidth>
+				<atoutwid Sync="TRUE">20</atoutwid>
+				<attrtype Sync="TRUE">String</attrtype>
+				<attalias Sync="TRUE">MAJOR</attalias>
+			</attr>
+		</detailed>
+		<overview>
+			<eaover>Includes linear features for rivers, streams, brooks, reservoirs, lakes, ponds and marshes published on the U.S. Geological Survey 7.5 minute topographic quadrangle maps. Upstream to downstream flow direction is established (in the ArcInfo coverage). Connectivity between adjacent hydrography features is established.</eaover>
+		</overview>
+	</eainfo>
+	<distinfo>
+		<distrib>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+				</cntorgp>
+				<cntaddr>
+					<addrtype>mailing and physical address</addrtype>
+					<address>79 Elm Street</address>
+					<city>Hartford</city>
+					<state>Connecticut</state>
+					<postal>06106-5127</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>860-424-3540</cntvoice>
+				<cntfax>860-424-4058</cntfax>
+				<cntemail>dep.gisdata@po.state.ct.us</cntemail>
+				<hours>Monday to Friday, 08:30 to 16:30 Eastern Standard Time</hours>
+			</cntinfo>
+		</distrib>
+		<resdesc>Hydrography layer</resdesc>
+		<stdorder>
+			<digform>
+				<digtinfo>
+					<formname>ESRI Shapefile</formname>
+					<filedec>Zip file</filedec>
+					<transize>9.312</transize>
+					<dssize Sync="TRUE">0.000</dssize>
+					<formvern>ArcGis 8.3</formvern></digtinfo>
+				<digtopt>
+					<onlinopt>
+						<computer>
+							<networka>
+								<networkr>http://www.dep.state.ct.us/gis</networkr>
+							</networka>
+						</computer>
+					</onlinopt>
+				</digtopt>
+			</digform>
+			<fees>An online copy of the data may be accessed without charge.</fees>
+		</stdorder>
+		<custom>The data distributor does not provide custom GIS analysis or mapping services. Data is available in a standard format and may be converted to other formats, projections, coordinate systems, or selected for specific geographic regions by the party receiving the data.</custom>
+		<techpreq>Geographic information system (GIS), computer-aided drawing or other mapping software is necessary to display, view and access the information.</techpreq>
+	</distinfo>
+	<metainfo>
+		<metd>20050317</metd>
+		<metc>
+			<cntinfo>
+				<cntorgp>
+					<cntorg>State of Connecticut, Department of Environmental Protection</cntorg>
+					<cntper>Diana Danenberg</cntper>
+				</cntorgp>
+				<cntaddr>
+					<addrtype>mailing and physical address</addrtype>
+					<address>79 Elm Street</address>
+					<city>Hartford</city>
+					<state>Connecticut</state>
+					<postal>06106-5127</postal>
+					<country>USA</country>
+				</cntaddr>
+				<cntvoice>860-424-3540</cntvoice>
+				<cntfax>860-424-4058</cntfax>
+				<cntemail>dep.gisdata@po.state.ct.us</cntemail>
+				<hours>Monday to Friday, 08:30 to 16:30 Eastern Standard Time</hours>
+			</cntinfo>
+		</metc>
+		<metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+		<metstdv>FGDC-STD-001-1998</metstdv>
+		<mettc>local time</mettc>
+		<langmeta Sync="TRUE">en</langmeta>
+		<metextns><onlink Sync="TRUE">http://www.esri.com/metadata/esriprof80.html</onlink><metprof Sync="TRUE">ESRI Metadata Profile</metprof></metextns></metainfo>
+	<dataIdInfo>
+		<envirDesc Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcCatalog 9.3.1.3000</envirDesc>
+		<dataLang>
+			<languageCode Sync="TRUE" value="en"/>
+		</dataLang>
+		<idCitation>
+			<resTitle Sync="TRUE">jeffspruce</resTitle>
+			<presForm>
+				<PresFormCd Sync="TRUE" value="005"/>
+			</presForm>
+		</idCitation>
+		<spatRpType>
+			<SpatRepTypCd Sync="TRUE" value="001"/>
+		</spatRpType>
+		<dataExt>
+			<geoEle>
+				<GeoBndBox esriExtentType="native">
+					<westBL Sync="TRUE">729811.5625</westBL>
+					<eastBL Sync="TRUE">1274661.5</eastBL>
+					<northBL Sync="TRUE">972035.375</northBL>
+					<southBL Sync="TRUE">546974.3125</southBL>
+					<exTypeCode Sync="TRUE">1</exTypeCode>
+				</GeoBndBox>
+			</geoEle>
+		</dataExt>
+		<geoBox esriExtentType="decdegrees">
+			<westBL Sync="TRUE">-73.745929</westBL>
+			<eastBL Sync="TRUE">-71.737585</eastBL>
+			<northBL Sync="TRUE">42.128776</northBL>
+			<southBL Sync="TRUE">40.957919</southBL>
+			<exTypeCode Sync="TRUE">1</exTypeCode>
+		</geoBox>
+	</dataIdInfo>
+	<mdLang>
+		<languageCode Sync="TRUE" value="en"/>
+	</mdLang>
+	<mdStanName Sync="TRUE">ISO 19115 Geographic Information - Metadata</mdStanName>
+	<mdStanVer Sync="TRUE">DIS_ESRI1.0</mdStanVer>
+	<mdChar>
+		<CharSetCd Sync="TRUE" value="004"/>
+	</mdChar>
+	<mdHrLv>
+		<ScopeCd Sync="TRUE" value="005"/>
+	</mdHrLv>
+	<mdHrLvName Sync="TRUE">dataset</mdHrLvName>
+	<distInfo>
+		<distributor>
+			<distorTran>
+				<onLineSrc>
+					<orDesc Sync="TRUE">002</orDesc>
+					<linkage Sync="TRUE">file://\\PR419\M\Brook trout DNA\Publication\Landscape genetics\11_2011_June_Mol.Ecol_second_resubmit\Dryad archive\Brook Trout Microsatellite\jeffspruce</linkage>
+					<protocol Sync="TRUE">Local Area Network</protocol>
+				</onLineSrc>
+				<transSize Sync="TRUE">0.000</transSize>
+			</distorTran>
+			<distorFormat>
+				<formatName Sync="TRUE">Shapefile</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+	<refSysInfo>
+		<RefSystem>
+			<refSysID>
+				<identCode Sync="TRUE">NAD_1983_StatePlane_Connecticut_FIPS_0600_Feet</identCode>
+			</refSysID>
+		</RefSystem>
+	</refSysInfo>
+	<spatRepInfo>
+		<VectSpatRep>
+			<topLvl>
+				<TopoLevCd Sync="TRUE" value="001"/>
+			</topLvl>
+			<geometObjs Name="jeffspruce"><geoObjTyp><GeoObjTypCd Sync="TRUE" value="001"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">0</geoObjCnt></geometObjs></VectSpatRep>
+	</spatRepInfo>
+	<Esri>
+		<SyncDate>20100204</SyncDate>
+		<SyncTime>19210700</SyncTime>
+		<ModDate>20100204</ModDate>
+		<ModTime>19210700</ModTime>
+		<DataProperties><lineage><Process ToolSource="C:\Program Files\ArcGIS\ArcToolbox\Toolboxes\Analysis Tools.tbx\Clip" Date="20100204" Time="192107">Clip HydrographyNetwork_Line jeff_spr_bk "C:\yo\the thing\jeffspruce.shp" #</Process></lineage></DataProperties><MetaID>{61F04892-2E25-47DB-B70E-2146EFC2B9D3}</MetaID><CreaDate>20110603</CreaDate><CreaTime>12170600</CreaTime><SyncOnce>TRUE</SyncOnce></Esri>
+	<mdDateSt Sync="TRUE">20100204</mdDateSt>
+</metadata>
