@@ -1,0 +1,12 @@
+npops=8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+nloci=15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1212,,701,,2064,,95,,1587,,2062,,29,,3090,,1235,,1714,,1977,,Cs290,,Dlu4171,,Dlu4131,,Dlu416,
+pop = LSCR,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+LSCR_01,148,148,178,178,251,257,171,171,153,153,149,149,163,163,219,219,237,237,205,211,195,195,223,283,139,139,115,135,155,223
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+row 1: must be blank,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+row 2: npops=# (number of populations in the dataset),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+row 3: nloci=# (number of loci in the dataset),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"row 4: locus name/identifier (in this case, a number referencing the original library sequence)",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"row 5: population identifier (see tab 'Population identifiers""",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"row 6: sample identifier, followed by allele scores for each locus (two alleles per locus in adjacent cells)",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

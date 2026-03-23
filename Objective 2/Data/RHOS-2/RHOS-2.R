@@ -231,6 +231,8 @@ stopifnot(isTRUE(all.equal(RHOS_2_fst, t(RHOS_2_fst))))
 # -----------------------------
 # 8) save objects
 # -----------------------------
+
+RHOS_2_coords <- RHOS_2_coords[, c("site", "lat", "lon")] # remove pop col
 save(
   RHOS_2_fst,
   RHOS_2_coords,

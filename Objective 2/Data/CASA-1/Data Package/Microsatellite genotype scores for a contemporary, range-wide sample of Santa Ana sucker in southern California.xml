@@ -1,0 +1,1316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Richmond, J.Q.</origin>
+        <origin>Backlin, A.R.</origin>
+        <origin>Galst-Cavalcante, Carey</origin>
+        <origin>O’Brien, J.W.</origin>
+        <origin>Fisher, R.N.</origin>
+        <pubdate>2017</pubdate>
+        <title>Microsatellite genotype scores for a contemporary, range-wide sample of Santa Ana sucker in southern California</title>
+        <geoform>Tabular Digital Data</geoform>
+        <pubinfo>
+          <pubplace>Denver, CO</pubplace>
+          <publish>U.S. Geological Survey data release</publish>
+        </pubinfo>
+        <onlink>https://doi.org/10.5066/F7Z31XMZ</onlink>
+        <lworkcit>
+          <citeinfo>
+            <origin>Jonathan Q. Richmond</origin>
+            <origin>Adam R. Backlin</origin>
+            <origin>Carey Galst-Cavalcante</origin>
+            <origin>John W O'Brien</origin>
+            <origin>Robert N. Fisher</origin>
+            <pubdate>2017</pubdate>
+            <title>Loss of dendritic connectivity in southern California’s urban riverscape facilitates decline of an endemic freshwater fish</title>
+            <geoform>Publication (Journal)</geoform>
+            <pubinfo>
+              <pubplace>Wiley Online Library</pubplace>
+              <publish>Molecular Ecology</publish>
+            </pubinfo>
+            <onlink>https://doi.org/10.1111/mec.14445</onlink>
+          </citeinfo>
+        </lworkcit>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>These data consist of microsatellite genotype scores for all samples of Santa Ana sucker (Catostomus santaanae) used in the study. Scores represent the allele calls for each microsatellite locus (i.e. DNA fragment length containing the microsatellite repeats), with each locus containing two scores representing the two allele copies detected. Included are five tables: Full dataset (includes genotypes from all samples), Santa Clara River samples only (includes genotypes only from samples collected in the Santa Clara River), Convert File format key (explains the data file format), Population identifiers (translates the numerical population identifiers to actual collecting sites), CASA sampling points (one coordinate given for each general collection site).
+
+Whole specimens are accessioned at the Los Angeles County Museum of Natural History (catalog numbers 58475-58481).
+
+GenBank accession numbers for the DNA sequences are: MF918422 - MF918481.
+
+These data support the following publication:
+Richmond, J.Q., Backlin, A.R., Galst‐Cavalcante, C., O'Brien, J.W. and Fisher, R.N., Loss of dendritic connectivity in southern California's urban riverscape facilitates decline of an endemic freshwater fish. Molecular Ecology.</abstract>
+      <purpose>We collected these data to examine the rangewide population genetic structure, measure genetic diversity and differentiation among populations, and identify sites that may represent introduced populations of the Santa Ana sucker Catostomus santaanae, an ICUN endangered species. These data provide key genetic information for informing recovery efforts.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>2012</begdate>
+          <enddate>2015</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>ground condition</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>Irregular</update>
+    </status>
+    <spdom>
+      <descgeog>Santa Ana, San Gabriel, Los Angeles, and Santa Clara River watersheds in southern California.</descgeog>
+      <bounding>
+        <westbc>-119.108607</westbc>
+        <eastbc>-117.39451</eastbc>
+        <northbc>34.5274</northbc>
+        <southbc>33.969003</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>USGS Thesaurus</themekt>
+        <themekey>endangered species</themekey>
+        <themekey>genetics</themekey>
+        <themekey>fish</themekey>
+      </theme>
+      <theme>
+        <themekt>None</themekt>
+        <themekey>metapopulation</themekey>
+        <themekey>admixture</themekey>
+        <themekey>dendritic network</themekey>
+        <themekey>hybridization</themekey>
+      </theme>
+      <place>
+        <placekt>None</placekt>
+        <placekey>Santa Ana</placekey>
+        <placekey>San Gabriel</placekey>
+        <placekey>Los Angeles</placekey>
+        <placekey>Santa Clara River watersheds</placekey>
+        <placekey>southern California</placekey>
+      </place>
+    </keywords>
+    <taxonomy>
+      <keywtax>
+        <taxonkt>USGS Biocomplexity Thesaurus</taxonkt>
+        <taxonkey>Fishes</taxonkey>
+      </keywtax>
+      <taxonsys>
+        <classsys>
+          <classcit>
+            <citeinfo>
+              <origin>Integrated Taxonomic Information System (ITIS)</origin>
+              <pubdate>2017</pubdate>
+              <title>Integrated Taxonomic Information System (ITIS)</title>
+              <geoform>Tabular Digital Data</geoform>
+              <pubinfo>
+                <pubplace>Washington, D.C.</pubplace>
+                <publish>Integrated Taxonomic Information System (ITIS)</publish>
+              </pubinfo>
+              <onlink>http://itis.gov</onlink>
+            </citeinfo>
+          </classcit>
+        </classsys>
+        <ider>
+          <cntinfo>
+            <cntperp>
+              <cntper>Jonathan Q Richmond</cntper>
+              <cntorg>U.S. Geological Survey, Western Ecological Research Center</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>4165 Spruance Road</address>
+              <city>San Diego</city>
+              <state>CA</state>
+              <postal>92101-0821</postal>
+              <country>United States</country>
+            </cntaddr>
+            <cntvoice>619-225-6434</cntvoice>
+            <cntemail>jrichmond@usgs.gov</cntemail>
+          </cntinfo>
+        </ider>
+        <ider>
+          <cntinfo>
+            <cntperp>
+              <cntper>Adam R Backlin</cntper>
+              <cntorg>U.S. Geological Survey, Western Ecological Research Center</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>1801 East Chestnut Avenue</address>
+              <city>Santa Ana</city>
+              <state>CA</state>
+              <postal>92701</postal>
+              <country>United States</country>
+            </cntaddr>
+            <cntvoice>714-541-1016</cntvoice>
+            <cntemail>abacklin@usgs.gov</cntemail>
+          </cntinfo>
+        </ider>
+        <ider>
+          <cntinfo>
+            <cntperp>
+              <cntper>John O'Brien</cntper>
+              <cntorg>California Department of Fish and Wildlife</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>4665 Lampson Ave</address>
+              <address>Suite C</address>
+              <city>San Lalmitos</city>
+              <state>CA</state>
+              <postal>90720</postal>
+              <country>United States</country>
+            </cntaddr>
+            <cntvoice>x</cntvoice>
+            <cntemail>x</cntemail>
+          </cntinfo>
+        </ider>
+        <ider>
+          <cntinfo>
+            <cntperp>
+              <cntper>Carey Galst-Cavalcante</cntper>
+              <cntorg>U.S. Fish and Wildlife Service</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>5275 Leesburg Pike Falls Church</address>
+              <city>Baileys Crossroads</city>
+              <state>VA</state>
+              <postal>22041</postal>
+              <country>United States</country>
+            </cntaddr>
+            <cntvoice>x</cntvoice>
+            <cntemail>x</cntemail>
+          </cntinfo>
+        </ider>
+        <ider>
+          <cntinfo>
+            <cntperp>
+              <cntper>Robert N Fisher</cntper>
+              <cntorg>U.S. Geological Survey, Western Ecological Research Center</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>4165 Spruance Road</address>
+              <city>San Diego</city>
+              <state>CA</state>
+              <postal>92101-0821</postal>
+              <country>US</country>
+            </cntaddr>
+            <cntvoice>619-225-6422</cntvoice>
+            <cntemail>rfisher@usgs.gov</cntemail>
+          </cntinfo>
+        </ider>
+        <taxonpro>genetic analysis;;identification keys;;</taxonpro>
+      </taxonsys>
+      <taxoncl>
+        <taxonrn>Kingdom</taxonrn>
+        <taxonrv>Animalia</taxonrv>
+        <taxoncl>
+          <taxonrn>Subkingdom</taxonrn>
+          <taxonrv>Bilateria</taxonrv>
+          <taxoncl>
+            <taxonrn>Infrakingdom</taxonrn>
+            <taxonrv>Deuterostomia</taxonrv>
+            <taxoncl>
+              <taxonrn>Phylum</taxonrn>
+              <taxonrv>Chordata</taxonrv>
+              <taxoncl>
+                <taxonrn>Subphylum</taxonrn>
+                <taxonrv>Vertebrata</taxonrv>
+                <taxoncl>
+                  <taxonrn>Infraphylum</taxonrn>
+                  <taxonrv>Gnathostomata</taxonrv>
+                  <taxoncl>
+                    <taxonrn>Superclass</taxonrn>
+                    <taxonrv>Actinopterygii</taxonrv>
+                    <taxoncl>
+                      <taxonrn>Class</taxonrn>
+                      <taxonrv>Teleostei</taxonrv>
+                      <taxoncl>
+                        <taxonrn>Superorder</taxonrn>
+                        <taxonrv>Ostariophysi</taxonrv>
+                        <taxoncl>
+                          <taxonrn>Order</taxonrn>
+                          <taxonrv>Cypriniformes</taxonrv>
+                          <taxoncl>
+                            <taxonrn>Superfamily</taxonrn>
+                            <taxonrv>Cobitoidea</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Family</taxonrn>
+                              <taxonrv>Catostomidae</taxonrv>
+                              <taxoncl>
+                                <taxonrn>Subfamily</taxonrn>
+                                <taxonrv>Catostominae</taxonrv>
+                                <taxoncl>
+                                  <taxonrn>Tribe</taxonrn>
+                                  <taxonrv>Catostomini</taxonrv>
+                                  <taxoncl>
+                                    <taxonrn>Genus</taxonrn>
+                                    <taxonrv>Catostomus</taxonrv>
+                                    <taxoncl>
+                                      <taxonrn>Species</taxonrn>
+                                      <taxonrv>Catostomus santaanae</taxonrv>
+                                      <common>Santa Ana sucker</common>
+                                    </taxoncl>
+                                  </taxoncl>
+                                </taxoncl>
+                              </taxoncl>
+                            </taxoncl>
+                          </taxoncl>
+                        </taxoncl>
+                      </taxoncl>
+                    </taxoncl>
+                  </taxoncl>
+                </taxoncl>
+              </taxoncl>
+            </taxoncl>
+          </taxoncl>
+        </taxoncl>
+      </taxoncl>
+      <taxoncl>
+        <taxonrn>Kingdom</taxonrn>
+        <taxonrv>Animalia</taxonrv>
+        <taxoncl>
+          <taxonrn>Subkingdom</taxonrn>
+          <taxonrv>Bilateria</taxonrv>
+          <taxoncl>
+            <taxonrn>Infrakingdom</taxonrn>
+            <taxonrv>Deuterostomia</taxonrv>
+            <taxoncl>
+              <taxonrn>Phylum</taxonrn>
+              <taxonrv>Chordata</taxonrv>
+              <taxoncl>
+                <taxonrn>Subphylum</taxonrn>
+                <taxonrv>Vertebrata</taxonrv>
+                <taxoncl>
+                  <taxonrn>Infraphylum</taxonrn>
+                  <taxonrv>Gnathostomata</taxonrv>
+                  <taxoncl>
+                    <taxonrn>Superclass</taxonrn>
+                    <taxonrv>Actinopterygii</taxonrv>
+                    <taxoncl>
+                      <taxonrn>Class</taxonrn>
+                      <taxonrv>Teleostei</taxonrv>
+                      <taxoncl>
+                        <taxonrn>Superorder</taxonrn>
+                        <taxonrv>Ostariophysi</taxonrv>
+                        <taxoncl>
+                          <taxonrn>Order</taxonrn>
+                          <taxonrv>Cypriniformes</taxonrv>
+                          <taxoncl>
+                            <taxonrn>Superfamily</taxonrn>
+                            <taxonrv>Cobitoidea</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Family</taxonrn>
+                              <taxonrv>Catostomidae</taxonrv>
+                              <taxoncl>
+                                <taxonrn>Subfamily</taxonrn>
+                                <taxonrv>Catostominae</taxonrv>
+                                <taxoncl>
+                                  <taxonrn>Tribe</taxonrn>
+                                  <taxonrv>Catostomini</taxonrv>
+                                  <taxoncl>
+                                    <taxonrn>Genus</taxonrn>
+                                    <taxonrv>Catostomus</taxonrv>
+                                    <taxoncl>
+                                      <taxonrn>Species</taxonrn>
+                                      <taxonrv>Catostomus fumeiventris</taxonrv>
+                                      <common>Owens sucker</common>
+                                    </taxoncl>
+                                  </taxoncl>
+                                </taxoncl>
+                              </taxoncl>
+                            </taxoncl>
+                          </taxoncl>
+                        </taxoncl>
+                      </taxoncl>
+                    </taxoncl>
+                  </taxoncl>
+                </taxoncl>
+              </taxoncl>
+            </taxoncl>
+          </taxoncl>
+        </taxoncl>
+      </taxoncl>
+    </taxonomy>
+    <accconst>none</accconst>
+    <useconst>The authors of these data require that users direct any questions pertaining to appropriate use or assistance with understanding limitations and interpretation of the data to the individuals/organization listed in the Point of Contact section.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Jonathan Q. Richmond</cntper>
+          <cntorg>U.S. Geological Survey, Western Ecological Research Center</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>4165 Spruance Road</address>
+          <city>San Diego</city>
+          <state>CA</state>
+          <postal>92101</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>619-225-6434</cntvoice>
+        <cntemail>jrichmond@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>U.S. Geological Survey, U.S. Fish and Wildlife Service</datacred>
+    <native>Environment as of Metadata Creation: Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.3.1 (Build 4959) Service Pack N/A (Build N/A)</native>
+    <crossref>
+      <citeinfo>
+        <origin>Richmond, J.Q.</origin>
+        <origin>Backlin, A.R.</origin>
+        <origin>Galst-Cavalcante, Carey</origin>
+        <origin>O’Brien, J.W.</origin>
+        <origin>Fisher, R.N.</origin>
+        <pubdate>2017</pubdate>
+        <title>Catostomus santaanae NADH dehydrogenase subunit 2 (ND2); tRNA-Trp, tRNA-Ala, tRNA-Asn, tRNA-Cys, tRNA-tyr, COI (partial sequence)</title>
+        <geoform>Tabular Digital Data</geoform>
+        <pubinfo>
+          <pubplace>Bethesda, MD</pubplace>
+          <publish>GenBank</publish>
+        </pubinfo>
+        <onlink>https://www.ncbi.nlm.nih.gov/nuccore/MF918422</onlink>
+        <onlink>https://www.ncbi.nlm.nih.gov/nuccore/MF918481</onlink>
+      </citeinfo>
+    </crossref>
+    <tool>
+      <tooldesc>CONVERT</tooldesc>
+      <toolacc>
+        <onlink>http://heidi.chnebu.ch/doku.php?id=convert</onlink>
+        <toolinst>Excel file:
+- first line (cell A1): brief description of the data file
+- second line (cell A2): number of populations present in the data file (e.g.: npops = 2)
+- third line (cell A3): number of loci (e.g.: nloci = 7)
+- fourth line: names of the loci (in order, without spaces, underscores are allowed)
+- Each population starts with the line pop = pop_name (there must be at least one space between 'pop' and '=', no spaces within population name, underxcores are allowed)
+- Each individual within a population begins with an individual name (can be numeric, not allowed: '/', '=', '?', ':', ';' or ',', no spaces within names)
+- After an individual’s name, the diploid genotypes are given for that individual:
+--- on the same line or wrapped to the next line
+--- alleles must be given in numeric form (two alleles for each locus)
+--- They can be any integer between 1 and 9999
+--- Typically the numbers will indicate the size of the allele in base pairs (e.g., for microsats)
+--- Missing data: '?'
+- Creating a text input file from the EXCEL file: 'File|Save As…' in EXCEL. Save the file as: 'Text(Tab delimited)(*.txt)</toolinst>
+      </toolacc>
+      <toolcite>
+        <citeinfo>
+          <origin>Glaubitz, J.C.</origin>
+          <pubdate>2014</pubdate>
+          <title>CONVERT: a user-friendly program to reformat diploid genotypic data for commonly used population genetic software packages</title>
+          <geoform>Publication (Journal)</geoform>
+        </citeinfo>
+      </toolcite>
+    </tool>
+    <tool>
+      <tooldesc>DIYABC v2.0</tooldesc>
+      <toolacc>
+        <onlink>http://www1.montpellier.inra.fr/CBGP/diyabc/</onlink>
+        <toolinst>This tool was used to conduct approximate Bayesian Modeling. 
+DIYABC allows considering complex population histories involving any combination of population divergences, admixtures and population size changes, with population samples potentially collected at different times. DIYABC can be used to compare competing evolutionary scenarios and quantify their relative support, and estimate parameters for one or more scenarios. Eventually, it provides a way to evaluate the amount of confidence that can be put into the various estimations and to achieve model checking computation within an approximate Bayesian computation (ABC) framework. The version 2.0 of the program implements a number of new features and analytical methods allowing extensive analyses of large molecular datasets, including single nucleotide polymorphism (SNP) data.</toolinst>
+      </toolacc>
+      <toolcite>
+        <citeinfo>
+          <origin>Jean-Marie Cornuet</origin>
+          <pubdate>2014</pubdate>
+          <title>DIYABC v2.0: a software to make approximate Bayesian computation inferences about population history using single nucleotide polymorphism, DNA sequence and microsatellite data</title>
+          <geoform>Publication (Journal)</geoform>
+        </citeinfo>
+      </toolcite>
+    </tool>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>We used the software Microchecker to verify that microsatellite allele scores were consistent with the expected repeat motifs and to screen for null alleles. We also used GenePop-on-the-Web to test whether any loci were not in Hardy-Weinberg equilibrium at each sampling locality.</attraccr>
+    </attracc>
+    <logic>No formal logical accuracy tests were conducted</logic>
+    <complete>We collected specimens or tissues from all known sites where the species still occurs, with the exception of Soledad Canyon in the upper Santa Clara River watershed, where local landowners precluded river access.</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>No formal positional accuracy tests were conducted</horizpar>
+      </horizpa>
+      <vertacc>
+        <vertaccr>No formal positional accuracy tests were conducted</vertaccr>
+      </vertacc>
+    </posacc>
+    <lineage>
+      <method>
+        <methtype>Lab</methtype>
+        <methdesc>Microsatellite library sequencing</methdesc>
+        <methcite>
+          <citeinfo>
+            <origin>Ronaghi M.</origin>
+            <origin>Uhlén M.</origin>
+            <origin>Nyrén P.</origin>
+            <pubdate>1998</pubdate>
+            <title>A sequencing method based on real-time pyrophosphate</title>
+            <geoform>Publication (Journal Article)</geoform>
+            <onlink>http://search.proquest.com/openview/4b05cb331a23369c2036c75163cf4dbe/1?pq-origsite=gscholar</onlink>
+          </citeinfo>
+        </methcite>
+      </method>
+      <procstep>
+        <procdesc>Briefly, we field collected specimens or tissue samples and extracted DNA from those samples as they became available. All samples were then microsatellite genotyped and/or sequenced for a mitochondrial gene fragment. We then edited and scored the raw data before analyzing them using a variety of analytical methods that were tailored to our study questions. Approximate dates of data processing extend from 2013-2016. Processing steps are all described in detail in the manuscript.</procdesc>
+        <procdate>Unknown</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <indspref>Latitude and longitude coordinates (WGS 84) were recorded using a GPS unit but are not included in this dataset due to its standing as a State and Federally listed species.</indspref>
+  </spdoinfo>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Full dataset (Microsatellite CONVERT Input File)</enttypl>
+        <enttypd>Microsatellite allele scores represent the size of the locus in base pairs, with two allele per locus. Genotypes from individual fish have a unique identifier that can be cross referenced to a specific sampling location. npops=8 nloci=16 The '?' indicates missing data.
+These data are in the format to input into CONVERT. Please see Convert File format key for more information.</enttypd>
+        <enttypds>Producer defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>Dataset ID/first column</attrlabl>
+        <attrdef>identifier assigned to the DNA extraction for each sample. 
+Please see "Population identifiers" for more information on population codes</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <udom>unique alphanumeric number for each sample within a population</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1212</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>114</rdommin>
+            <rdommax>152</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1212</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>114</rdommin>
+            <rdommax>152</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>701</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>169</rdommin>
+            <rdommax>187</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>701</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>169</rdommin>
+            <rdommax>190</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2064</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>239</rdommin>
+            <rdommax>257</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2064</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>242</rdommin>
+            <rdommax>257</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>95</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>159</rdommin>
+            <rdommax>177</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>95</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>159</rdommin>
+            <rdommax>180</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1587</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>141</rdommin>
+            <rdommax>153</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1587</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>141</rdommin>
+            <rdommax>153</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2062</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>140</rdommin>
+            <rdommax>158</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2062</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>149</rdommin>
+            <rdommax>164</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>29</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>151</rdommin>
+            <rdommax>179</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>29</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>151</rdommin>
+            <rdommax>179</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>3090</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>207</rdommin>
+            <rdommax>219</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>3090</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>207</rdommin>
+            <rdommax>219</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1235</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>233</rdommin>
+            <rdommax>356</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1235</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>233</rdommin>
+            <rdommax>359</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1714</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>195</rdommin>
+            <rdommax>213</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1714</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>197</rdommin>
+            <rdommax>215</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Cs290</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>211</rdommin>
+            <rdommax>339</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples (? indicates missing data)</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Cs290</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>227</rdommin>
+            <rdommax>343</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples (? indicates missing data)</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4171</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>103</rdommin>
+            <rdommax>139</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4171</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>107</rdommin>
+            <rdommax>151</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4131</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>115</rdommin>
+            <rdommax>135</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4131</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>115</rdommin>
+            <rdommax>135</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu416</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>151</rdommin>
+            <rdommax>247</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu416</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>155</rdommin>
+            <rdommax>259</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>Santa Clara River samples only (Microsatellite CONVERT Input File)</enttypl>
+        <enttypd>Includes genotypes only from samples collected in the Santa Clara River
+Microsatellite allele scores represent the size of the locus in base pairs, with two allele per locus. Genotypes from individual fish have a unique identifier that can be cross referenced to a specific sampling location. npops=4 nloci=16 The '?' indicates missing data.
+These data are in the format to input into CONVERT. Please see "Convert File format key" for more information.</enttypd>
+        <enttypds>Producer defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>Dataset ID/first column</attrlabl>
+        <attrdef>identifier assigned to the DNA extraction for each sample. 
+Please see "Population identifiers" for more information on population codes</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <udom>unique alphanumeric number for each sample within a population</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1212</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>114</rdommin>
+            <rdommax>148</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1212</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>114</rdommin>
+            <rdommax>148</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>701</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>169</rdommin>
+            <rdommax>187</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>701</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>169</rdommin>
+            <rdommax>187</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2064</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>239</rdommin>
+            <rdommax>257</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2064</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>242</rdommin>
+            <rdommax>257</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>95</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>162</rdommin>
+            <rdommax>177</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>95</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>171</rdommin>
+            <rdommax>177</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1587</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>141</rdommin>
+            <rdommax>153</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1587</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>141</rdommin>
+            <rdommax>153</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2062</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>149</rdommin>
+            <rdommax>158</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>2062</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>149</rdommin>
+            <rdommax>158</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>29</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>151</rdommin>
+            <rdommax>175</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>29</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>151</rdommin>
+            <rdommax>175</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>3090</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>207</rdommin>
+            <rdommax>219</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>3090</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>207</rdommin>
+            <rdommax>219</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1235</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>233</rdommin>
+            <rdommax>356</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1235</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>233</rdommin>
+            <rdommax>359</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1714</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>195</rdommin>
+            <rdommax>211</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>1714</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>205</rdommin>
+            <rdommax>215</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Cs290</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>203</rdommin>
+            <rdommax>291</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples (? indicates missing data)</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Cs290</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>219</rdommin>
+            <rdommax>295</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples (? indicates missing data)</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4171</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>127</rdommin>
+            <rdommax>139</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4171</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>131</rdommin>
+            <rdommax>139</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4131</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>115</rdommin>
+            <rdommax>135</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu4131</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>115</rdommin>
+            <rdommax>135</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu416</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>155</rdommin>
+            <rdommax>227</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu416</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>155</rdommin>
+            <rdommax>235</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu434</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>206</rdommin>
+            <rdommax>254</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Dlu434</attrlabl>
+        <attrdef>microsatellite locus identifier</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>226</rdommin>
+            <rdommax>258</rdommax>
+            <attrunit>microsatellite allele scores (i.e. the length of the gene sequence in base pairs) for each locus across all samples</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <detailed>
+      <enttyp>
+        <enttypl>CASA sampling points</enttypl>
+        <enttypd>Includes general site locations for sampled populations</enttypd>
+        <enttypds>Producer defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>Site No.</attrlabl>
+        <attrdef>Unique number for each location where samples were taken.</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>1</rdommin>
+            <rdommax>15</rdommax>
+            <attrunit>integer</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Long</attrlabl>
+        <attrdef>North-South coordinate of point.</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>-119.108607</rdommin>
+            <rdommax>-117.39451</rdommax>
+            <attrunit>UTM</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Lat</attrlabl>
+        <attrdef>East-West coordinate of point.</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>33.969003</rdommin>
+            <rdommax>34.5274</rdommax>
+            <attrunit>UTM</attrunit>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>PopID</attrlabl>
+        <attrdef>Identifier for each population. </attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <udom>A three letter code</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Location</attrlabl>
+        <attrdef>Names of major drainages.</attrdef>
+        <attrdefs>Producer defined</attrdefs>
+        <attrdomv>
+          <udom>Name of main drainages.                        </udom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntperp>
+          <cntper>ScienceBase</cntper>
+          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>Denver Federal Center</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty. Any use of trade, firm, or product names is for descriptive purposes only and does not imply endorsement by the U.S. Government.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>Tabular Digital Data</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>https://doi.org/10.5066/F7Z31XMZ</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None. No fees are applicable for obtaining the data set.</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20170831</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey, Western Ecological Research Center</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>3020 State University Drive</address>
+          <address>Suite 4004</address>
+          <city>Sacramento</city>
+          <state>CA</state>
+          <postal>95819</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>916-278-9483</cntvoice>
+        <cntemail>gs-b-werc_data_management@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>
