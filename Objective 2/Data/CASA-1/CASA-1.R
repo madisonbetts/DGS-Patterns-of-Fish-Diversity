@@ -226,7 +226,7 @@ diag(CASA_1_fst) <- 0 # make diags zero
 save(
   CASA_1_fst,
   CASA_1_sites,
-  file = "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/CASA-1/data/CASA-1.RData"
+  file = "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/CASA-1//CASA-1.RData"
 )
 
 # -----------------------------

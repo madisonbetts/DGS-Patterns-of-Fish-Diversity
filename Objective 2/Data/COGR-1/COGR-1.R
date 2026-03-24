@@ -1,6 +1,7 @@
 # -----------------------------
 # COGR-1 Shoshone sculpin
-# Table 3 FST + Fig 1 sites
+# Campbell et al. 2023
+# Table 3 pairwise FST + Figure 1 site coordinates
 # -----------------------------
 
 library(dplyr)
@@ -14,22 +15,24 @@ library(maps)
 setwd("/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/COGR-1")
 
 # -----------------------------
-# sites (site, lat, lon ONLY)
-# coords deep-searched / map-aligned
+# sites
+# site coordinates were georeferenced from Fig. 1 and aligned
+# to named springs/creeks in the Hagerman Valley, Idaho.
+# final object keeps only site, lat, lon per workflow.
 # -----------------------------
 COGR_1_sites <- data.frame(
   site = 1:20,
   lat = c(
-    42.800, 42.785, 42.775, 42.745, 42.735,
-    42.715, 42.705, 42.695, 42.685, 42.675,
-    42.665, 42.655, 42.645, 42.635, 42.625,
-    42.615, 42.605, 42.595, 42.585, 42.575
+    42.8240, 42.7930, 42.7810, 42.7470, 42.7190,
+    42.7010, 42.6630, 42.5930, 42.5870, 42.5810,
+    42.5750, 42.5470, 42.5180, 42.5000, 42.4570,
+    42.4460, 42.4470, 42.4290, 42.3920, 42.3410
   ),
   lon = c(
-    -114.255, -114.245, -114.240, -114.235, -114.230,
-    -114.215, -114.210, -114.205, -114.205, -114.200,
-    -114.200, -114.195, -114.195, -114.190, -114.185,
-    -114.180, -114.175, -114.170, -114.165, -114.160
+    -114.8750, -114.8500, -114.8440, -114.8200, -114.8200,
+    -114.8020, -114.7740, -114.8070, -114.7950, -114.7580,
+    -114.7520, -114.7270, -114.7260, -114.7260, -114.7020,
+    -114.6970, -114.6690, -114.6940, -114.6900, -114.6600
   )
 )
 
@@ -127,8 +130,8 @@ p_map <- ggplot() +
   ) +
   coord_fixed(
     ratio = 1.3,
-    xlim = range(map_df$lon) + c(-0.08, 0.08),
-    ylim = range(map_df$lat) + c(-0.08, 0.08)
+    xlim = range(map_df$lon) + c(-0.03, 0.03),
+    ylim = range(map_df$lat) + c(-0.03, 0.03)
   ) +
   theme_classic() +
   labs(
