@@ -1,14 +1,16 @@
+
 # -----------------------------
 # SACO-3 Bull trout (Salvelinus confluentus)
 # Whiteley et al. 2006
 # Boise River basin, Idaho
 #
-# NOTE:
-# The published pairwise FST table (Table 4) provides a complete
-# symmetric reconstruction for samples 1–20, but the values linking
-# sample 21 (West Fork Big Smoky Creek) to the other sites are not
-# fully reported in the printed upper triangle. To avoid inventing
-# values, this workflow uses samples 1–20 only.
+# Cleaned workflow:
+# - site coordinates are read directly from SACO-3-sites.csv
+# - site 21 is removed because its pairwise FST values are unavailable
+# - the FST matrix is built for the 20 fully observed sites
+# - the matrix is forced to be symmetric
+# - negative FST values are set to 0
+#
 # -----------------------------
 
 library(geosphere)
@@ -16,65 +18,35 @@ library(ggplot2)
 library(maps)
 
 # -----------------------------
-# 1) sites
-# feature-anchor coordinates from named streams and the site map
-# in Whiteley et al. (2006), ordered to match Table 1 / Table 4
+# paths
 # -----------------------------
-SACO_3_sites <- data.frame(
-  site = 1:20,
-  lat = c(
-    43.64806,  # 1  Mores Creek
-    43.72000,  # 2  Sheep Creek
-    43.73000,  # 3  East Fork Sheep Creek
-    43.79000,  # 4  Roaring River
-    43.79000,  # 5  Yuba River
-    43.97000,  # 6  Crooked River
-    43.90000,  # 7  Bear Creek and River
-    43.85000,  # 8  Lodgepole Creek
-    43.84000,  # 9  Johnson Creek (North Fork)
-    43.92000,  # 10 Ballentyne Creek
-    43.97000,  # 11 McLeod Creek
-    43.66000,  # 12 Rattlesnake Creek
-    43.70000,  # 13 Elk Creek
-    43.62000,  # 14 Skeleton Creek
-    43.48000,  # 15 Boardman Creek
-    43.42000,  # 16 Smoky Dome Creek
-    43.62000,  # 17 Emma Creek
-    43.80000,  # 18 Johnson Creek (South Fork)
-    43.72000,  # 19 Big Smoky Creek
-    43.76000   # 20 Upper Big Smoky Creek
-  ),
-  lon = c(
-    -115.98972, # 1
-    -115.67000, # 2
-    -115.63000, # 3
-    -115.44000, # 4
-    -115.18000, # 5
-    -115.27000, # 6
-    -115.12000, # 7
-    -115.08000, # 8
-    -114.99000, # 9
-    -114.93000, # 10
-    -114.89000, # 11
-    -115.41000, # 12
-    -115.05000, # 13
-    -114.85000, # 14
-    -114.88000, # 15
-    -114.90000, # 16
-    -114.74000, # 17
-    -114.67000, # 18
-    -114.54000, # 19
-    -114.49000  # 20
-  )
-)
+site_csv <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-3/SACO-3-sites.csv"
+out_rdata <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-3/data/SACO-3.RData"
+
+# -----------------------------
+# 1) sites from csv
+# -----------------------------
+SACO_3_coords <- read.csv(site_csv, stringsAsFactors = FALSE)
+
+names(SACO_3_coords)[names(SACO_3_coords) == "latitude"]  <- "lat"
+names(SACO_3_coords)[names(SACO_3_coords) == "longitude"] <- "lon"
+
+SACO_3_coords <- SACO_3_coords[order(SACO_3_coords$site), c("site", "stream", "lat", "lon")]
+SACO_3_coords$site <- as.integer(SACO_3_coords$site)
+
+# remove site 21 because pairwise FST values were not available in Table 4
+SACO_3_coords <- SACO_3_coords[SACO_3_coords$site != 21, ]
+
+stopifnot(nrow(SACO_3_coords) == 20)
+stopifnot(identical(SACO_3_coords$site, 1:20))
 
 # -----------------------------
 # 2) pairwise FST matrix
-# Table 4, above diagonal only, samples 1–20
-# negative FST values are retained initially then set to 0
+# Table 4, above diagonal where available
 # -----------------------------
-SACO_3_fst <- matrix(0, nrow = 20, ncol = 20)
-rownames(SACO_3_fst) <- colnames(SACO_3_fst) <- 1:20
+SACO_3_fst <- matrix(NA_real_, nrow = 20, ncol = 20)
+rownames(SACO_3_fst) <- colnames(SACO_3_fst) <- as.character(1:20)
+diag(SACO_3_fst) <- 0
 
 # row 1
 SACO_3_fst[1,2]  <- 0.125
@@ -304,20 +276,26 @@ SACO_3_fst[18,20] <- 0.025
 # row 19
 SACO_3_fst[19,20] <- 0.043
 
-# make symmetric and clean
+# -----------------------------
+# 3) make symmetric and clean
+# -----------------------------
 SACO_3_fst[lower.tri(SACO_3_fst)] <- t(SACO_3_fst)[lower.tri(SACO_3_fst)]
 SACO_3_fst[SACO_3_fst < 0] <- 0
 diag(SACO_3_fst) <- 0
 
-# -----------------------------
-# 3) geographic distances (km)
-# -----------------------------
-coords <- SACO_3_sites[, c("lon", "lat")]
-geo_dist_km <- geosphere::distm(coords, fun = geosphere::distHaversine) / 1000
-rownames(geo_dist_km) <- colnames(geo_dist_km) <- SACO_3_sites$site
+stopifnot(identical(dim(SACO_3_fst), c(20L, 20L)))
+stopifnot(isTRUE(all.equal(SACO_3_fst, t(SACO_3_fst), check.attributes = FALSE)))
 
 # -----------------------------
-# 4) IBD dataframe
+# 4) geographic distances (km)
+# -----------------------------
+coords <- SACO_3_coords[, c("lon", "lat")]
+geo_dist_km <- geosphere::distm(coords, fun = geosphere::distHaversine) / 1000
+rownames(geo_dist_km) <- colnames(geo_dist_km) <- SACO_3_coords$site
+
+# -----------------------------
+# 5) IBD dataframe
+# keep only pairs with non-missing FST
 # -----------------------------
 ibd_df <- data.frame(
   site1   = rownames(SACO_3_fst)[row(SACO_3_fst)[upper.tri(SACO_3_fst)]],
@@ -326,18 +304,19 @@ ibd_df <- data.frame(
   dist_km = geo_dist_km[upper.tri(geo_dist_km)]
 )
 
+ibd_df <- ibd_df[!is.na(ibd_df$fst), ]
+
 # -----------------------------
-# 5) map of sampling sites
+# 6) map of sampling sites
 # -----------------------------
 world_map <- map_data("world")
-usa_map   <- subset(world_map, region == "USA")
 
-map_df <- SACO_3_sites
+map_df <- SACO_3_coords
 map_df$label <- as.character(map_df$site)
 
 p_map <- ggplot() +
   geom_polygon(
-    data = usa_map,
+    data = world_map,
     aes(x = long, y = lat, group = group),
     fill = "grey92",
     color = "grey55",
@@ -352,13 +331,13 @@ p_map <- ggplot() +
   geom_text(
     data = map_df,
     aes(x = lon, y = lat, label = label),
-    nudge_y = 0.02,
+    nudge_y = 0.03,
     size = 3.3
   ) +
   coord_fixed(
     ratio = 1.3,
-    xlim = range(map_df$lon) + c(-0.15, 0.15),
-    ylim = range(map_df$lat) + c(-0.12, 0.12)
+    xlim = range(map_df$lon) + c(-2.5, 2.5),
+    ylim = range(map_df$lat) + c(-1.5, 1.5)
   ) +
   theme_classic() +
   labs(
@@ -368,7 +347,7 @@ p_map <- ggplot() +
   )
 
 # -----------------------------
-# 6) IBD plot
+# 7) IBD plot
 # -----------------------------
 p_ibd <- ggplot(ibd_df, aes(x = dist_km, y = fst)) +
   geom_point(size = 3, alpha = 0.8) +
@@ -381,18 +360,23 @@ p_ibd <- ggplot(ibd_df, aes(x = dist_km, y = fst)) +
   )
 
 # -----------------------------
-# 7) save RData
+# 8) save RData
 # -----------------------------
+SACO_3_coords$stream <- NULL # remove site names
+
 save(
   SACO_3_fst,
-  SACO_3_sites,
-  file = "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-3/data/SACO-3.RData"
+  SACO_3_coords,
+  file = out_rdata
 )
 
+
+SACO_3_coords$stream <- NULL
+
 # -----------------------------
-# 8) print outputs
+# 9) print outputs
 # -----------------------------
-print(SACO_3_sites)
+print(SACO_3_coords)
 print(round(SACO_3_fst, 4))
 print(head(ibd_df))
 print(p_map)
