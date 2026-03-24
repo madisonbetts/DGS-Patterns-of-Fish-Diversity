@@ -2,7 +2,7 @@
 # SACO-4 Bull trout (Salvelinus confluentus)
 # Hargrove et al. 2025
 # Snake River / Hells Canyon baseline
-
+#
 # Workflow:
 # - read the FishGen GenePop export
 # - link original POP blocks to the 32 pooled populations in Table 1 / Fig. 1
@@ -10,13 +10,21 @@
 # - compute pairwise Weir & Cockerham FST from the raw SNP genotypes
 # - force symmetry and set negative FST values to 0
 # - create a matching site coordinate dataframe and IBD objects
-
+#
 # NOTE:
 # Coordinates below are feature-anchor coordinates tied to the named stream /
 # river location shown in Fig. 1 and Table 1. They are intended for Objective 2
 # mapping + IBD workflows and can be refined later if a higher-precision site
 # source becomes available.
 # -----------------------------
+
+
+
+
+
+SACO_4 = read.Genepop("/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-4/GenePop.gen.txt")
+
+
 
 library(adegenet)
 library(HWxtest)
@@ -28,7 +36,7 @@ library(maps)
 # -----------------------------
 # paths
 # -----------------------------
-genepop_file <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-4/GenePop.txt"
+genepop_file <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-4/GenePop.gen"
 out_rdata    <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SACO-4/data/SACO-4.RData"
 
 # -----------------------------
