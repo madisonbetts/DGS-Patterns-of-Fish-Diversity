@@ -269,7 +269,7 @@ p <- ggplot() +
     x = "Longitude",
     y = "Latitude",
     color = "Family",
-    title = "Extracted study sites across the conterminous U.S. and southern Canada"
+    title = "Extracted sites from North American freshwater fish riverscape genetics studies"
   )
 
 print(p)
