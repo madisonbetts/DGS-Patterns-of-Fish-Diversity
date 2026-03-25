@@ -277,13 +277,13 @@ print(p)
 # -------------------------------
 # optional save
 # -------------------------------
-ggsave(
-  filename = file.path(base_dir, "all_sites_us_canada_by_family.png"),
-  plot = p,
-  width = 12,
-  height = 8,
-  dpi = 400
-)
+#ggsave(
+#  filename = file.path(base_dir, "all_sites_us_canada_by_family.png"),
+#  plot = p,
+#  width = 12,
+#  height = 8,
+#  dpi = 400
+#)
 
 # -------------------------------
 # summary counts
