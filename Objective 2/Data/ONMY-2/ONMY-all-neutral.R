@@ -35,7 +35,7 @@ suppressPackageStartupMessages({
 # -----------------------------
 # paths
 # -----------------------------
-xlsx_file <- "/mnt/data/SH_Raw_Genetic.xlsx"
+xlsx_file <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/ONMY-2/doi_10_5061_dryad_pr065__v20151211/DataforDryad/SH_Raw_Genetic.xlsx"
 
 # -----------------------------
 # sheets to combine
@@ -290,10 +290,11 @@ ONMY_all_sites <- site_lookup
 # -----------------------------
 # save objects
 # -----------------------------
+
 save(
-  ONMY_all_fst,
-  ONMY_all_sites,
-  file = "/mnt/data/ONMY-all-neutral.RData"
+  ONMY_2_fst,
+  ONMY_2_fst,
+  file = "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/ONMY-2/data/ONMY-2.RData"
 )
 
 # -----------------------------
@@ -307,3 +308,106 @@ cat("Total loci:", ncol(ONMY_all_hf) - 1, "\n\n")
 print(head(ONMY_all_sites, 10))
 print(dim(ONMY_all_fst))
 print(round(ONMY_all_fst[1:min(10, nrow(ONMY_all_fst)), 1:min(10, ncol(ONMY_all_fst))], 5))
+
+
+
+# plotting
+ONMY_all_sites <- site_lookup
+
+
+# -----------------------------
+# add coordinates
+# -----------------------------
+# Fill these with your vetted lat/lon values.
+# site_id must match ONMY_all_sites$site_id exactly.
+
+site_coords <- data.frame(
+  site_id = ONMY_all_sites$site_id,
+  lat = NA_real_,
+  lon = NA_real_
+)
+
+ONMY_all_sites <- merge(
+  ONMY_all_sites,
+  site_coords,
+  by = "site_id",
+  all.x = TRUE,
+  sort = FALSE
+)
+
+# restore original order
+ONMY_all_sites <- ONMY_all_sites[match(site_lookup$site_id, ONMY_all_sites$site_id), ]
+rownames(ONMY_all_sites) <- NULL
+
+# quick check
+if (any(is.na(ONMY_all_sites$lat)) || any(is.na(ONMY_all_sites$lon))) {
+  warning("Some site coordinates are missing. Map and IBD plots will fail until lat/lon are filled.")
+}
+
+
+
+# -----------------------------
+# plot sites
+# -----------------------------
+library(ggplot2)
+library(maps)
+
+usa <- map_data("state")
+canada <- map_data("world", region = "Canada")
+
+p_sites <- ggplot() +
+  geom_polygon(
+    data = usa,
+    aes(x = long, y = lat, group = group),
+    fill = "gray95",
+    color = "gray70",
+    linewidth = 0.2
+  ) +
+  geom_polygon(
+    data = canada,
+    aes(x = long, y = lat, group = group),
+    fill = "gray95",
+    color = "gray70",
+    linewidth = 0.2
+  ) +
+  geom_point(
+    data = ONMY_all_sites,
+    aes(x = lon, y = lat, shape = metapop),
+    size = 2.8
+  ) +
+  geom_text(
+    data = ONMY_all_sites,
+    aes(x = lon, y = lat, label = site_id),
+    size = 2.7,
+    nudge_y = 0.18
+  ) +
+  coord_quickmap(
+    xlim = range(ONMY_all_sites$lon, na.rm = TRUE) + c(-2, 2),
+    ylim = range(ONMY_all_sites$lat, na.rm = TRUE) + c(-2, 2)
+  ) +
+  theme_classic() +
+  labs(
+    x = "Longitude",
+    y = "Latitude",
+    shape = "Metapopulation",
+    title = "ONMY all neutral sites"
+  )
+
+print(p_sites)
+
+ggsave(
+  filename = "ONMY_all_sites.png",
+  plot = p_sites,
+  width = 9,
+  height = 7,
+  dpi = 300,
+  bg = "white"
+)
+
+ggsave(
+  filename = "ONMY_all_sites.pdf",
+  plot = p_sites,
+  width = 9,
+  height = 7,
+  bg = "white"
+)
