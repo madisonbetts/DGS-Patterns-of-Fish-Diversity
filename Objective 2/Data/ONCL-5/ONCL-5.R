@@ -332,10 +332,10 @@ states_map <- map_data("state")
 canada_map <- map_data("world", region = "Canada")
 
 xpad <- 0.7
-ymin <- min(ONCL_5_coords$lat) - 0.5
-ymax <- max(ONCL_5_coords$lat) + 0.5
-xmin <- min(ONCL_5_coords$lon) - xpad
-xmax <- max(ONCL_5_coords$lon) + xpad
+ymin <- min(ONCL_5_coords$lat) - 0.1
+ymax <- max(ONCL_5_coords$lat) + 0.1
+xmin <- min(ONCL_5_coords$lon) - 0.1
+xmax <- max(ONCL_5_coords$lon) + 0.1
 
 ggplot() +
   geom_polygon(
