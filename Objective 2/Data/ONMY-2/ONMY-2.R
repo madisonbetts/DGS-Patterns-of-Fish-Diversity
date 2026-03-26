@@ -322,11 +322,11 @@ if (nrow(coord_lookup) != nrow(site_lookup)) {
   stop("Coordinate table length does not match site_lookup.")
 }
 
-ONMY_2_sites <- merge(site_lookup, coord_lookup, by = "site_id", sort = FALSE)
-ONMY_2_sites <- ONMY_2_sites[match(site_lookup$site_id, ONMY_2_sites$site_id), ]
-rownames(ONMY_2_sites) <- NULL
+ONMY_2_coords <- merge(site_lookup, coord_lookup, by = "site_id", sort = FALSE)
+ONMY_2_coords <- ONMY_2_coords[match(site_lookup$site_id, ONMY_2_coords$site_id), ]
+rownames(ONMY_2_coords) <- NULL
 
-ONMY_2_coords <- ONMY_2_sites[, c("site_id", "lat", "lon")]
+ONMY_2_coords <- ONMY_2_coords[, c("site_id", "lat", "lon")]
 
 # -----------------------------
 # straight-line distances + IBD
@@ -367,19 +367,19 @@ ggplot() +
     linewidth = 0.2
   ) +
   geom_point(
-    data = ONMY_2_sites,
+    data = ONMY_2_coords,
     aes(x = lon, y = lat, shape = metapop),
     size = 2.8
   ) +
   geom_text(
-    data = ONMY_2_sites,
+    data = ONMY_2_coords,
     aes(x = lon, y = lat, label = site_id),
     size = 2.7,
     nudge_y = 0.18
   ) +
   coord_quickmap(
-    xlim = range(ONMY_2_sites$lon, na.rm = TRUE) + c(-2, 2),
-    ylim = range(ONMY_2_sites$lat, na.rm = TRUE) + c(-2, 2)
+    xlim = range(ONMY_2_coords$lon, na.rm = TRUE) + c(-2, 2),
+    ylim = range(ONMY_2_coords$lat, na.rm = TRUE) + c(-2, 2)
   ) +
   theme_classic() +
   labs(
@@ -408,7 +408,7 @@ ggplot(ONMY_2_ibd, aes(x = dist_km, y = fst)) +
 save(
   ONMY_2_fst,
   ONMY_2_coords,
-  #ONMY_2_sites,
+  #ONMY_2_coords,
   #ONMY_2_ibd,
   file = file.path(data_dir, "ONMY-2.RData")
 )
@@ -417,8 +417,8 @@ save(
 # quick output
 # -----------------------------
 cat("\nFinished combined neutral extraction across all five sheets.\n")
-cat("Total populations:", nrow(ONMY_2_sites), "\n")
-cat("Total individuals:", sum(ONMY_2_sites$n_ind), "\n")
+cat("Total populations:", nrow(ONMY_2_coords), "\n")
+cat("Total individuals:", sum(ONMY_2_coords$n_ind), "\n")
 cat("Total loci:", ncol(ONMY_2_hf) - 1, "\n\n")
 
 print(head(ONMY_2_coords, 10))

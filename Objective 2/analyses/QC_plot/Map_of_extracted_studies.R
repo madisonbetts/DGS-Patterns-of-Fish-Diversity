@@ -196,6 +196,15 @@ family_labels <- setNames(
 sites_df$Family <- factor(sites_df$Family, levels = family_counts$Family)
 
 # -------------------------------
+# IMPORTANT:
+# draw common families first so they end up on the bottom;
+# rarer families get plotted later and stay visible on top
+# -------------------------------
+sites_df <- sites_df %>%
+  left_join(family_counts, by = "Family") %>%
+  arrange(desc(n_datasets), Family)
+
+# -------------------------------
 # convert sites to sf
 # -------------------------------
 sites_sf <- st_as_sf(
@@ -221,7 +230,6 @@ states_provinces_sf <- ne_states(
   returnclass = "sf"
 )
 
-# drop AK/HI/territories if you want a cleaner lower-48 + southern Canada map
 states_provinces_sf <- states_provinces_sf %>%
   filter(
     !name_en %in% c(
@@ -258,7 +266,9 @@ p <- ggplot() +
     expand = FALSE
   ) +
   scale_color_discrete(
-    labels = family_labels
+    breaks = family_counts$Family,
+    labels = family_labels,
+    drop = FALSE
   ) +
   theme_classic() +
   theme(
@@ -269,7 +279,7 @@ p <- ggplot() +
     x = "Longitude",
     y = "Latitude",
     color = "Family",
-    title = "Extracted sites from North American freshwater fish riverscape genetics studies"
+    title = "Extracted North American freshwater fish riverscape genetics studies"
   )
 
 print(p)
