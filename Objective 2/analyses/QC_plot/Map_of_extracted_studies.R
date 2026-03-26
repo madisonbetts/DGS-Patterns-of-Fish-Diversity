@@ -301,9 +301,9 @@ n_species_codes <- sites_df %>%
   nrow()
 
 cat("\n==================== SUMMARY ====================\n")
-cat("Unique sites: ", n_sites, "\n", sep = "")
 cat("Datasets: ", n_datasets, "\n", sep = "")
 cat("Species codes: ", n_species_codes, "\n", sep = "")
+cat("Unique sites: ", n_sites, "\n", sep = "")
 cat("\nDataset counts per family:\n")
 
 for (i in seq_len(nrow(family_counts))) {
