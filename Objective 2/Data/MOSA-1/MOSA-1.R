@@ -32,7 +32,7 @@
 # digitized from uploaded Figure 1 CSV
 # -----------------------------
 MOSA_1_coords <- data.frame(
-  site_id = 1:14,
+  site = 1:14,
   lat = c(
     45.7648906, 45.0437827, 45.2930963, 44.4798915, 40.7762392, 39.2978876, 39.5288732, 38.0664161, 37.6298330, 36.9628787, 38.6406970, 38.2430349, 35.3449110, 34.3690049
   ),
@@ -127,7 +127,7 @@ ggplot() +
 # -----------------------------
 coords_mat <- as.matrix(MOSA_1_coords[, c("lon", "lat")])
 geo_dist_km <- geosphere::distm(coords_mat, fun = geosphere::distGeo) / 1000
-rownames(geo_dist_km) <- colnames(geo_dist_km) <- as.character(MOSA_1_coords$site_id)
+rownames(geo_dist_km) <- colnames(geo_dist_km) <- as.character(MOSA_1_coords$site)
 
 # -----------------------------
 # pairwise dataframe for IBD plot
