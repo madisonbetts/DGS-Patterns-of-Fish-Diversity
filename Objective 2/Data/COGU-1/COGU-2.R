@@ -142,3 +142,4 @@ save(
   COGU_1_coords,
   file = file.path("/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/COGU-1/data/COGU-1.RData")
 )
+ÔÓ

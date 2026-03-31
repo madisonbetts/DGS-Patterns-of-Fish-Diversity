@@ -1,7 +1,10 @@
 # -------------------------------
 # Plot all extracted study sites across the U.S. + Canada
 # colored by Family from Study_metadata.xlsx
-# legend includes dataset counts per family, e.g. Leuciscidae (x23)
+# legend entries include dataset counts per family, e.g. Leuciscidae (x23)
+# legend title = Dataset (n = total number of datasets)
+# adds north arrow + default scale bar + black inset box
+# saves as png + pdf
 # -------------------------------
 
 library(readxl)
@@ -11,6 +14,8 @@ library(stringr)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
+library(ggspatial)
+library(grid)
 
 # -------------------------------
 # paths
@@ -18,6 +23,12 @@ library(rnaturalearthdata)
 base_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data"
 
 metadata_file <- file.path(base_dir, "Study_metadata.xlsx")
+
+out_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/analyses/QC_plot"
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
+png_file <- file.path(out_dir, "all_sites_us_canada_by_family.png")
+pdf_file <- file.path(out_dir, "all_sites_us_canada_by_family.pdf")
 
 # -------------------------------
 # list valid study folders
@@ -179,7 +190,7 @@ if (nrow(unmatched) > 0) {
 }
 
 # -------------------------------
-# family counts for legend and summary
+# family counts for legend entries
 # dataset-level counts per family
 # -------------------------------
 family_counts <- sites_df %>%
@@ -192,14 +203,17 @@ family_labels <- setNames(
   family_counts$Family
 )
 
+# total datasets for legend title
+n_datasets <- sites_df %>%
+  distinct(study_code) %>%
+  nrow()
+
+legend_title <- paste0("Datasets (n = ", n_datasets, ")")
+
 # keep legend order consistent with counts
 sites_df$Family <- factor(sites_df$Family, levels = family_counts$Family)
 
-# -------------------------------
-# IMPORTANT:
-# draw common families first so they end up on the bottom;
-# rarer families get plotted later and stay visible on top
-# -------------------------------
+# common families plotted first; rarer families stay visible on top
 sites_df <- sites_df %>%
   left_join(family_counts, by = "Family") %>%
   arrange(desc(n_datasets), Family)
@@ -216,8 +230,6 @@ sites_sf <- st_as_sf(
 
 # -------------------------------
 # get map layers
-# country polygons for U.S. + Canada
-# state/province internal boundaries
 # -------------------------------
 countries_sf <- ne_countries(
   country = c("United States of America", "Canada"),
@@ -239,6 +251,12 @@ states_provinces_sf <- states_provinces_sf %>%
   )
 
 # -------------------------------
+# map extent
+# -------------------------------
+map_xlim <- c(-130, -52)
+map_ylim <- c(23, 60)
+
+# -------------------------------
 # plot
 # -------------------------------
 p <- ggplot() +
@@ -257,53 +275,100 @@ p <- ggplot() +
   geom_sf(
     data = sites_sf,
     aes(color = Family),
-    size = 2.2,
+    size = 0.75,
     alpha = 0.9
   ) +
   coord_sf(
-    xlim = c(-130, -52),
-    ylim = c(23, 60),
+    xlim = map_xlim,
+    ylim = map_ylim,
     expand = FALSE
   ) +
+  # manual scale bar in lower-left white space
+  annotate("rect", xmin = -128.2, xmax = -125.7, ymin = 24.4, ymax = 25.6,
+           fill = "black", color = "black") +
+  annotate("rect", xmin = -125.7, xmax = -123.2, ymin = 24.4, ymax = 25.6,
+           fill = "white", color = "black") +
+  annotate("text",
+           x = -122.0, y = 25.0,
+           label = "1000 km",
+           hjust = 0, size = 3.2) +
+  # north arrow
+  #annotation_north_arrow(
+  #  location = "tr",
+  #  which_north = "true",
+  #  height = unit(0.15, "in"),
+  #  width = unit(0.15, "in"),
+  #  pad_x = unit(0.10, "in"),
+  #  pad_y = unit(0.10, "in"),
+  #  style = north_arrow_orienteering(
+  #    fill = c("black", "black"))
+  #) +
+  # north arrow v2
+# north arrow
+annotation_north_arrow(
+  location = "tr",
+  which_north = "true",
+  height = unit(0.22, "in"),
+  width  = unit(0.22, "in"),
+  pad_x  = unit(0.10, "in"),
+  pad_y  = unit(0.10, "in"),
+  style = north_arrow_orienteering(
+    fill = c("black", "black"),
+    line_col = "black",
+    text_col = NA   # suppress built-in N text
+  )
+) + # north arrow text "N"
+  #annotate(
+  #  "text",
+  #  x = -55.2, y = 56.3,   # tweak if needed
+  #  label = "N",
+  #  size = 3.2
+  #) + 
+  # color scale
   scale_color_discrete(
     breaks = family_counts$Family,
     labels = family_labels,
-    drop = FALSE
+    drop = FALSE,
   ) +
   theme_classic() +
   theme(
     legend.title = element_text(size = 11),
-    legend.text = element_text(size = 9)
+    legend.text = element_text(size = 9),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8),
+    legend.key.size = unit(0.1, "in")
   ) +
   labs(
     x = "Longitude",
     y = "Latitude",
-    color = "Family",
-    title = "Extracted North American freshwater fish riverscape genetics studies"
+    color = legend_title
   )
 
 print(p)
 
 # -------------------------------
-# optional save
+# save
 # -------------------------------
-#ggsave(
-#  filename = file.path(base_dir, "all_sites_us_canada_by_family.png"),
-#  plot = p,
-#  width = 12,
-#  height = 8,
-#  dpi = 400
-#)
+ggsave(
+  filename = png_file,
+  plot = p,
+  width = 6.5,
+  height = 4,
+  dpi = 400
+)
+
+ggsave(
+  filename = pdf_file,
+  plot = p,
+  width = 6.5,
+  height = 4,
+  device = cairo_pdf
+)
 
 # -------------------------------
 # summary counts
 # -------------------------------
 n_sites <- sites_df %>%
   distinct(lon, lat) %>%
-  nrow()
-
-n_datasets <- sites_df %>%
-  distinct(study_code) %>%
   nrow()
 
 n_species_codes <- sites_df %>%
@@ -314,10 +379,6 @@ cat("\n==================== SUMMARY ====================\n")
 cat("Datasets: ", n_datasets, "\n", sep = "")
 cat("Species codes: ", n_species_codes, "\n", sep = "")
 cat("Unique sites: ", n_sites, "\n", sep = "")
-cat("\nDataset counts per family:\n")
-
-for (i in seq_len(nrow(family_counts))) {
-  cat("  ", family_counts$Family[i], ": ", family_counts$n_datasets[i], "\n", sep = "")
-}
-
+cat("PNG saved to: ", png_file, "\n", sep = "")
+cat("PDF saved to: ", pdf_file, "\n", sep = "")
 cat("=================================================\n\n")
