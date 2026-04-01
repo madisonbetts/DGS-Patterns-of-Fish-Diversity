@@ -1,13 +1,8 @@
 # -------------------------------
 # Plot all extracted study sites across the U.S. + Canada
 # colored by Family from Study_metadata.xlsx
-# reports dynamic extraction diagnostics from metadata:
-#   datasets mapped
-#   unique spp
-#   unique sites
-#   metadata rows not plotted
-#   plotted rows not in metadata
-# no hardcoded expected dataset totals
+# reports only unique spp and unique sites in the lower-right
+# aligned visually with the scale bar and north arrow
 # -------------------------------
 
 library(readxl)
@@ -30,8 +25,8 @@ metadata_file <- file.path(base_dir, "Study_metadata.xlsx")
 out_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/analyses/QC_plot"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-png_file <- file.path(out_dir, "all_sites_us_canada_by_family_summary_dynamic.png")
-pdf_file <- file.path(out_dir, "all_sites_us_canada_by_family_summary_dynamic.pdf")
+png_file <- file.path(out_dir, "all_sites_by_family.png")
+pdf_file <- file.path(out_dir, "all_sites_by_family.pdf")
 
 # -------------------------------
 # list valid study folders
@@ -207,38 +202,6 @@ meta2 <- meta %>%
   select(study_code, Family, everything())
 
 # -------------------------------
-# diagnostics: compare metadata rows to plotted datasets
-# -------------------------------
-metadata_ids_all <- trimws(as.character(meta[[code_col]]))
-metadata_ids_all <- metadata_ids_all[!is.na(metadata_ids_all) & metadata_ids_all != ""]
-
-metadata_ids_unique <- sort(unique(metadata_ids_all))
-plotted_ids_unique <- sort(unique(sites_df$study_code))
-
-metadata_rows_not_plotted <- setdiff(metadata_ids_unique, plotted_ids_unique)
-plotted_rows_not_in_metadata <- setdiff(plotted_ids_unique, metadata_ids_unique)
-
-metadata_duplicate_ids <- sort(unique(metadata_ids_all[duplicated(metadata_ids_all)]))
-
-write.csv(
-  data.frame(study_code = metadata_rows_not_plotted),
-  file.path(out_dir, "metadata_rows_not_plotted.csv"),
-  row.names = FALSE
-)
-
-write.csv(
-  data.frame(study_code = plotted_rows_not_in_metadata),
-  file.path(out_dir, "plotted_rows_not_in_metadata.csv"),
-  row.names = FALSE
-)
-
-write.csv(
-  data.frame(study_code = metadata_duplicate_ids),
-  file.path(out_dir, "metadata_duplicate_ids.csv"),
-  row.names = FALSE
-)
-
-# -------------------------------
 # join metadata
 # -------------------------------
 sites_df <- sites_df %>%
@@ -289,11 +252,8 @@ n_species_codes <- sites_df %>%
 legend_title <- paste0("Datasets (n = ", n_datasets, ")")
 
 summary_label <- paste(
-  paste0("Datasets: ", n_datasets),
   paste0("Unique spp: ", n_species_codes),
   paste0("Unique sites: ", n_sites),
-  paste0("Excel not plotted: ", length(metadata_rows_not_plotted)),
-  paste0("Plotted not in Excel: ", length(plotted_rows_not_in_metadata)),
   sep = "\n"
 )
 
@@ -393,8 +353,8 @@ p <- ggplot() +
   ) +
   annotate(
     "text",
-    x = -58.2,
-    y = 31.0,
+    x = -58.0,
+    y = 25.2,
     label = summary_label,
     hjust = 1,
     vjust = 0,
@@ -447,17 +407,6 @@ cat("\n==================== SUMMARY ====================\n")
 cat("Datasets: ", n_datasets, "\n", sep = "")
 cat("Unique spp: ", n_species_codes, "\n", sep = "")
 cat("Unique sites: ", n_sites, "\n", sep = "")
-cat("Excel rows not plotted: ", length(metadata_rows_not_plotted), "\n", sep = "")
-cat("Plotted rows not in Excel: ", length(plotted_rows_not_in_metadata), "\n", sep = "")
-if (length(metadata_rows_not_plotted) > 0) {
-  cat("Excel rows not plotted IDs: ", paste(metadata_rows_not_plotted, collapse = ", "), "\n", sep = "")
-}
-if (length(plotted_rows_not_in_metadata) > 0) {
-  cat("Plotted rows not in Excel IDs: ", paste(plotted_rows_not_in_metadata, collapse = ", "), "\n", sep = "")
-}
-if (length(metadata_duplicate_ids) > 0) {
-  cat("Duplicate Study_IDs in Excel: ", paste(metadata_duplicate_ids, collapse = ", "), "\n", sep = "")
-}
 cat("PNG saved to: ", png_file, "\n", sep = "")
 cat("PDF saved to: ", pdf_file, "\n", sep = "")
 cat("=================================================\n\n")
