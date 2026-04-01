@@ -1,5 +1,5 @@
 # ========================================
-# LEMA-3
+# LEME-1
 # Lepomis megalotis
 # longear sunfish
 #
@@ -14,9 +14,9 @@ library(ggplot2)
 library(geosphere)
 library(maps)
 
-study_code <- "LEMA-3"
+study_code <- "LEME-1"
 
-base_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/LEMA-3"
+base_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/LEME-1"
 data_dir <- file.path(base_dir, "data")
 
 dir.create(base_dir, recursive = TRUE, showWarnings = FALSE)
@@ -27,7 +27,7 @@ dir.create(data_dir, recursive = TRUE, showWarnings = FALSE)
 # Appendix Table I
 # Site order matches Table 2.5 exactly
 # -----------------------------
-LEMA_3_coords <- data.frame(
+LEME_1_coords <- data.frame(
   site_id = as.character(1:12),
   lat = c(
     40.117908, 40.121214, 40.122522, 40.117217, 40.120531, 40.122811,
@@ -107,34 +107,34 @@ fst_vals <- c(
   -0.0052,  0.0066,  0.0106,  0.0025,  0.0015,  0.0038,  0.0018,  0.0036, -0.0011, -0.0031,  0.0052
 )
 
-LEMA_3_fst <- fill_sym_from_lower(
-  pops = LEMA_3_coords$site_id,
+LEME_1_fst <- fill_sym_from_lower(
+  pops = LEME_1_coords$site_id,
   vals = fst_vals,
   diag_val = 0
 )
 
-LEMA_3_fst[LEMA_3_fst < 0] <- 0
-diag(LEMA_3_fst) <- 0
+LEME_1_fst[LEME_1_fst < 0] <- 0
+diag(LEME_1_fst) <- 0
 
 # -----------------------------
 # 4) geographic distance matrix
 # straight-line distance among exact site coordinates
 # -----------------------------
 geo_dist_km <- geosphere::distm(
-  x = as.matrix(LEMA_3_coords[, c("lon", "lat")]),
+  x = as.matrix(LEME_1_coords[, c("lon", "lat")]),
   fun = geosphere::distHaversine
 ) / 1000
 
-rownames(geo_dist_km) <- LEMA_3_coords$site_id
-colnames(geo_dist_km) <- LEMA_3_coords$site_id
+rownames(geo_dist_km) <- LEME_1_coords$site_id
+colnames(geo_dist_km) <- LEME_1_coords$site_id
 
 # -----------------------------
 # 5) IBD dataframe
 # -----------------------------
 ibd_df <- data.frame(
-  site1 = rownames(LEMA_3_fst)[row(LEMA_3_fst)[upper.tri(LEMA_3_fst)]],
-  site2 = colnames(LEMA_3_fst)[col(LEMA_3_fst)[upper.tri(LEMA_3_fst)]],
-  fst = LEMA_3_fst[upper.tri(LEMA_3_fst)],
+  site1 = rownames(LEME_1_fst)[row(LEME_1_fst)[upper.tri(LEME_1_fst)]],
+  site2 = colnames(LEME_1_fst)[col(LEME_1_fst)[upper.tri(LEME_1_fst)]],
+  fst = LEME_1_fst[upper.tri(LEME_1_fst)],
   dist_km = geo_dist_km[upper.tri(geo_dist_km)],
   stringsAsFactors = FALSE
 )
@@ -147,7 +147,7 @@ ibd_df$site2_code <- site_lookup$site_code[match(ibd_df$site2, site_lookup$site_
 # tight local extent around exact sites
 # -----------------------------
 state_map <- map_data("state")
-plot_sites <- merge(LEMA_3_coords, site_lookup, by = "site_id", sort = FALSE)
+plot_sites <- merge(LEME_1_coords, site_lookup, by = "site_id", sort = FALSE)
 
 lon_rng <- range(plot_sites$lon, na.rm = TRUE)
 lat_rng <- range(plot_sites$lat, na.rm = TRUE)
@@ -158,7 +158,7 @@ y_pad <- max(0.01, diff(lat_rng) * 0.25)
 xlim_use <- c(lon_rng[1] - x_pad, lon_rng[2] + x_pad)
 ylim_use <- c(lat_rng[1] - y_pad, lat_rng[2] + y_pad)
 
-map_plot <- ggplot() +
+ggplot() +
   geom_polygon(
     data = state_map,
     aes(x = long, y = lat, group = group),
@@ -185,52 +185,35 @@ map_plot <- ggplot() +
   labs(
     x = "Longitude",
     y = "Latitude",
-    title = "LEMA-3 sampling locations"
+    title = "LEME-1 sampling locations"
   )
 
-print(map_plot)
-
-ggsave(
-  filename = file.path(base_dir, "LEMA-3_map.png"),
-  plot = map_plot,
-  width = 7,
-  height = 5.2,
-  dpi = 300
-)
 
 # -----------------------------
 # 7) IBD plot
 # -----------------------------
-ibd_plot <- ggplot(ibd_df, aes(x = dist_km, y = fst)) +
+ ggplot(ibd_df, aes(x = dist_km, y = fst)) +
   geom_point(size = 2.8, alpha = 0.85) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_classic() +
   labs(
     x = "Euclidean distance (km)",
     y = expression(F[ST]),
-    title = "LEMA-3 isolation by distance"
+    title = "LEME-1 isolation by distance"
   )
 
-print(ibd_plot)
 
-ggsave(
-  filename = file.path(base_dir, "LEMA-3_IBD.png"),
-  plot = ibd_plot,
-  width = 7,
-  height = 5,
-  dpi = 300
-)
 
 # -----------------------------
 # 8) checks + save
 # -----------------------------
-stopifnot(identical(rownames(LEMA_3_fst), LEMA_3_coords$site_id))
-stopifnot(identical(colnames(LEMA_3_fst), LEMA_3_coords$site_id))
-stopifnot(isTRUE(all.equal(LEMA_3_fst, t(LEMA_3_fst))))
+stopifnot(identical(rownames(LEME_1_fst), LEME_1_coords$site_id))
+stopifnot(identical(colnames(LEME_1_fst), LEME_1_coords$site_id))
+stopifnot(isTRUE(all.equal(LEME_1_fst, t(LEME_1_fst))))
 stopifnot(isTRUE(all.equal(geo_dist_km, t(geo_dist_km))))
 
 save(
-  LEMA_3_fst,
-  LEMA_3_coords,
-  file = file.path(data_dir, "LEMA-3.RData")
+  LEME_1_fst,
+  LEME_1_coords,
+  file = file.path(data_dir, "LEME-1.RData")
 )

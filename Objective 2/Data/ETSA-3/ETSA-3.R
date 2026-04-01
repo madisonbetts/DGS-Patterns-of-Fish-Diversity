@@ -2,8 +2,21 @@
 # ETSA-3
 # Etheostoma sagitta
 # Kentucky Arrow Darter
+#
+# Builds:
+#   ETSA_3_coords
+#   ETSA_3_fst
+#   ETSA_3_rivdists
+#
+# Saves to:
+#   ETSA-3/data/ETSA-3.RData
+#
+# Plots in RStudio:
+#   - site map
+#   - IBD using in-river distance only
 # ========================================
 
+library(HWxtest)
 library(adegenet)
 library(hierfstat)
 library(ggplot2)
@@ -18,11 +31,13 @@ data_dir  <- file.path(base_dir, "data")
 
 dir.create(data_dir, recursive = TRUE, showWarnings = FALSE)
 
-gen_file    <- file.path(river_dir, "KAD_Watson_GenepopFile_12popRearranged.txt")
-coords_file <- file.path(river_dir, "SiteCoords.csv")
+gen_file     <- file.path(river_dir, "KAD_Watson_GenepopFile_12popRearranged.txt")
+coords_file  <- file.path(river_dir, "SiteCoords.csv")
+rivdist_file <- file.path(river_dir, "riverdist_correctsitenumbers.csv")
 
 stopifnot(file.exists(gen_file))
 stopifnot(file.exists(coords_file))
+stopifnot(file.exists(rivdist_file))
 
 # -----------------------------
 # 1) read exact site coordinates
@@ -63,7 +78,7 @@ et3_gen <- HWxtest::genepop.to.genind(
   ncode = 2
 )
 
-pop_sizes <- table(pop(et3_gen))
+pop_sizes <- table(adegenet::pop(et3_gen))
 stopifnot(length(pop_sizes) == nrow(site_info))
 
 et3_hf <- hierfstat::genind2hierfstat(et3_gen)
@@ -89,7 +104,35 @@ diag(fst_named) <- 0
 fst_named[lower.tri(fst_named)] <- t(fst_named)[lower.tri(fst_named)]
 
 # -----------------------------
-# 3) build final Objective 2 objects
+# 3) read in-river distance matrix
+# -----------------------------
+riv_raw <- read.csv(rivdist_file, stringsAsFactors = FALSE, check.names = FALSE)
+names(riv_raw)[1] <- "row_id"
+
+riv_row_ids <- suppressWarnings(as.integer(riv_raw$row_id))
+riv_col_ids <- suppressWarnings(as.integer(names(riv_raw)[-1]))
+
+keep_cols <- !is.na(riv_col_ids)
+riv_col_ids <- riv_col_ids[keep_cols]
+
+riv_vals <- as.matrix(riv_raw[, c(TRUE, keep_cols), drop = FALSE][, -1, drop = FALSE])
+mode(riv_vals) <- "numeric"
+
+riv_vals <- riv_vals[!is.na(riv_row_ids), , drop = FALSE]
+riv_row_ids <- riv_row_ids[!is.na(riv_row_ids)]
+
+rownames(riv_vals) <- riv_row_ids
+colnames(riv_vals) <- riv_col_ids
+
+stopifnot(setequal(as.integer(rownames(riv_vals)), site_info$site_orig))
+stopifnot(setequal(as.integer(colnames(riv_vals)), site_info$site_orig))
+
+riv_vals <- riv_vals[as.character(site_info$site_orig), as.character(site_info$site_orig), drop = FALSE]
+riv_vals[lower.tri(riv_vals)] <- t(riv_vals)[lower.tri(riv_vals)]
+diag(riv_vals) <- 0
+
+# -----------------------------
+# 4) build final objects
 # -----------------------------
 ETSA_3_coords <- data.frame(
   site = as.character(seq_len(nrow(site_info))),
@@ -106,28 +149,21 @@ site_lookup <- data.frame(
 )
 
 ETSA_3_fst <- fst_named
+ETSA_3_rivdists <- riv_vals
+
 rownames(ETSA_3_fst) <- ETSA_3_coords$site
 colnames(ETSA_3_fst) <- ETSA_3_coords$site
+rownames(ETSA_3_rivdists) <- ETSA_3_coords$site
+colnames(ETSA_3_rivdists) <- ETSA_3_coords$site
 
 # -----------------------------
-# 4) Euclidean geographic distance matrix
-# -----------------------------
-geo_dist_km <- geosphere::distm(
-  x = as.matrix(ETSA_3_coords[, c("lon", "lat")]),
-  fun = geosphere::distHaversine
-) / 1000
-
-rownames(geo_dist_km) <- ETSA_3_coords$site
-colnames(geo_dist_km) <- ETSA_3_coords$site
-
-# -----------------------------
-# 5) pairwise dataframe for IBD plot
+# 5) pairwise dataframe for in-river IBD plot
 # -----------------------------
 ibd_df <- data.frame(
   site1 = rownames(ETSA_3_fst)[row(ETSA_3_fst)[upper.tri(ETSA_3_fst)]],
   site2 = colnames(ETSA_3_fst)[col(ETSA_3_fst)[upper.tri(ETSA_3_fst)]],
   fst = ETSA_3_fst[upper.tri(ETSA_3_fst)],
-  dist_km = geo_dist_km[upper.tri(geo_dist_km)],
+  rivdist_km = ETSA_3_rivdists[upper.tri(ETSA_3_rivdists)] / 1000,
   stringsAsFactors = FALSE
 )
 
@@ -168,16 +204,9 @@ map_plot <- ggplot() +
     nudge_y = 0.012,
     size = 3.0
   ) +
-  coord_fixed(
-    xlim = xlim_use,
-    ylim = ylim_use
-  ) +
+  coord_fixed(xlim = xlim_use, ylim = ylim_use) +
   theme_classic() +
-  labs(
-    x = "Longitude",
-    y = "Latitude",
-    title = "ETSA-3 sampling locations"
-  )
+  labs(x = "Longitude", y = "Latitude", title = "ETSA-3 sampling locations")
 
 print(map_plot)
 
@@ -190,39 +219,39 @@ ggsave(
 )
 
 # -----------------------------
-# 7) IBD plot
+# 7) IBD plot using in-river distance only
+# plotted in RStudio; not saved
 # -----------------------------
-ibd_plot <- ggplot(ibd_df, aes(x = dist_km, y = fst)) +
+ibd_plot_river <- ggplot(ibd_df, aes(x = rivdist_km, y = fst)) +
   geom_point(size = 2.7, alpha = 0.8) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_classic() +
   labs(
-    x = "Euclidean distance (km)",
+    x = "In-river distance (km)",
     y = expression(F[ST]),
-    title = "ETSA-3 isolation by distance"
+    title = "ETSA-3 isolation by distance (in-river)"
   )
 
-print(ibd_plot)
-
-ggsave(
-  filename = file.path(base_dir, "ETSA-3_IBD.png"),
-  plot = ibd_plot,
-  width = 7,
-  height = 5,
-  dpi = 300
-)
+print(ibd_plot_river)
 
 # -----------------------------
 # 8) checks + save
 # -----------------------------
 stopifnot(identical(rownames(ETSA_3_fst), ETSA_3_coords$site))
 stopifnot(identical(colnames(ETSA_3_fst), ETSA_3_coords$site))
+stopifnot(identical(rownames(ETSA_3_rivdists), ETSA_3_coords$site))
+stopifnot(identical(colnames(ETSA_3_rivdists), ETSA_3_coords$site))
 stopifnot(isTRUE(all.equal(ETSA_3_fst, t(ETSA_3_fst))))
-stopifnot(isTRUE(all.equal(geo_dist_km, t(geo_dist_km))))
+stopifnot(isTRUE(all.equal(ETSA_3_rivdists, t(ETSA_3_rivdists))))
 
+ETSA_3_rivdists = (ETSA_3_rivdists / 1000)
+
+
+# export
 save(
   ETSA_3_fst,
   ETSA_3_coords,
+  ETSA_3_rivdists,
   file = file.path(data_dir, "ETSA-3.RData")
 )
 
