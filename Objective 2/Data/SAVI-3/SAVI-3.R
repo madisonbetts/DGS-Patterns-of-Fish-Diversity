@@ -1,18 +1,14 @@
-#-------
-# SAVI-3
-#-------
-
-# packages
+# -----------------------------
+# 0) setup
+# -----------------------------
 library(dplyr)
 library(ggplot2)
 library(geosphere)
 library(sf)
 library(rnaturalearth)
+library(rnaturalearthdata)
 
-# directories
-base_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SAVI-3"
-data_dir <- file.path(base_dir, "data")
-dir.create(data_dir, showWarnings = FALSE, recursive = TRUE)
+sf::sf_use_s2(FALSE)
 
 # -----------------------------
 # 1) site coordinates
@@ -167,7 +163,7 @@ SAVI_3_fst <- fill_sym_from_lower(
 # 5) geographic distances
 # -----------------------------
 coords_mat <- as.matrix(SAVI_3_coords[, c("lon", "lat")])
-geo_dist <- distm(coords_mat, fun = distHaversine) / 1000
+geo_dist <- geosphere::distm(coords_mat, fun = geosphere::distHaversine) / 1000
 rownames(geo_dist) <- SAVI_3_coords$site
 colnames(geo_dist) <- SAVI_3_coords$site
 diag(geo_dist) <- 0
@@ -185,20 +181,31 @@ ibd_df <- data.frame(
 # -----------------------------
 # 7) basemap
 # -----------------------------
-world <- ne_countries(scale = "medium", returnclass = "sf")
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+lakes <- rnaturalearth::ne_download(
+  scale = 10,
+  type = "lakes",
+  category = "physical",
+  returnclass = "sf"
+)
 
 bbox <- st_bbox(c(
   xmin = -93, xmax = -75,
   ymin = 41, ymax = 49
 ), crs = st_crs(4326))
 
+bbox_sf <- st_as_sfc(bbox)
+
 world_crop <- st_crop(world, bbox)
+lakes <- st_make_valid(lakes)
+lakes_crop <- st_intersection(lakes, bbox_sf)
 
 # -----------------------------
 # 8) QC map
 # -----------------------------
-ggplot() +
-  geom_sf(data = world_crop, fill = "grey95", color = "grey70") +
+qc_plot <- ggplot() +
+  geom_sf(data = world_crop, fill = "grey95", color = "grey70", linewidth = 0.25) +
+  geom_sf(data = lakes_crop, fill = "white", color = "grey55", linewidth = 0.25) +
   geom_point(
     data = SAVI_3_coords,
     aes(x = lon, y = lat),
@@ -208,40 +215,38 @@ ggplot() +
     data = SAVI_3_coords,
     aes(x = lon, y = lat, label = site),
     size = 3,
-    vjust = -0.8
+    vjust = -0.6
   ) +
-  coord_sf(xlim = c(-93, -75), ylim = c(41, 49)) +
+  coord_sf(
+    xlim = c(-93, -75),
+    ylim = c(41, 49),
+    expand = FALSE
+  ) +
   theme_classic(base_size = 12) +
   labs(
+    title = "SAVI-3 sampling sites",
     x = "Longitude",
     y = "Latitude"
   )
 
+print(qc_plot)
+
 # -----------------------------
 # 9) IBD plot
 # -----------------------------
-ggplot(ibd_df, aes(x = log(dist_km), y = fst)) +
+ibd_plot <- ggplot(ibd_df, aes(x = log(dist_km), y = fst)) +
   geom_point(size = 1.5) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_classic(base_size = 12) +
   labs(
-    x = "Geographic distance (km)",
+    x = "Log geographic distance (km)",
     y = "FST"
   )
 
+print(ibd_plot)
 
 # -----------------------------
-# 10) save outputs
-# -----------------------------
-save(
-  SAVI_3_fst,
-  SAVI_3_coords,
-  file = file.path(data_dir, "SAVI-3.RData")
-)
-
-
-# -----------------------------
-# 11) checks
+# 10) checks
 # -----------------------------
 stopifnot(nrow(SAVI_3_fst) == 29)
 stopifnot(ncol(SAVI_3_fst) == 29)
@@ -250,3 +255,13 @@ stopifnot(identical(rownames(SAVI_3_fst), SAVI_3_coords$site))
 stopifnot(isTRUE(all.equal(SAVI_3_fst, t(SAVI_3_fst))))
 stopifnot(all(diag(SAVI_3_fst) == 0))
 stopifnot(all(diag(geo_dist) == 0))
+
+
+# -----------------------------
+# 11) export site coordinates
+# -----------------------------
+write.csv(
+  SAVI_3_coords,
+  file = "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/Data/SAVI-3/SAVI-3_coords.csv",
+  row.names = FALSE
+)

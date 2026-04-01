@@ -1,10 +1,13 @@
 # -------------------------------
 # Plot all extracted study sites across the U.S. + Canada
 # colored by Family from Study_metadata.xlsx
-# legend entries include dataset counts per family, e.g. Leuciscidae (x23)
-# legend title = Dataset (n = total number of datasets)
-# adds north arrow + default scale bar + black inset box
-# saves as png + pdf
+# reports dynamic extraction diagnostics from metadata:
+#   datasets mapped
+#   unique spp
+#   unique sites
+#   metadata rows not plotted
+#   plotted rows not in metadata
+# no hardcoded expected dataset totals
 # -------------------------------
 
 library(readxl)
@@ -27,8 +30,8 @@ metadata_file <- file.path(base_dir, "Study_metadata.xlsx")
 out_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/analyses/QC_plot"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-png_file <- file.path(out_dir, "all_sites_us_canada_by_family.png")
-pdf_file <- file.path(out_dir, "all_sites_us_canada_by_family.pdf")
+png_file <- file.path(out_dir, "all_sites_us_canada_by_family_summary_dynamic.png")
+pdf_file <- file.path(out_dir, "all_sites_us_canada_by_family_summary_dynamic.pdf")
 
 # -------------------------------
 # list valid study folders
@@ -36,6 +39,7 @@ pdf_file <- file.path(out_dir, "all_sites_us_canada_by_family.pdf")
 # -------------------------------
 subdirs <- list.dirs(base_dir, full.names = TRUE, recursive = FALSE)
 subdirs <- subdirs[grepl("^[A-Za-z0-9]+-[0-9]+$", basename(subdirs))]
+subdirs <- sort(subdirs)
 
 # -------------------------------
 # helper: identify lon/lat columns in a dataframe
@@ -67,9 +71,7 @@ find_lon_lat_cols <- function(df) {
 }
 
 # -------------------------------
-# helper: load .RData from each folder/data/
-# and extract best lon/lat dataframe
-# preference is given to objects with "coords" in the name
+# helper: choose/load readable RData robustly
 # -------------------------------
 extract_site_coords <- function(folder_path) {
   
@@ -88,43 +90,76 @@ extract_site_coords <- function(folder_path) {
     return(NULL)
   }
   
-  tmp_env <- new.env()
-  load(rdata_files[1], envir = tmp_env)
-  obj_names <- ls(tmp_env)
+  expected_file <- file.path(data_dir, paste0(folder_name, ".RData"))
+  if (file.exists(expected_file)) {
+    rdata_files <- c(expected_file, setdiff(rdata_files, expected_file))
+  }
   
-  obj_names <- c(
-    obj_names[grepl("coord", tolower(obj_names))],
-    obj_names[!grepl("coord", tolower(obj_names))]
-  ) %>% unique()
-  
-  for (nm in obj_names) {
-    obj <- get(nm, envir = tmp_env)
+  for (rf in rdata_files) {
     
-    if (is.data.frame(obj)) {
-      coords <- find_lon_lat_cols(obj)
-      if (!is.null(coords)) {
-        coords$source_object <- nm
-        coords$folder_name <- folder_name
-        return(coords)
-      }
+    finfo <- file.info(rf)
+    if (is.na(finfo$size) || finfo$size == 0) {
+      message("Skipping empty .RData in ", folder_name, ": ", basename(rf))
+      next
     }
     
-    if (is.list(obj) && !is.data.frame(obj)) {
-      sub_nms <- names(obj)
-      if (length(sub_nms) > 0) {
-        sub_nms <- c(
-          sub_nms[grepl("coord", tolower(sub_nms))],
-          sub_nms[!grepl("coord", tolower(sub_nms))]
-        ) %>% unique()
-        
-        for (sub_nm in sub_nms) {
-          sub_obj <- obj[[sub_nm]]
-          if (is.data.frame(sub_obj)) {
-            coords <- find_lon_lat_cols(sub_obj)
-            if (!is.null(coords)) {
-              coords$source_object <- paste0(nm, "$", sub_nm)
-              coords$folder_name <- folder_name
-              return(coords)
+    tmp_env <- new.env()
+    
+    ok <- tryCatch({
+      load(rf, envir = tmp_env)
+      TRUE
+    }, error = function(e) {
+      message("Skipping unreadable .RData in ", folder_name, ": ",
+              basename(rf), " | ", conditionMessage(e))
+      FALSE
+    })
+    
+    if (!ok) next
+    
+    obj_names <- ls(tmp_env)
+    expected_obj <- paste0(gsub("-", "_", folder_name), "_coords")
+    
+    obj_names <- c(
+      expected_obj,
+      obj_names[grepl("_coords$", obj_names, ignore.case = TRUE)],
+      obj_names[grepl("coord", obj_names, ignore.case = TRUE)],
+      obj_names
+    ) %>% unique()
+    
+    obj_names <- obj_names[obj_names %in% ls(tmp_env)]
+    
+    for (nm in obj_names) {
+      obj <- get(nm, envir = tmp_env)
+      
+      if (is.data.frame(obj)) {
+        coords <- find_lon_lat_cols(obj)
+        if (!is.null(coords)) {
+          coords$source_object <- nm
+          coords$folder_name <- folder_name
+          coords$rdata_file <- basename(rf)
+          return(coords)
+        }
+      }
+      
+      if (is.list(obj) && !is.data.frame(obj)) {
+        sub_nms <- names(obj)
+        if (length(sub_nms) > 0) {
+          sub_nms <- c(
+            sub_nms[grepl("_coords$", sub_nms, ignore.case = TRUE)],
+            sub_nms[grepl("coord", sub_nms, ignore.case = TRUE)],
+            sub_nms
+          ) %>% unique()
+          
+          for (sub_nm in sub_nms) {
+            sub_obj <- obj[[sub_nm]]
+            if (is.data.frame(sub_obj)) {
+              coords <- find_lon_lat_cols(sub_obj)
+              if (!is.null(coords)) {
+                coords$source_object <- paste0(nm, "$", sub_nm)
+                coords$folder_name <- folder_name
+                coords$rdata_file <- basename(rf)
+                return(coords)
+              }
             }
           }
         }
@@ -132,7 +167,7 @@ extract_site_coords <- function(folder_path) {
     }
   }
   
-  message("No suitable lon/lat dataframe found in: ", folder_name)
+  message("No suitable readable lon/lat dataframe found in: ", folder_name)
   return(NULL)
 }
 
@@ -140,6 +175,7 @@ extract_site_coords <- function(folder_path) {
 # extract coordinates from all study folders
 # -------------------------------
 site_list <- lapply(subdirs, extract_site_coords)
+site_list <- site_list[!vapply(site_list, is.null, logical(1))]
 
 sites_df <- bind_rows(site_list) %>%
   mutate(
@@ -166,9 +202,41 @@ if (!"Family" %in% names(meta)) {
 
 meta2 <- meta %>%
   mutate(
-    study_code = as.character(.data[[code_col]])
+    study_code = trimws(as.character(.data[[code_col]]))
   ) %>%
   select(study_code, Family, everything())
+
+# -------------------------------
+# diagnostics: compare metadata rows to plotted datasets
+# -------------------------------
+metadata_ids_all <- trimws(as.character(meta[[code_col]]))
+metadata_ids_all <- metadata_ids_all[!is.na(metadata_ids_all) & metadata_ids_all != ""]
+
+metadata_ids_unique <- sort(unique(metadata_ids_all))
+plotted_ids_unique <- sort(unique(sites_df$study_code))
+
+metadata_rows_not_plotted <- setdiff(metadata_ids_unique, plotted_ids_unique)
+plotted_rows_not_in_metadata <- setdiff(plotted_ids_unique, metadata_ids_unique)
+
+metadata_duplicate_ids <- sort(unique(metadata_ids_all[duplicated(metadata_ids_all)]))
+
+write.csv(
+  data.frame(study_code = metadata_rows_not_plotted),
+  file.path(out_dir, "metadata_rows_not_plotted.csv"),
+  row.names = FALSE
+)
+
+write.csv(
+  data.frame(study_code = plotted_rows_not_in_metadata),
+  file.path(out_dir, "plotted_rows_not_in_metadata.csv"),
+  row.names = FALSE
+)
+
+write.csv(
+  data.frame(study_code = metadata_duplicate_ids),
+  file.path(out_dir, "metadata_duplicate_ids.csv"),
+  row.names = FALSE
+)
 
 # -------------------------------
 # join metadata
@@ -178,14 +246,14 @@ sites_df <- sites_df %>%
   mutate(Family = ifelse(is.na(Family), "Unknown", Family))
 
 # -------------------------------
-# report unmatched folders
+# report unmatched plotted folders
 # -------------------------------
 unmatched <- sites_df %>%
   filter(Family == "Unknown") %>%
   distinct(folder_name)
 
 if (nrow(unmatched) > 0) {
-  message("These studies did not match a Family in metadata:")
+  message("These plotted studies did not match a Family in metadata:")
   print(unmatched)
 }
 
@@ -203,12 +271,31 @@ family_labels <- setNames(
   family_counts$Family
 )
 
-# total datasets for legend title
+# -------------------------------
+# summary counts
+# -------------------------------
 n_datasets <- sites_df %>%
   distinct(study_code) %>%
   nrow()
 
+n_sites <- sites_df %>%
+  distinct(lon, lat) %>%
+  nrow()
+
+n_species_codes <- sites_df %>%
+  distinct(species_code) %>%
+  nrow()
+
 legend_title <- paste0("Datasets (n = ", n_datasets, ")")
+
+summary_label <- paste(
+  paste0("Datasets: ", n_datasets),
+  paste0("Unique spp: ", n_species_codes),
+  paste0("Unique sites: ", n_sites),
+  paste0("Excel not plotted: ", length(metadata_rows_not_plotted)),
+  paste0("Plotted not in Excel: ", length(plotted_rows_not_in_metadata)),
+  sep = "\n"
+)
 
 # keep legend order consistent with counts
 sites_df$Family <- factor(sites_df$Family, levels = family_counts$Family)
@@ -283,7 +370,6 @@ p <- ggplot() +
     ylim = map_ylim,
     expand = FALSE
   ) +
-  # manual scale bar in lower-left white space
   annotate("rect", xmin = -128.2, xmax = -125.7, ymin = 24.4, ymax = 25.6,
            fill = "black", color = "black") +
   annotate("rect", xmin = -125.7, xmax = -123.2, ymin = 24.4, ymax = 25.6,
@@ -292,50 +378,40 @@ p <- ggplot() +
            x = -122.0, y = 25.0,
            label = "1000 km",
            hjust = 0, size = 3.2) +
-  # north arrow
-  #annotation_north_arrow(
-  #  location = "tr",
-  #  which_north = "true",
-  #  height = unit(0.15, "in"),
-  #  width = unit(0.15, "in"),
-  #  pad_x = unit(0.10, "in"),
-  #  pad_y = unit(0.10, "in"),
-  #  style = north_arrow_orienteering(
-  #    fill = c("black", "black"))
-  #) +
-  # north arrow v2
-# north arrow
-annotation_north_arrow(
-  location = "tr",
-  which_north = "true",
-  height = unit(0.22, "in"),
-  width  = unit(0.22, "in"),
-  pad_x  = unit(0.10, "in"),
-  pad_y  = unit(0.10, "in"),
-  style = north_arrow_orienteering(
-    fill = c("black", "black"),
-    line_col = "black",
-    text_col = NA   # suppress built-in N text
-  )
-) + # north arrow text "N"
-  #annotate(
-  #  "text",
-  #  x = -55.2, y = 56.3,   # tweak if needed
-  #  label = "N",
-  #  size = 3.2
-  #) + 
-  # color scale
+  annotation_north_arrow(
+    location = "tr",
+    which_north = "true",
+    height = unit(0.22, "in"),
+    width  = unit(0.22, "in"),
+    pad_x  = unit(0.10, "in"),
+    pad_y  = unit(0.10, "in"),
+    style = north_arrow_orienteering(
+      fill = c("black", "black"),
+      line_col = "black",
+      text_col = NA
+    )
+  ) +
+  annotate(
+    "text",
+    x = -58.2,
+    y = 31.0,
+    label = summary_label,
+    hjust = 1,
+    vjust = 0,
+    size = 3.0
+  ) +
   scale_color_discrete(
     breaks = family_counts$Family,
     labels = family_labels,
-    drop = FALSE,
+    drop = FALSE
   ) +
   theme_classic() +
   theme(
     legend.title = element_text(size = 11),
     legend.text = element_text(size = 9),
     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8),
-    legend.key.size = unit(0.1, "in")
+    legend.key.size = unit(0.1, "in"),
+    plot.margin = margin(t = 2, r = 4, b = 2, l = 4, unit = "pt")
   ) +
   labs(
     x = "Longitude",
@@ -352,7 +428,7 @@ ggsave(
   filename = png_file,
   plot = p,
   width = 6.5,
-  height = 4,
+  height = 3.75,
   dpi = 400
 )
 
@@ -360,25 +436,28 @@ ggsave(
   filename = pdf_file,
   plot = p,
   width = 6.5,
-  height = 4,
+  height = 3.75,
   device = cairo_pdf
 )
 
 # -------------------------------
-# summary counts
+# console summary
 # -------------------------------
-n_sites <- sites_df %>%
-  distinct(lon, lat) %>%
-  nrow()
-
-n_species_codes <- sites_df %>%
-  distinct(species_code) %>%
-  nrow()
-
 cat("\n==================== SUMMARY ====================\n")
 cat("Datasets: ", n_datasets, "\n", sep = "")
-cat("Species codes: ", n_species_codes, "\n", sep = "")
+cat("Unique spp: ", n_species_codes, "\n", sep = "")
 cat("Unique sites: ", n_sites, "\n", sep = "")
+cat("Excel rows not plotted: ", length(metadata_rows_not_plotted), "\n", sep = "")
+cat("Plotted rows not in Excel: ", length(plotted_rows_not_in_metadata), "\n", sep = "")
+if (length(metadata_rows_not_plotted) > 0) {
+  cat("Excel rows not plotted IDs: ", paste(metadata_rows_not_plotted, collapse = ", "), "\n", sep = "")
+}
+if (length(plotted_rows_not_in_metadata) > 0) {
+  cat("Plotted rows not in Excel IDs: ", paste(plotted_rows_not_in_metadata, collapse = ", "), "\n", sep = "")
+}
+if (length(metadata_duplicate_ids) > 0) {
+  cat("Duplicate Study_IDs in Excel: ", paste(metadata_duplicate_ids, collapse = ", "), "\n", sep = "")
+}
 cat("PNG saved to: ", png_file, "\n", sep = "")
 cat("PDF saved to: ", pdf_file, "\n", sep = "")
 cat("=================================================\n\n")
