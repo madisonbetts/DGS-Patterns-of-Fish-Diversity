@@ -353,8 +353,8 @@ p <- ggplot() +
   ) +
   annotate(
     "text",
-    x = -58.0,
-    y = 25.2,
+    x = -54.25,
+    y = 24.75,
     label = summary_label,
     hjust = 1,
     vjust = 0,
