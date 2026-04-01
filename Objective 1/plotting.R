@@ -5,7 +5,7 @@ packages <- c("sf", "dplyr",
               "readxl", "nhdplusTools", 
               "units", "rnaturalearth",
               "ape", "fishtree", "colorspace",
-              "taxize", "phytools", "tigris")
+              "taxize", "phytools", "tigris", "ggplot2")
 new_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
 # install new packages
 if (length(new_packages)) {
@@ -19,14 +19,14 @@ sf::sf_use_s2(FALSE)
 dat <- read.csv("Data/filtered_data.csv")
 
 # some plots quick
-He_lat <- ggplot(dat, aes(x = y, y = He)) +
+He_lat <- ggplot(dat, aes(y, He)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Expected Heterozygosity (He)") +
   theme_classic()
 ggsave(He_lat, filename = "Figures/He_lat.pdf", width = 7, height = 5, dpi = 300)
 
-Ho_lat <- ggplot(dat, aes(x = y, y = Ho)) +
+Ho_lat <- ggplot(dat, aes(y, Ho)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Observed Heterozygosity (Ho)") +
