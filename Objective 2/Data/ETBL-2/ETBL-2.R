@@ -1,4 +1,3 @@
-
 # -----------------------------
 # ETBL-2 | Greenside darter
 # Etheostoma blennioides
