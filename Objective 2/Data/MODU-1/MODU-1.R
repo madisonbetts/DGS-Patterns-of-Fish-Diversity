@@ -32,23 +32,23 @@ MODU_1_coords <- data.frame(
   site_id = 1:8,
   lat = c(
     43.074,  # 1 CAL (Caledonia)
-    42.984,  # 2 CK (Cockshutt)
-    43.200,  # 3 PAR (Paris)
-    43.230,  # 4 NR (Nith River confluence)
-    43.260,  # 5 GTO (Glen Morris reach)
-    43.360,  # 6 GAL (Galt / Cambridge)
-    43.520,  # 7 CON (Conestogo River)
-    43.580   # 8 WM (West Montrose)
+    43.1164591,  # 2 CK (Cockshutt)
+    43.185483,  # 3 PAR (Paris)
+    43.2778502,  # 4 NR (Nith River confluence)
+    43.337705,  # 5 GTO (Glen Morris reach)
+    43.3857031,  # 6 GAL (Galt / Cambridge) 
+    43.5289615,  # 7 CON (Conestogo River)
+    43.5853467   # 8 WM (West Montrose)
   ),
   lon = c(
     -79.955,
-    -80.200,
-    -80.383,
-    -80.420,
-    -80.450,
-    -80.310,
-    -80.600,
-    -80.480
+    -80.237769,
+    -80.3709836,
+    -80.4576403,
+    -80.3161036,
+    -80.3704253,
+    -80.5356272,
+    -80.4786268
   ),
   stringsAsFactors = FALSE
 )
