@@ -1,0 +1,19 @@
+// Priors and rules file
+// *********************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max
+//all N are in number of haploid individuals
+1  NPOP0       logunif     100  1000000    output bounded
+1  NPOP1       logunif     100  1000000    output bounded
+1  ANCSIZE	logunif    100  1000000    output bounded
+
+[RULES]
+[COMPLEX PARAMETERS]
+
+0  RESIZE = ANCSIZE/NPOP1   hide
+
+
+
+
+
