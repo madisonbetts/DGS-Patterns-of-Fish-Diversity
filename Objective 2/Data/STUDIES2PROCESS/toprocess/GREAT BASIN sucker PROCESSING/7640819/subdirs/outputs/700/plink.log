@@ -1,0 +1,30 @@
+PLINK v1.90b6.14 64-bit (7 Jan 2020)
+Options in effect:
+  --allow-extra-chr
+  --map plink-binary.map
+  --out plink
+  --ped plink-binary.ped
+  --recode vcf
+
+Hostname: Macs-MBP-2
+Working directory: /Users/mac/github/wall-canyon/outputs/700
+Start time: Wed Apr 13 11:20:27 2022
+
+Random number seed: 1649877627
+16384 MB RAM detected; reserving 8192 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (22200 variants, 108 people).
+--file: plink-temporary.bed + plink-temporary.bim + plink-temporary.fam
+written.
+22200 variants loaded from .bim file.
+108 people (0 males, 0 females, 108 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to plink.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 108 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.931041.
+22200 variants and 108 people pass filters and QC.
+Note: No phenotypes present.
+--recode vcf to plink.vcf ... done.
+
+End time: Wed Apr 13 11:20:28 2022

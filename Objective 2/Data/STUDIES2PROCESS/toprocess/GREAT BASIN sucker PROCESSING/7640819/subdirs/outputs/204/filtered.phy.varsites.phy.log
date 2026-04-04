@@ -1,0 +1,410 @@
+IQ-TREE multicore version 2.0-rc1 for Linux 64-bit built Nov 21 2019
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    c10-76 (AVX2, FMA3, 62 GB RAM)
+Command: /home/maccamp/bin/iqtree -nt AUTO -s filtered.phy.varsites.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+Seed:    291034 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Thu Apr 14 14:20:30 2022
+Kernel:  AVX+FMA - auto-detect threads (2 CPU cores detected)
+
+Reading alignment file filtered.phy.varsites.phy ... Phylip format detected
+Alignment most likely contains DNA/RNA sequences
+Alignment has 107 sequences with 8168 columns, 8066 distinct patterns
+7330 parsimony-informative, 838 singleton sites, 0 constant sites
+              Gap/Ambiguity  Composition  p-value
+   1  MS_PC_01        8.53%    failed      0.00%
+   2  MS_PC_06        7.84%    failed      0.00%
+   3  S_TR_17         9.18%    failed      0.00%
+   4  S_TR_01         8.55%    failed      0.00%
+   5  S_TR_09         9.83%    failed      0.00%
+   6  S_TR_10         9.97%    failed      0.00%
+   7  TS_EFCR_13      9.10%    failed      0.00%
+   8  TS_EFCR_15      8.77%    failed      0.00%
+   9  1272-017       13.99%    passed     19.59%
+  10  1272-012       15.03%    passed     27.66%
+  11  1208-058       15.63%    failed      0.00%
+  12  1208-011       12.50%    failed      0.00%
+  13  KLS_3228-047   13.72%    failed      0.00%
+  14  KLS_2897-059   13.16%    failed      0.00%
+  15  KSS_3734-008    9.84%    failed      0.00%
+  16  KSS_3734-002   10.24%    failed      0.00%
+  17  LRS_2735-077   11.50%    failed      0.00%
+  18  LRS_2728-012   11.39%    failed      0.00%
+  19  SNS_2894-073   14.18%    failed      0.00%
+  20  SNS_2801-025   14.94%    failed      0.00%
+  21  OSKR_44        12.60%    passed     86.14%
+  22  OSKR_15        12.90%    passed     80.32%
+  23  OSKR_19        13.42%    passed     83.02%
+  24  OSKR_23        11.21%    passed     83.28%
+  25  OSKR_22        11.45%    passed     87.41%
+  26  OSKR_11        13.25%    passed     59.12%
+  27  OSKR_21        11.09%    passed     99.38%
+  28  OSKR_27        11.95%    passed     88.93%
+  29  OSKR_16        13.65%    passed     53.23%
+  30  OSKR_9         13.70%    passed     37.20%
+  31  OSKR_34        11.41%    passed     95.90%
+  32  OSKR_10        13.38%    passed     46.39%
+  33  OSKR_17        13.17%    passed     52.61%
+  34  OSKR_36        12.05%    passed     90.59%
+  35  OSKR_24        11.18%    passed     92.06%
+  36  OSKR_42        13.14%    passed     73.05%
+  37  OSKR_5         13.45%    passed     64.82%
+  38  OSKR_35        11.66%    passed     98.20%
+  39  WCS_17          7.21%    passed     91.03%
+  40  OSKR_18        13.00%    passed     55.10%
+  41  WCS_12          7.06%    passed     97.74%
+  42  OSKR_38        11.41%    passed     83.94%
+  43  WCS_14          7.28%    passed     94.84%
+  44  WCS_13          7.03%    passed     88.45%
+  45  OSKR_13        13.10%    passed     43.37%
+  46  OSKR_41        11.56%    passed     84.36%
+  47  WCS_06          6.89%    passed     97.39%
+  48  WCS_07          7.19%    passed     92.62%
+  49  OSKR_43        13.41%    passed     65.30%
+  50  OSKR_4         13.39%    passed     43.26%
+  51  WCS_05          7.77%    passed     89.82%
+  52  OSKR_20        13.77%    passed     32.12%
+  53  OSKR_7         13.11%    passed     60.27%
+  54  OSKR_29        11.56%    passed     89.18%
+  55  OSKR_39        11.42%    passed     78.52%
+  56  OSKR_2         12.93%    passed     69.17%
+  57  OSKR_30        11.69%    passed     80.33%
+  58  OSKR_3         12.92%    passed     74.66%
+  59  WCS_26          7.11%    passed     87.65%
+  60  WCS_11          7.08%    passed     96.85%
+  61  OSKR_26        12.03%    passed     98.84%
+  62  WCS_08          7.41%    passed     95.10%
+  63  OSKR_32        17.41%    passed      6.00%
+  64  WCS_03          7.10%    passed     86.57%
+  65  OSKR_25        11.26%    passed     73.60%
+  66  OSKR_40        11.26%    passed     96.43%
+  67  OSKR_8         13.55%    passed     71.78%
+  68  OSKR_14        13.77%    passed     42.62%
+  69  OSKR_12        13.03%    passed     51.65%
+  70  WCS_01          7.26%    passed     95.99%
+  71  WS_HC5          7.84%    passed     97.08%
+  72  OSKR_31        12.78%    passed     78.24%
+  73  WCS_27          8.66%    passed     56.77%
+  74  WCS_10          7.53%    passed     96.24%
+  75  WCS_22          6.77%    passed     91.37%
+  76  WCS_02          7.39%    passed     91.34%
+  77  WS_HC8          8.20%    passed     94.25%
+  78  WS_HC2          8.14%    passed     94.55%
+  79  WS_HC7          8.33%    passed     98.51%
+  80  WCS_04          7.10%    passed     92.96%
+  81  WS_HC4          8.58%    passed     92.88%
+  82  WCS_19          7.36%    passed     83.32%
+  83  WCS_21          7.33%    passed     95.30%
+  84  WS_HC6          9.39%    passed     88.28%
+  85  WCS_09          7.99%    passed     77.75%
+  86  WCS_25          7.10%    passed     88.73%
+  87  WS_HC1          7.93%    passed     93.73%
+  88  OSKR_1         12.59%    passed     74.50%
+  89  OSKR_37        12.94%    passed     56.32%
+  90  OSKR_28        13.26%    passed     45.93%
+  91  WS_TMC08        8.73%    passed     52.03%
+  92  WS_TMC07        8.83%    passed     64.15%
+  93  WCS_16          7.73%    passed     65.38%
+  94  OSKR_33        13.11%    passed     54.38%
+  95  WCS_24          8.33%    passed     84.82%
+  96  WCS_20          7.62%    passed     82.27%
+  97  WS_HC3          9.66%    passed     67.51%
+  98  OSKR_6         14.52%    passed     22.15%
+  99  WS_TMC14        9.84%    passed     40.31%
+ 100  WS_TMC03        9.66%    passed     51.65%
+ 101  WS_TMC01        9.56%    passed     60.58%
+ 102  WS_TMC10       10.87%    passed     10.19%
+ 103  WCS_15         10.59%    passed     29.67%
+ 104  WS_DC09        14.01%    passed      5.14%
+ 105  WS_TMC13       14.15%    passed     18.38%
+ 106  WCS_23         13.15%    passed     15.61%
+ 107  WCS_18         13.71%    passed     13.47%
+****  TOTAL          10.80%  18 sequences failed composition chi2 test (p-value<5%; df=3)
+
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.138 seconds
+Measuring multi-threading efficiency up to 2 CPU cores
+Increase to 10 rounds for branch lengths
+4 trees examined
+Threads: 1 / Time: 2.665 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -261442
+Threads: 2 / Time: 2.270 sec / Speedup: 1.174 / Efficiency: 59% / LogL: -261442
+BEST NUMBER OF THREADS: 2
+
+Perform fast likelihood tree search using GTR+ASC model...
+Estimate model parameters (epsilon = 5.000)
+Perform nearest neighbor interchange...
+Estimate model parameters (epsilon = 1.000)
+1. Initial log-likelihood: -92935.410
+Optimal log-likelihood: -92935.365
+Rate parameters:  A-C: 0.97138  A-G: 3.19270  A-T: 1.72443  C-G: 0.29621  C-T: 3.33101  G-T: 1.00000
+Base frequencies:  A: 0.186  C: 0.321  G: 0.313  T: 0.180
+Parameters optimization took 1 rounds (0.336 sec)
+Time for fast ML tree search: 4.376 seconds
+
+NOTE: ModelFinder requires 310 MB RAM!
+ModelFinder will test up to 242 DNA models (sample size: 8168) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+  1  GTR+F+ASC     92935.357    219 186308.714   186320.838   187843.462
+  2  GTR+F+ASC+G4  92417.285    220 185274.570   185286.806   186816.326
+  3  GTR+F+ASC+R2  92293.065    221 185028.129   185040.478   186576.893
+  4  GTR+F+ASC+R3  92280.959    223 185007.918   185020.494   186570.698
+  5  GTR+F+ASC+R4  92280.885    225 185011.769   185024.575   186588.565
+ 14  SYM+ASC+R2    92910.534    218 186257.067   186269.079   187784.807
+ 15  SYM+ASC+R3    92910.482    220 186260.964   186273.200   187802.720
+ 25  TVM+F+ASC+R2  92294.303    220 185028.606   185040.842   186570.361
+ 26  TVM+F+ASC+R3  92281.530    222 185007.061   185019.523   186562.832
+ 36  TVMe+ASC+R2   92910.978    217 186255.956   186267.857   187776.688
+ 37  TVMe+ASC+R3   92910.981    219 186259.962   186272.086   187794.710
+ 47  TIM3+F+ASC+R2 92863.259    219 186164.519   186176.643   187699.266
+ 48  TIM3+F+ASC+R3 92852.916    221 186147.832   186160.181   187696.596
+ 58  TIM3e+ASC+R2  93088.928    216 186609.856   186621.646   188123.580
+ 59  TIM3e+ASC+R3  93088.844    218 186613.689   186625.701   188141.428
+ 69  TIM2+F+ASC+R2 92881.801    219 186201.602   186213.726   187736.349
+ 70  TIM2+F+ASC+R3 92872.830    221 186187.661   186200.009   187736.424
+ 80  TIM2e+ASC+R2  93069.926    216 186571.853   186583.643   188085.576
+ 81  TIM2e+ASC+R3  93069.869    218 186575.737   186587.749   188103.477
+ 91  TIM+F+ASC+R2  93207.092    219 186852.185   186864.308   188386.932
+ 92  TIM+F+ASC+R3  93200.916    221 186843.831   186856.180   188392.595
+102  TIMe+ASC+R2   93133.084    216 186698.167   186709.958   188211.891
+103  TIMe+ASC+R3   93133.027    218 186702.054   186714.066   188229.794
+113  TPM3u+F+ASC+R2 92863.717    218 186163.434   186175.446   187691.174
+114  TPM3u+F+ASC+R3 92853.545    220 186147.090   186159.326   187688.845
+124  TPM3+F+ASC+R2 92863.717    218 186163.434   186175.446   187691.174
+125  TPM3+F+ASC+R3 92853.545    220 186147.090   186159.326   187688.845
+135  TPM2u+F+ASC+R2 92884.451    218 186204.902   186216.914   187732.642
+136  TPM2u+F+ASC+R3 92875.429    220 186190.858   186203.094   187732.614
+146  TPM2+F+ASC+R2 92884.451    218 186204.902   186216.914   187732.642
+147  TPM2+F+ASC+R3 92875.429    220 186190.858   186203.094   187732.614
+157  K3Pu+F+ASC+R2 93208.531    218 186853.061   186865.073   188380.801
+158  K3Pu+F+ASC+R3 93202.397    220 186844.794   186857.030   188386.550
+168  K3P+ASC+R2    93133.548    215 186697.096   186708.776   188203.812
+169  K3P+ASC+R3    93133.493    217 186700.986   186712.887   188221.717
+179  TN+F+ASC+R2   93386.248    218 187208.496   187220.508   188736.236
+180  TN+F+ASC+R3   93380.661    220 187201.322   187213.558   188743.077
+190  TNe+ASC+R2    93193.947    215 186817.894   186829.574   188324.609
+191  TNe+ASC+R3    93193.876    217 186821.753   186833.654   188342.484
+201  HKY+F+ASC+R2  93387.628    217 187209.256   187221.157   188729.988
+202  HKY+F+ASC+R3  93382.103    219 187202.206   187214.330   188736.954
+212  K2P+ASC+R2    93194.442    214 186816.885   186828.455   188316.592
+213  K2P+ASC+R3    93194.373    216 186820.745   186832.535   188334.469
+223  F81+F+ASC+R2  97153.065    216 194738.130   194749.920   196251.853
+224  F81+F+ASC+R3  97153.060    218 194742.119   194754.131   196269.859
+234  JC+ASC+R2     96397.375    213 193220.750   193232.211   194713.450
+235  JC+ASC+R3     96397.448    215 193224.895   193236.575   194731.611
+Akaike Information Criterion:           TVM+F+ASC+R3
+Corrected Akaike Information Criterion: TVM+F+ASC+R3
+Bayesian Information Criterion:         TVM+F+ASC+R3
+Best-fit model: TVM+F+ASC+R3 chosen according to BIC
+
+All model information printed to filtered.phy.varsites.phy.model.gz
+CPU time for ModelFinder: 1128.040 seconds (0h:18m:48s)
+Wall-clock time for ModelFinder: 569.576 seconds (0h:9m:29s)
+Generating 1000 samples for ultrafast bootstrap (seed: 291034)...
+
+NOTE: 114 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -92281.530
+Optimal log-likelihood: -92281.494
+Rate parameters:  A-C: 0.96829  A-G: 3.32501  A-T: 1.91937  C-G: 0.26642  C-T: 3.32501  G-T: 1.00000
+Base frequencies:  A: 0.186  C: 0.321  G: 0.313  T: 0.180
+Site proportion and rates:  (0.493,0.321) (0.446,1.279) (0.060,4.488)
+Parameters optimization took 1 rounds (1.021 sec)
+Computing ML distances based on estimated model parameters... 2.150 sec
+Computing BIONJ tree...
+0.013 seconds
+Log-likelihood of BIONJ tree: -93154.511
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 21.989 second
+Computing log-likelihood of 98 initial trees ... 16.350 seconds
+Current best score: -92281.494
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -92275.727
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 2: -92160.358
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 5: -92150.073
+Iteration 10 / LogL: -92199.504 / Time: 0h:1m:14s
+Iteration 20 / LogL: -92287.713 / Time: 0h:1m:41s
+Finish initializing candidate tree set (20)
+Current best tree score: -92150.073 / CPU time: 97.556
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 25: -92147.544
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 26: -92116.035
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 28: -92096.979
+Iteration 30 / LogL: -92143.376 / Time: 0h:2m:19s (0h:7m:52s left)
+Iteration 40 / LogL: -92127.153 / Time: 0h:2m:51s (0h:6m:25s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 43: -92092.262
+Iteration 50 / LogL: -92098.522 / Time: 0h:3m:25s (0h:6m:30s left)
+Log-likelihood cutoff on original alignment: -92299.399
+Iteration 60 / LogL: -92095.413 / Time: 0h:3m:59s (0h:5m:37s left)
+Iteration 70 / LogL: -92098.950 / Time: 0h:4m:34s (0h:4m:50s left)
+Iteration 80 / LogL: -92111.260 / Time: 0h:5m:3s (0h:4m:2s left)
+Iteration 90 / LogL: -92092.737 / Time: 0h:5m:33s (0h:3m:18s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 91: -92090.637
+Iteration 100 / LogL: -92284.982 / Time: 0h:6m:8s (0h:5m:38s left)
+Log-likelihood cutoff on original alignment: -92299.399
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.994
+Iteration 110 / LogL: -92137.913 / Time: 0h:6m:41s (0h:5m:31s left)
+Iteration 120 / LogL: -92130.519 / Time: 0h:7m:16s (0h:4m:53s left)
+Iteration 130 / LogL: -92096.847 / Time: 0h:7m:49s (0h:4m:15s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 135: -92089.205
+Iteration 140 / LogL: -92098.816 / Time: 0h:8m:21s (0h:5m:42s left)
+Iteration 150 / LogL: -92091.167 / Time: 0h:8m:56s (0h:5m:5s left)
+Log-likelihood cutoff on original alignment: -92299.399
+Iteration 160 / LogL: -92103.710 / Time: 0h:9m:29s (0h:4m:28s left)
+Iteration 170 / LogL: -92092.458 / Time: 0h:9m:59s (0h:3m:50s left)
+Iteration 180 / LogL: -92175.865 / Time: 0h:10m:33s (0h:3m:14s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 183: -92083.574
+Iteration 190 / LogL: -92098.152 / Time: 0h:11m:10s (0h:5m:29s left)
+Iteration 200 / LogL: -92116.615 / Time: 0h:11m:42s (0h:4m:53s left)
+Log-likelihood cutoff on original alignment: -92299.399
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.997
+Iteration 210 / LogL: -92103.745 / Time: 0h:12m:21s (0h:5m:19s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 214: -92078.857
+Iteration 220 / LogL: -92082.746 / Time: 0h:12m:54s (0h:5m:32s left)
+Iteration 230 / LogL: -92088.899 / Time: 0h:13m:28s (0h:4m:56s left)
+Iteration 240 / LogL: -92100.356 / Time: 0h:13m:59s (0h:4m:20s left)
+Iteration 250 / LogL: -92089.596 / Time: 0h:14m:34s (0h:3m:44s left)
+Log-likelihood cutoff on original alignment: -92299.399
+Iteration 260 / LogL: -92120.288 / Time: 0h:15m:7s (0h:3m:9s left)
+Iteration 270 / LogL: -92100.339 / Time: 0h:15m:42s (0h:2m:34s left)
+Iteration 280 / LogL: -92115.914 / Time: 0h:16m:13s (0h:1m:58s left)
+Iteration 290 / LogL: -92083.037 / Time: 0h:16m:47s (0h:1m:23s left)
+Iteration 300 / LogL: -92132.336 / Time: 0h:17m:19s (0h:0m:48s left)
+Log-likelihood cutoff on original alignment: -92299.399
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.994
+Iteration 310 / LogL: -92108.917 / Time: 0h:17m:50s (0h:5m:11s left)
+TREE SEARCH COMPLETED AFTER 315 ITERATIONS / Time: 0h:18m:7s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -92078.857
+2. Current log-likelihood: -92078.834
+3. Current log-likelihood: -92078.813
+4. Current log-likelihood: -92078.792
+5. Current log-likelihood: -92078.773
+6. Current log-likelihood: -92078.753
+7. Current log-likelihood: -92078.734
+8. Current log-likelihood: -92078.715
+9. Current log-likelihood: -92078.696
+10. Current log-likelihood: -92078.678
+11. Current log-likelihood: -92078.660
+12. Current log-likelihood: -92078.642
+13. Current log-likelihood: -92078.624
+14. Current log-likelihood: -92078.607
+15. Current log-likelihood: -92078.589
+16. Current log-likelihood: -92078.572
+17. Current log-likelihood: -92078.555
+18. Current log-likelihood: -92078.538
+19. Current log-likelihood: -92078.521
+20. Current log-likelihood: -92078.505
+21. Current log-likelihood: -92078.489
+22. Current log-likelihood: -92078.473
+23. Current log-likelihood: -92078.457
+24. Current log-likelihood: -92078.441
+25. Current log-likelihood: -92078.426
+26. Current log-likelihood: -92078.410
+27. Current log-likelihood: -92078.395
+28. Current log-likelihood: -92078.380
+29. Current log-likelihood: -92078.365
+30. Current log-likelihood: -92078.350
+31. Current log-likelihood: -92078.336
+32. Current log-likelihood: -92078.321
+33. Current log-likelihood: -92078.307
+34. Current log-likelihood: -92078.292
+35. Current log-likelihood: -92078.278
+36. Current log-likelihood: -92078.264
+37. Current log-likelihood: -92078.250
+38. Current log-likelihood: -92078.236
+39. Current log-likelihood: -92078.223
+40. Current log-likelihood: -92078.209
+41. Current log-likelihood: -92078.196
+42. Current log-likelihood: -92078.182
+43. Current log-likelihood: -92078.169
+44. Current log-likelihood: -92078.156
+45. Current log-likelihood: -92078.142
+46. Current log-likelihood: -92078.130
+47. Current log-likelihood: -92078.117
+48. Current log-likelihood: -92078.104
+49. Current log-likelihood: -92078.091
+50. Current log-likelihood: -92078.079
+51. Current log-likelihood: -92078.067
+52. Current log-likelihood: -92078.054
+53. Current log-likelihood: -92078.042
+54. Current log-likelihood: -92078.030
+55. Current log-likelihood: -92078.018
+56. Current log-likelihood: -92078.006
+57. Current log-likelihood: -92077.995
+58. Current log-likelihood: -92077.983
+59. Current log-likelihood: -92077.971
+60. Current log-likelihood: -92077.960
+61. Current log-likelihood: -92077.949
+62. Current log-likelihood: -92077.937
+63. Current log-likelihood: -92077.926
+64. Current log-likelihood: -92077.915
+65. Current log-likelihood: -92077.904
+66. Current log-likelihood: -92077.893
+67. Current log-likelihood: -92077.883
+68. Current log-likelihood: -92077.872
+69. Current log-likelihood: -92077.862
+70. Current log-likelihood: -92077.851
+71. Current log-likelihood: -92077.841
+72. Current log-likelihood: -92077.830
+73. Current log-likelihood: -92077.820
+74. Current log-likelihood: -92077.810
+Optimal log-likelihood: -92077.796
+Rate parameters:  A-C: 0.98107  A-G: 3.35927  A-T: 1.93147  C-G: 0.26961  C-T: 3.35927  G-T: 1.00000
+Base frequencies:  A: 0.186  C: 0.321  G: 0.313  T: 0.180
+Site proportion and rates:  (0.679,0.516) (0.275,1.602) (0.046,4.560)
+Parameters optimization took 74 rounds (66.081 sec)
+BEST SCORE FOUND : -92077.796
+
+Testing tree branches by SH-like aLRT with 1000 replicates...
+10.558 sec.
+Creating bootstrap support values...
+Split supports printed to NEXUS file filtered.phy.varsites.phy.splits.nex
+Total tree length: 1.402
+
+Total number of iterations: 315
+CPU time used for tree search: 2153.815 sec (0h:35m:53s)
+Wall-clock time used for tree search: 1083.639 sec (0h:18m:3s)
+Total CPU time used: 2313.669 sec (0h:38m:33s)
+Total wall-clock time used: 1164.188 sec (0h:19m:24s)
+
+Computing bootstrap consensus tree...
+Reading input file filtered.phy.varsites.phy.splits.nex...
+107 taxa and 1100 splits.
+Consensus tree written to filtered.phy.varsites.phy.contree
+Reading input trees file filtered.phy.varsites.phy.contree
+Log-likelihood of consensus tree: -92089.704
+
+Analysis results written to: 
+  IQ-TREE report:                filtered.phy.varsites.phy.iqtree
+  Maximum-likelihood tree:       filtered.phy.varsites.phy.treefile
+  Likelihood distances:          filtered.phy.varsites.phy.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          filtered.phy.varsites.phy.splits.nex
+  Consensus tree:                filtered.phy.varsites.phy.contree
+  Screen log file:               filtered.phy.varsites.phy.log
+
+Date and Time: Thu Apr 14 14:49:25 2022

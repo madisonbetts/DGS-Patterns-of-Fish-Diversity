@@ -4,7 +4,6 @@
 # reports only unique spp and unique sites in the lower-right
 # aligned visually with the scale bar and north arrow
 # -------------------------------
-
 library(readxl)
 library(dplyr)
 library(ggplot2)

@@ -1,0 +1,171 @@
+---
+title: "200-xyrauchen"
+author: "Mac Campbell"
+date: "1/29/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+## Aligning to a closer relative
+
+Xyrauchen texanus (HiC version 1.0 maker 3.8): HiC version 1.0 maker 3.8 (vHiC version 1.0, id56101): unmasked
+
+Chromosomes/contigs:	50   Histogram | List
+Sequence type:	unmasked: unmasked sequence data
+Length:	2,393,514,981 bp (GC: 39.51% AT: 60.36% N: 0.13% X: 0.00%)
+Noncoding sequence:	%GC
+genome.faa: HiC version 1.0 maker 3.8 (vHiC version 1.0, 2019-11-06 17:49:35, id134791)
+RBS_HiC_50CHRs_rnd3.8_mpi.all.makerONLY.noseq.gff: maker 3.8 (vmaker 3.8, 2019-11-06 18:10:46, id134793)   
+
+
+In `(base) maccamp@farm:~/wall-canyon/data/mapped$ `   
+```{sh, eval=FALSE}
+bash ../../103-do-align.sh sequences.txt $HOME/genomes/xyrauchen/Xyrauchen_texanus.faa
+```
+
+Get counts
+```{sh, eval=FALSE}
+ls | grep sort.flt.bam | grep -v bai | while read line; do samtools flagstat $line | grep mapped | head -n 1 >> counts.txt; done;
+ls | grep sort.bam | grep -v bai | while read line; do samtools flagstat $line | grep mapped | head -n 1 >> counts-sort.txt; done;
+ls | grep sort.flt.bam | grep -v bai >> counts.files.txt
+
+```
+
+Import.  
+```{r}
+files<-read_tsv("outputs/200/counts.files.txt", col_names="File")
+counts<-read_tsv("outputs/200/counts.txt", col_names="Counts")
+counts$Counts<-gsub(" + 0 mapped (100.00% : N/A)", "", counts$Counts, fixed = TRUE)
+counts$Counts<-as.numeric(counts$Counts)
+
+#in bash
+#cut -f 1 -d ' ' counts-sort.txt  > counts-sort-numbers.txt
+countssort<-read_tsv("outputs/200/counts-sort-numbers.txt", col_names="CountsSort")
+countsalign<-read_tsv("outputs/200/counts-sort-align.txt", col_names="CountAlign")
+comb<-bind_cols(files, counts, countssort, countsalign)
+comb
+```
+
+meta    
+```{r}
+b<-read_csv("meta/barcodes-edited02012022.csv")
+b %>% dplyr::select(`Library Index`) %>% group_by(`Library Index`) %>% summarize(Count=n())
+b2<- b %>% mutate(Filename1=paste0(`Library Index`, "_RA_GG",`Sample Index`, "TGCAG.fastq")) %>% 
+      mutate(Filename2=paste0(`Library Index`, "_RB_GG",`Sample Index`, "TGCAG.fastq")) %>%
+      mutate(NewFile1=paste0(`Sample ID`, "_RA.fastq")) %>%
+      mutate(NewFile2=paste0(`Sample ID`, "_RB.fastq")) %>%
+      mutate(Command1 = paste0("mv data/split/",Filename1, " data/renamed/", `NewFile1`)) %>%
+      mutate(Command2 = paste0("mv data/split/",Filename2, " data/renamed/", `NewFile2`))
+
+```
+
+```{r}
+b3 <- b2 %>% mutate(File=paste0(`Sample ID`,"_RA.sort.flt.bam"), 
+                    Path=paste0("data/mapped/",`Sample ID`,"_RA.sort.flt.bam" )) %>%
+  left_join(comb)
+
+mean(b3$Counts)
+```
+
+```{r}
+b3 %>% group_by(`Species Common Name`, `Scientific Name`) %>% summarize(Count=n(), `Mean Counts`=mean(Counts)) %>% ungroup() %>% arrange(`Scientific Name`)
+```
+
+Histogram of coverage    
+```{r}
+ggplot(b3) +
+  geom_histogram(aes(x = Counts, fill=`Scientific Name`)) +
+  theme_bw()
+```
+
+```{r}
+ggplot(b3 %>% filter(Counts>2e5)) +
+  geom_histogram(aes(x = Counts, fill=`Scientific Name`)) +
+  theme_bw()
+```
+
+Pull out related species
+
+```{r}
+close<-b3 %>% filter(`Scientific Name` %in% c("Catostomus warnerensis", "Catostomus fumeiventris",
+                                       "Catostomus new species")) %>%
+  filter(Location != "Truckee River, NV") %>% filter(Counts > 2e5)
+
+ggplot(close) +
+  geom_histogram(aes(x = Counts, fill=`Scientific Name`)) +
+  theme_bw()
+
+close %>% group_by(`Scientific Name`) %>% summarize(Count=n())
+```
+
+
+Note: We have some high coverage reads we can downsample: https://davemcg.github.io/post/easy-bam-downsampling/
+say to 1500000    
+frac=$( samtools idxstats input.bam | cut -f3 | awk 'BEGIN {total=0} {total += $1} END {frac=1500000/total; if (frac > 1) {print 1} else {print frac}}' )
+
+samtools view -bs $frac input.bam > subsample.bam
+
+## Set up to downsample all species
+```{r}
+
+b3b<-b3 %>% mutate(NewPath = ifelse(Counts > 1.5e6, paste0("data/reduced/",`Sample ID`,"_RA.reduced.bam"), Path))
+
+write_tsv(b3b, "meta/b3b.tsv")
+
+b4<-b3 %>% filter(Counts > 2e5) %>% mutate(NewPath = ifelse(Counts > 1.5e6, paste0("data/reduced/",`Sample ID`,"_RA.reduced.bam"), Path))
+b4 %>% group_by(`Scientific Name`) %>% summarize(Count=n())
+
+write_tsv(b4, "outputs/200/b4.tsv")
+write_tsv(dplyr::select(b4, NewPath), file="bamlists/test260.bamlist", col_names = FALSE)
+```
+
+```{r}
+b5 <- b4 %>% filter(Counts > 1.5e6) %>% mutate(Frac=1.5e6/Counts) %>% 
+  mutate(ReductionCommand = paste0("samtools view -bs ",Frac, " ", Path, " > ", "data/reduced/",`Sample ID`,"_RA.reduced.bam" ))
+
+write_tsv(b5 %>% select(ReductionCommand), col_names = FALSE, "bamlists/highrollers-reduce.sh")
+write_tsv(b5 %>% select(Path), col_names = FALSE, "bamlists/highrollers.bamlist")
+```
+
+
+(base) maccamp@farm:~/wall-canyon$ samtools view -bs 0.72971608206679 data/mapped/KSS_3734-015_RA.sort.flt.bam > data/reduced/KSS_3734-015_RA.reduced.bam
+
+Checks out.     
+
+### Creating alignnment with more C occidentalis occidentalis
+```{r}
+more <- read_csv("meta/additional-meta.csv")
+mmeta <- b3 %>% left_join(more, by=c("Sample ID"="GVL Code"))
+b6<-mmeta %>% filter(Counts > .9e5) %>% mutate(NewPath = ifelse(Counts > 1.5e6, paste0("data/reduced/",`Sample ID`,"_RA.reduced.bam"), Path))
+b6 %>% group_by(`Scientific Name`,Subspecies ) %>% summarize(Count=n())
+
+
+write_tsv(b6, "outputs/200/b6.tsv")
+
+
+write_tsv(select(b6, NewPath), file="bamlists/test279.bamlist", col_names = FALSE)
+```
+
+## Pull out WOW group
+
+Not using the most stringent read counts
+```{r}
+wow<-mmeta %>% filter(`Species Common Name` %in% c("Wall Canyon Sucker","Owens Sucker","Warner Sucker")) %>% filter(Counts > .9e5) %>% mutate(NewPath = ifelse(Counts > 1.5e6, paste0("data/reduced/",`Sample ID`,"_RA.reduced.bam"), Path))
+
+wow %>% group_by(`Scientific Name`,Subspecies ) %>% summarize(Count=n())
+
+#108 inds
+
+write_tsv(wow, "outputs/700/wow.tsv")
+
+
+write_tsv(select(wow, NewPath), file="bamlists/wow.bamlist", col_names = FALSE)
+```
+ 

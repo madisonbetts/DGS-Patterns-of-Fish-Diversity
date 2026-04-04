@@ -1,0 +1,331 @@
+---
+title: "Figure-3"
+author: "Mac Campbell"
+date: "2023-02-13"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+
+```{r}
+library(tidyverse)
+library(ggtree)
+library(ape)
+library(viridis)
+```
+
+## Phylogeny
+
+Generating a data set for concated and species tree analyses. Will reduce sampling of non-wow clade fish.
+
+These our are downsampled and complete read counts.
+
+```{r}
+b3b<-read_tsv("meta/b3b.tsv")
+```
+
+### Mountains
+Get 2-4 or each location of Pantosteus
+
+```{r}
+mountains<-read_tsv("outputs/300/mymountains.tsv")
+tahoe<-read_tsv("outputs/300/mytahoe.tsv")
+```
+
+```{r}
+mpc<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Sample ID` %in% mountains$sample) %>% group_by(Location) %>% arrange(-Counts) %>%
+  filter(Location=="Poore Creek, CA") %>% top_n(n=2, wt=Counts)
+
+mtr<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Sample ID` %in% mountains$sample) %>% group_by(Location) %>% arrange(-Counts) %>%
+  filter(Location=="Truckee River, NV") %>% top_n(n=2, wt=Counts)
+```
+
+```{r}
+og<-bind_rows(mpc,mtr)
+```
+
+
+### Tahoes
+```{r}
+tpc<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Sample ID` %in% tahoe$sample) %>% group_by(Location) %>% arrange(-Counts) %>%
+  filter(Location=="Poore Creek, CA") %>% top_n(n=2, wt=Counts)
+
+ttr<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Sample ID` %in% tahoe$sample) %>% group_by(Location) %>% arrange(-Counts) %>%
+  filter(Location=="Truckee River, NV") %>% top_n(n=2, wt=Counts)
+
+tcr<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Sample ID` %in% tahoe$sample) %>% group_by(Location) %>% arrange(-Counts) %>%
+  filter(Location=="East Fork Carson River, NV") %>% top_n(n=2, wt=Counts)
+
+```
+
+```{r}
+tahoes<-bind_rows(tpc,ttr,tcr)
+```
+
+
+### Sacs
+
+```{r}
+additional<-read_csv("meta/additional-meta.csv")
+
+lac<- b3b %>% left_join(additional, by=c("Sample ID"="GVL Code")) %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath, Subspecies) %>% filter(Subspecies=="lacuanserinus") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts) %>% dplyr::select(-Subspecies)
+
+# lac from Ash Creek has generally good coverage, Goose lake dent has 156708 reads (1208-008)
+
+occ<-b3b %>% left_join(additional, by=c("Sample ID"="GVL Code")) %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath, Subspecies) %>% filter(Subspecies=="occidentalis") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts) %>% dplyr::select(-Subspecies)
+
+# occidentalis also has low reads.... 
+```
+
+```{r}
+sacs<-bind_rows(lac, occ)
+```
+
+### Modocs
+```{r}
+modocs<-b3b %>% left_join(additional, by=c("Sample ID"="GVL Code")) %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath, Coordinates) %>%
+  filter(`Species Common Name`=="Modoc Sucker") %>% 
+  arrange(-Counts) %>% top_n(4, Counts) %>% dplyr::select(-Coordinates)
+
+#Two turner creeks and two ash creeks
+```
+
+
+### Klams
+
+Get a couple of each species
+```{r}
+larges<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Species Common Name`=="Klamath Largescale Sucker") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts)
+
+smalls<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Species Common Name`=="Klamath Smallscale Sucker") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts)
+
+losts<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Species Common Name`=="Lost River Sucker") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts)
+
+shorts<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Species Common Name`=="Shortnose Sucker") %>%
+  arrange(-Counts)  %>% top_n(n=2, wt=Counts)
+```
+
+```{r}
+klams<-bind_rows(larges,smalls,losts,shorts)
+```
+
+
+### Wow Clade
+```{r}
+wowsers<-b3b %>% dplyr::select(`Sample ID`, `Species Common Name`, Location, Counts, NewPath) %>% filter(`Species Common Name` %in% c("Wall Canyon Sucker","Warner Sucker","Owens Sucker")) %>%
+  arrange(-Counts) 
+  
+ggplot(wowsers) +
+  geom_histogram(aes(x = Counts, fill=`Species Common Name`)) +
+  theme_bw()
+```
+
+```{r}
+wowsers %>% filter(Counts>5e5) %>% group_by(`Species Common Name`,Location) %>% summarize(Count=n())
+```
+
+```{r}
+keepers<-wowsers %>% filter(Counts>4e5)
+```
+
+
+## Combine
+
+```{r}
+myfish<-bind_rows(og,tahoes,sacs,modocs,klams,keepers)
+write_tsv(myfish,"outputs/802/myfish.tsv")
+myfish %>% group_by(`Species Common Name`) %>% summarize(Count=n())
+```
+
+
+```{r}
+nrow(myfish)
+write_csv(myfish, "meta/phylo119.csv")
+```
+
+
+```{r}
+write_tsv(dplyr::select(myfish %>% ungroup, NewPath), col_names = FALSE, "bamlists/phylo119.bamlist")
+
+write_tsv(dplyr::select(myfish %>% ungroup, `Sample ID`), col_names = FALSE, "outputs/204/samples119.txt")
+
+```
+```{sh, eval=FALSE}
+srun -p bigmemh -t 18:00:00 --mem=16G --nodes=1 --ntasks=1 angsd -P 6 \
+-bam bamlists/phylo119.bamlist \
+-out /home/maccamp/wall-canyon/outputs/204/plink \
+-anc $HOME/genomes/xyrauchen/Xyrauchen_texanus.faa \
+-minInd 113 -minMaf 0.05  -minMapQ 10 -minQ 20 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 \
+-doGeno 4 -doPost 1 -postCutoff 0.95 -doPlink 2 >outputs/204/std.out 2>outputs/204/std.err &
+```
+
+## Process
+
+
+```{sh, eval=FALSE}
+plink --tped plink.tped --tfam plink.tfam  --out binary --recode --allow-extra-chr --noweb
+plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
+bcftools +prune -l 0.9 -w 100000 recode.vcf  -Ov -o recode.prune.vcf
+bcftools reheader --samples samples119.txt -o recode.prune.reheadered.vcf recode.prune.vcf
+
+```
+
+Convert to phylip, then nexus. Create a missing data set
+
+```{sh, eval=FALSE}
+source activate py2; ~/github/mccloud-rrt/vcf2phylip.py -i recode.prune.reheadered.vcf; conda deactivate;
+seqConverter.pl -drecode.prune.reheadered.min4.phy -on
+
+#Corrected for ascertainment bias
+~/github/mccloud-rrt/103-remove-invariant.py -p recode.prune.reheadered.min4.phy -o recode.prune.reheadered.min4.asc.phy
+seqConverter.pl -drecode.prune.reheadered.min4.asc.phy -on
+
+#Now remove missing??
+ ~/github/relict-dace/201.1-removeMissing.pl recode.prune.reheadered.min4.asc.phy  > filtered.phy
+seqConverter.pl -dfiltered.phy -on
+```
+    
+    
+##Concat     
+
+```{sh, eval=FALSE}
+iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+```
+
+Moved to farm:
+
+```{sh, eval=FALSE}
+srun -p high -t 05:00:00 iqtree -nt AUTO -s recode.prune.reheadered.min4.asc.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+```
+
+
+Alignment has 119 sequences with 8248 columns, 8247 distinct patterns
+7433 parsimony-informative, 815 singleton sites, 0 constant sites
+
+
+```{r}
+iq<-read.tree("outputs/204/recode.prune.reheadered.min4.asc.phy.contree")
+iq<-root(iq, c("MS_PC_01","MS_PC_06","S_TR_17","S_TR_01"))
+t<-as.polytomy(iq, feature='node.label', fun=function(x) as.numeric(x) < 75)
+t<-ggtree(t)
+
+t$data$Bootstrap<-as.numeric(t$data$label)
+
+d <- t$data
+d <- d[!d$isTip,]
+d$label <- as.numeric(d$label)
+d <- d[d$label >= 90,]
+
+e <- t$data
+e <- e[!e$isTip,]
+e$label <- as.numeric(e$label)
+e <- e[e$label < 90,]
+e <- e[e$label >= 75,]
+
+```
+
+```{r}
+t %<+% myfish +
+  geom_point(data=e,  color="gray50", cex=5, alpha=0.75, pch=18) +
+  geom_point(data=d,  color="black", cex=5, alpha=0.75, pch=18) +
+#  geom_tippoint(aes(fill=`Species Common Name`,x=x+0.03), pch=21) +
+  geom_tiplab(aes(label=Location, color=`Species Common Name`), size=2, align = TRUE) +
+#  geom_nodelab() +
+  xlim(0,.5)
+
+ggsave("outputs/204/concat-snps.pdf", width=7, height=8)
+```
+
+
+
+
+
+
+These samples have a high propoirtion of missing data     
+(base) Macs-MBP-2:204 mac$ cat dumped.txt | cut -f 1      
+MS_PC_03   
+MS_PC_02    
+934-003    
+934-002   
+1208-059    
+1208-064   
+WS_TMC15   
+WS_DC01   
+WS_TMC02   
+WS_TMC05   
+WS_TMC12   
+WS_DC14  
+
+```{sh, eval=FALSE}
+iqtree -s filtered.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+iqtree -s filtered.phy.varsites.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+```
+
+
+Alignment has 107 sequences with 8168 columns, 8066 distinct patterns
+
+7330 parsimony-informative, 838 singleton sites, 0 constant sites
+
+```{sh, eval=FALSE}
+srun -p high -t 05:00:00 iqtree -nt AUTO -s filtered.phy.varsites.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+```
+
+```{r}
+iq<-read.tree("outputs/204/filtered.phy.varsites.phy.contree")
+iq<-root(iq, c("MS_PC_01","MS_PC_06","S_TR_17","S_TR_01","S_TR_09","S_TR_10","TS_EFCR_13","TS_EFCR_15"))
+t<-as.polytomy(iq, feature='node.label', fun=function(x) as.numeric(x) < 75)
+t<-ggtree(t) %>% ggtree::rotate(127) %>% ggtree::rotate(146)
+
+
+t$data$Bootstrap<-as.numeric(t$data$label)
+
+d <- t$data
+d <- d[!d$isTip,]
+d$label <- as.numeric(d$label)
+d <- d[d$label >= 90,]
+
+e <- t$data
+e <- e[!e$isTip,]
+e$label <- as.numeric(e$label)
+e <- e[e$label < 90,]
+e <- e[e$label >= 75,]
+
+```
+
+```{r}
+t2<-t %<+% left_join(myfish, additional, by=c("Sample ID"="GVL Code")) 
+```
+
+```{r}
+t2$data$Location<-gsub(", Bishop, CA|  Bishop, CA|, Bishop,CA|,  Bishop, CA","",t2$data$Location)
+t2$data$Location<-gsub(", NV|, OR","",t2$data$Location)
+```
+
+```{r}
+t2 +
+  geom_point(data=e,  fill="grey", cex=2, alpha=0.75, pch=21) +
+  geom_point(data=d,  fill="black", cex=2, alpha=0.75, pch=21) +
+#  geom_tippoint(aes(fill=`Species Common Name`,x=x+0.03), pch=21) +
+  geom_tiplab(data=t2$data %>% filter(!`Species Common Name` %in% c("Wall Canyon Sucker", "Owens Sucker", "Warner Sucker")),
+              aes(label=`Species Common Name`), size=2, align = TRUE) +
+  geom_tiplab(data=t2$data %>% filter(`Species Common Name` %in% c("Wall Canyon Sucker", "Owens Sucker", "Warner Sucker")),
+              aes(label=Location), size=2, align = TRUE) +
+  geom_cladelab(128,"Owens Sucker", offset=0.08, offset.text=0.001) +
+  geom_cladelab(147,"Wall Canyon Sucker", offset=0.08, offset.text=0.001) +
+  geom_cladelab(157,"Warner Sucker", offset=0.08, offset.text=0.001) +
+#  geom_nodelab() +
+  xlim(0,.5) +
+  geom_treescale()
+
+ggsave("outputs/204/concat-snps-filtered.pdf", width=7, height=8)
+```
+

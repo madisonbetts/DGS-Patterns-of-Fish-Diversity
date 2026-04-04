@@ -1,0 +1,340 @@
+---
+title: "Figure-4, Table S2"
+author: "Mac Campbell"
+date: "2023-02-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE)
+```
+
+```{r}
+library(adegenet)
+library(tidyverse)
+library(snpR)
+library(gplots)
+library(viridis)
+library(ggpubr)
+```
+
+## Let's calculates some pop gen stats with pruned genotypes
+
+Have .vcf in outputs/700/plink.vcf
+
+```{sh, eval=FALSE}
+bcftools +prune -l 0.6 -w 10000 outputs/700/plink.vcf -Ov -o outputs/701/plink-pruned.vcf
+```
+
+This reduces our variant count to 9511
+```{r, eval=FALSE}
+vcf<-read.vcfR(file="outputs/701/plink-pruned.vcf")
+genind<-vcfR2genind(vcf)
+genind@pop<-meta$Location
+save(genind, file="outputs/701/pruned-genind.rda")
+```
+
+Sanity check of signal:
+
+```{r}
+load("outputs/701/pruned-genind.rda")
+```
+
+Sanity check of signal:    
+
+```{r}
+gen<-genind
+X <- tab(gen, NA.method="mean")
+
+pca1 <- dudi.pca(X,scannf=FALSE,scale=FALSE,nf=3)
+plot(pca1$li)
+```
+
+## Import to snpR
+
+```{r}
+meta<-read_tsv("outputs/700/wow.tsv")
+sample_meta<-read_tsv("outputs/700/sample_meta.tsv")
+my.dat <- import.snpR.data("outputs/701/plink-pruned.vcf", sample.meta = sample_meta)
+```
+
+
+
+```{r}
+x<-calc_pairwise_fst(my.dat, "Group")
+groupfst<-get.snpR.stats(x, "Group", "fst")
+#this is weighted means
+mg<-groupfst$fst.matrix$Group
+sample_meta %>% group_by(Species, Group) %>% summarize()
+as.tibble(mg)
+```
+
+```{r}
+y<-calc_pairwise_fst(my.dat, "Species")
+speciesfst<-get.snpR.stats(y, "Species", "fst")
+#this is weighted means
+speciesfst$fst.matrix$Species %>% as_tibble()
+```
+
+```{r}
+z<-calc_pairwise_fst(my.dat, "Location")
+locfst<-get.snpR.stats(z, "Location", "fst")
+#this is weighted means
+m<-locfst$fst.matrix$Location
+```
+
+```{r}
+m
+```
+
+```{r}
+
+makeSymmLower <- function(m) {
+   m[lower.tri(m)] <- t(m)[lower.tri(m)]
+   return(m)
+}
+```
+
+
+#This code doesn't work as there isn't a zero diagonal
+```{r}
+m2<-makeSymmLower(as.matrix(m)[,2:9])
+m2
+```
+
+```{r}
+md<- m2 %>% as_tibble() 
+mdd<-bind_cols(as_tibble(as.matrix(m[,1])), md)
+```
+
+```{r}
+md2<-mdd %>% pivot_longer(2:9) %>% rename(`Location 1`=p1, `Location 2`=name, Fst=value) 
+
+```
+
+```{r}
+md3<-md2 
+md3$Fst<-as.numeric(md3$Fst)
+
+#md3$`Location 1`<-factor(md3$`Location 1`, levels=c("HoneyCreek","TwentymileCreek","DeepCreek","LowerHotCreek","LowerRockCreek",
+ #                                                   "LowerHortonCreek","HortonCreek", "SouthFork"))
+#md3$`Location 2`<-factor(md3$`Location 2`, levels=c("WallCanyon","HoneyCreek","TwentymileCreek","LowerHotCreek","LowerRockCreek",
+ #                                                   "LowerHortonCreek","HortonCreek", "SouthFork"))
+```
+
+```{r}
+ggplot(md3) + 
+  geom_raster(aes(x=`Location 1`, y=`Location 2`, fill=Fst)) +
+  geom_text(aes(x=`Location 1`, y=`Location 2`, label=round(Fst,2)), color="white") +
+  theme(axis.text.x = element_text(angle=45, vjust=0.5))
+```
+
+```{r}
+mat_num <- matrix(as.numeric(m2),    # Convert to numeric matrix
+                  ncol = ncol(m2))
+#mat_num[mat_num<0]<-0
+colnames(mat_num)<-colnames(m2)
+rownames(mat_num)<-m[,1]$p1
+mat_num
+
+```
+
+
+
+```{r}
+heatmap.2(mat_num, trace="none",
+          key=TRUE, srtCol=45, margins = c(5,5), col=viridis(15, direction=-1))
+```
+
+###  removing small sample sizes
+
+```{r}
+sample_meta %>% group_by(Location) %>% summarize(Count=n())
+```
+
+```{r}
+my.dat2<-my.dat[,my.dat@sample.meta$Location %in% c("DeepCreek","HoneyCreek","LowerHotCreek","LowerRockCreek","TwentymileCreek","WallCanyon")]
+```
+```{r}
+v<-my.dat2@sample.meta$Location
+my.dat3<-my.dat2
+my.dat3@sample.meta$Plot<-ifelse(v=="WallCanyon","A",ifelse(v=="HoneyCreek","B",ifelse(v=="TwentymileCreek","C",
+                         ifelse(v=="DeepCreek","D",ifelse(v=="LowerHotCreek","E",ifelse(v=="LowerRockCreek","F",NA))))))
+```
+
+
+
+```{r}
+a<-calc_pairwise_fst(my.dat3, "Plot")
+locfsta<-get.snpR.stats(a, "Plot", "fst")
+#this is weighted means
+ma<-locfsta$fst.matrix$Plot
+ma %>% as_tibble()
+```
+
+
+
+## What about Theta, Tajima's D?
+
+
+```{r}
+picalc<-calc_pi(my.dat3,"Plot")
+pi<-get.snpR.stats(picalc,"Plot","pi")
+```
+
+Generate barplots of pi
+
+```{r}
+pidf<-pi$single %>% as_tibble() %>%
+  mutate(Species=ifelse(subfacet=="A", "Wall Canyon",
+                        ifelse(subfacet %in% c("B","C","D"), "Warner", 
+                        ifelse(subfacet %in% c("E","F"), "Owens", "NA"))))
+pidf
+```
+
+ifelse(v=="WallCanyon","A",ifelse(v=="HoneyCreek","B",ifelse(v=="TwentymileCreek","C",
+                         ifelse(v=="DeepCreek","D",ifelse(v=="LowerHotCreek","E",ifelse(v=="LowerRockCreek","F",NA))))))
+                         
+```{r}
+piplot<-ggplot(pidf %>% group_by(Species,subfacet,CHROM) %>% summarize(meanpi=mean(pi))) +
+  geom_boxplot(aes(x=subfacet,y=meanpi, fill=Species), alpha=0.75) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  ylab("Pi") +
+  scale_x_discrete(labels=c("Wall Canyon", "Honey Creek","Twentymile Creek","Deep Creek", "Lower Hot Creek", "Lower Rock Creek")) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  scale_fill_manual(values=alpha(c("red","black","blue"),0.75)) +
+  xlab("\nSampling Location") +
+  theme(legend.position = "")
+
+piplot
+```
+
+```{r}
+pidf %>% group_by(Species,subfacet,CHROM) %>% summarize(meanpi=mean(pi)) %>% select(-CHROM) %>% summarize(mean(meanpi))
+```
+
+```{r}
+pi$weighted.means
+```
+
+Calculating tajima's per chrom (takes a minute)
+```{r, eval=FALSE}
+theta<-calc_tajimas_d(my.dat3, c("Plot.CHROM"))
+td<-get.snpR.stats(theta,"Plot.CHROM","tajimas_d")
+tddf<-td$single.window %>% as_tibble() %>%
+  mutate(Species=ifelse(subfacet=="A", "Wall Canyon",
+                        ifelse(subfacet %in% c("B","C","D"), "Warner", 
+                        ifelse(subfacet %in% c("E","F"), "Owens", "NA"))))
+write_tsv(tddf, "outputs/701/tddf.tsv")
+```
+
+```{r}
+tddf<-read_tsv("outputs/701/tddf.tsv")
+```
+```{r}
+tplot<-ggplot(tddf) +
+  geom_boxplot(aes(x=subfacet,y=D, fill=Species), alpha=0.75) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  ylab("Tajima's D") +
+  scale_x_discrete(labels=c("Wall Canyon", "Honey Creek","Twentymile Creek","Deep Creek", "Lower Hot Creek", "Lower Rock Creek")) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  scale_fill_manual(values=alpha(c("red","black","blue"),0.75)) +
+  xlab("\nSampling Location") +
+  theme(legend.position = "")
+
+tplot
+```
+
+```{r}
+tddf %>% group_by(Species, subfacet) %>% mutate(Tajimas=mean(D)) %>% select(Tajimas) %>% unique()
+```
+
+
+```{r}
+ggarrange(piplot + ggtitle("A") + theme(plot.title = element_text(size=18, face="bold")), 
+          tplot  + ggtitle("B") + theme(plot.title = element_text(size=18, face="bold")))
+ggsave("outputs/701/plot.pdf", width=8.5, height = 4)
+```
+
+
+Test if PI are different? there are quite a few options
+
+```{r}
+A=pidf %>% filter(subfacet=="A")
+B=pidf %>% filter(subfacet=="B")
+C=pidf %>% filter(subfacet=="C")
+```
+
+Are our data normally distributed?    
+
+```{r}
+A
+```
+
+
+```{r}
+tab<-wilcox.test(A$pi, B$pi)
+```
+
+```{r}
+tab
+```
+
+Get all options:
+
+```{r}
+mydf<-data.frame()
+for(i in seq(1:15)) {
+
+#print (i);
+vector<-comb[,i]
+a<-vector[1]
+b<-vector[2]
+
+v1<-pidf %>% filter(subfacet==vector[1])
+v2<-pidf %>% filter(subfacet==vector[2])
+
+PiA<-mean(v1$pi)
+PiB<-mean(v2$pi)
+
+
+test1<-wilcox.test(v1$pi, v2$pi)
+p.valuePi<-test1$p.value
+Species1<-unique(v1$Species)
+Species2<-unique(v2$Species)
+
+#t
+v1<-tddf %>% filter(subfacet==vector[1])
+v2<-tddf %>% filter(subfacet==vector[2])
+test2<-wilcox.test(v1$D, v2$D)
+p.valueD<-test2$p.value
+
+DA<-mean(v1$D)
+DB<-mean(v2$D)
+
+row<-cbind(a,b,Species1, Species2, PiA, PiB, p.valuePi, DA, DB, p.valueD) %>% as_tibble()
+#row<-cbind(a,b,Species1, Species2, p.valuePi, p.valueD) %>% as_tibble()
+
+mydf<-bind_rows(mydf, row)
+}
+```
+
+c("Wall Canyon", "Honey Creek","Twentymile Creek","Deep Creek", "Lower Hot Creek", "Lower Rock Creek")
+```{r}
+df<-mydf %>% mutate(Group1=ifelse(a=="A", "Wall Canyon", 
+                       ifelse(a=="B", "Honey Creek",
+                       ifelse(a=="C", "Twentymile Creek",
+                       ifelse(a=="D", "Deep Creek",
+                       ifelse(a=="E", "Lower Hot Creek",
+                       ifelse(a=="F", "Lower Rock Creek",a)))))))
+df<-df %>% mutate(Group2=ifelse(b=="A", "Wall Canyon", 
+                       ifelse(b=="B", "Honey Creek",
+                       ifelse(b=="C", "Twentymile Creek",
+                       ifelse(b=="D", "Deep Creek",
+                       ifelse(b=="E", "Lower Hot Creek",
+                       ifelse(b=="F", "Lower Rock Creek",b)))))))
+
+write_csv(df,"outputs/701/pi-comparisons.csv")
+```

@@ -1,0 +1,53 @@
+---
+title: "802-wall-canyon-network"
+author: "Mac Campbell"
+date: "2023-01-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggtree)
+library(tanggle)
+library(phangorn)
+library(ape)
+```
+
+# Implicit network
+[1]  "Sacremento Sucker"        
+ [4] "Modoc Sucker"              "
+ [7] "        "Owens Sucker"             
+[10] "Wall Canyon Sucker"        "Warner Sucker"            
+```{r}
+nm<-read_tsv("outputs/802/myfish2.tsv")  
+nm$`Species Common Name`<-gsub("Sacremento","Sacramento",nm$`Species Common Name`)
+nm$`Species Common Name`<-factor(nm$`Species Common Name`, 
+                                 levels=c("Mountain Sucker","Tahoe Sucker",
+                                         "Klamath Largescale Sucker","Klamath Smallscale Sucker",
+                                         "Lost River Sucker","Shortnose Sucker",
+                                         "Modoc Sucker","Sacramento Sucker",
+                                         "Owens Sucker","Warner Sucker", "Wall Canyon Sucker"))
+```
+
+```{r}
+net<-read.nexus.networx("outputs/204/splitstree.nex")
+p <- ggsplitnet(net) 
+
+p$data<-p$data %>% left_join(nm, by=c("label"="Sample ID"))
+p
+```
+
+```{r}
+p + geom_tippoint(aes(fill=`Species Common Name`), pch=21, cex=4, alpha=1) +
+ # scale_fill_viridis_d(option="H") +
+  scale_fill_manual(values=c("grey50","brown","grey50","grey50","grey50","grey50",
+                             "purple","orange","red","blue","black"))
+
+ggsave("outputs/802/splitstree.pdf")
+```
+
+

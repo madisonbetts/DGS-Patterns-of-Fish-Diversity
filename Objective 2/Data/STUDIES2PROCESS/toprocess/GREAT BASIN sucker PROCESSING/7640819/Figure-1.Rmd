@@ -1,0 +1,415 @@
+---
+title: "Figure-1"
+author: "Mac Campbell"
+date: "2023-02-13"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(raster)
+library(rgdal)
+library(maps)
+library(ggpubr)
+library(gridExtra)
+library(grid)
+library(ggrepel)
+library(viridis)
+library(ggsn)
+library(polyggon)
+```
+
+
+## Base map
+
+```{r}
+states<-map_data("state") %>% filter(region %in% c("california","oregon","nevada"))
+
+cali<- map_data("state") %>% filter(region %in% c("california"))
+domain <- c(min(states$long), max(states$long), min(states$lat), max(states$lat))
+
+# here eric implements something and I copy it
+tidy_subset <- function(x, longlat) {
+  x@data$id <- rownames(x@data)
+  x.f <- broom::tidy(x) %>%
+    dplyr::left_join(., x@data, by = "id") %>%
+    dplyr::tbl_df() %>%
+    filter(long > longlat[1],
+           long < longlat[2],
+           lat > longlat[3],
+           lat < longlat[4])
+}
+
+```
+
+
+
+```{r}
+nat.earth<-stack("~/github/mccloud-rrt/outputs/1000/NE2_HR_LC_SR_W_DR/NE2_HR_LC_SR_W_DR.tif")
+
+nat.crop <- crop(nat.earth, y=extent(domain))
+
+rast.table <- data.frame(xyFromCell(nat.crop, 1:ncell(nat.crop)),
+                         getValues(nat.crop/255))
+
+
+rast.table$rgb <- with(rast.table, rgb(NE2_HR_LC_SR_W_DR_1,
+                                       NE2_HR_LC_SR_W_DR_2,
+                                       NE2_HR_LC_SR_W_DR_3,
+                                       1))
+
+save(rast.table, file="outputs/400/rast.table.rda")
+```
+
+```{r}
+ggplot() +
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE)  +
+  coord_fixed(ratio=1.3, xlim = c(min(states$long), max(cali$long)), ylim=c(min(cali$lat), max(states$lat)))
+
+```
+
+## Ranges
+
+Trying databasin.org
+
+HUC8 based? https://databasin.org/datasets/492657c4dc5146e2a56d7dc22e8480a0/
+
+May need to get Wall Canyon poly separately?
+
+Owens Sucker, Warner Sucker
+
+```{r, eval=FALSE}
+#owens<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Owens sucker (Catostomus fumeiventris) distribution and status by HUC8/data/commondata/data0/Catostomus_fumeiventris.shp","Catostomus_fumeiventris")
+#owensWGS <- spTransform(owens, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+#owensdf<-fortify(owensWGS)
+
+#warner<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Warner sucker (Catostomus warnerensis) distribution and status by HUC8/data/commondata/data0/Catostomus_warnerensis.shp","Catostomus_warnerensis")
+#warnerWGS <- spTransform(warner, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+#warnerdf<-fortify(warnerWGS)
+
+#sac<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Sacramento sucker (Catostomus occidentalis) distribution and status by HUC8/data/commondata/data0/Catostomus_occidentalis.shp","Catostomus_occidentalis")
+
+#https://databasin.org/datasets/c39ac7af155544308a4905569d2fbc99/
+sac<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Sacramento sucker (Catostomus occidentalis) distribution in California as of 2002/data/commondata/data0/ssk.shp","ssk")
+sacWGS <- spTransform(sac, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+sacdf<-fortify(sacWGS)
+
+#modoc<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Modoc sucker (Catostomus microps) distribution and status by HUC8/data/commondata/data0/Catostomus_microps.shp","Catostomus_microps")
+#modocWGS <- spTransform(modoc, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+#modocdf<-fortify(modocWGS)
+
+#Modoc is found in Thomas Creek Goose Lake Basin, Ash and Turner Creeks.  Can get Ash and Turner going here
+modoc<-readOGR("/Users/mac/github/wall-canyon/outputs/400/modoc/Catostomus_microps_CCM01_historical_expert_16.shp","Catostomus_microps_CCM01_historical_expert_16")
+modocWGS <- spTransform(modoc, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+modocdf<-fortify(modocWGS)
+
+
+
+tahoe<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Tahoe sucker (Catostomus tahoensis) distribution and status by HUC8/data/commondata/data0/Catostomus_tahoensis.shp","Catostomus_tahoensis")
+
+#https://nas.er.usgs.gov/queries/FactSheet.aspx?speciesID=355
+#non-indigenous East Branch North Fork Feather; Lower Sacramento; Middle Fork Feather; North Fork American; North Fork Feather; Upper Pit; Upper Yuba
+tahoeWGS <- spTransform(tahoe, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+tahoeNative<-tahoeWGS[! tahoeWGS@data$HUC_NAME %in% c("Lower Pit","North Fork American","South Fork American", "East Branch North Fork Feather",
+                                                      "North Fork Feather","Middle Fork Feather"),]
+tahoedf<-fortify(tahoeNative)
+
+
+#save(warnerdf, file="outputs/400/warner.rda")
+#save(owensdf, file="outputs/400/owens.rda")
+save(sacdf, file="outputs/400/sac.rda")
+save(modocdf, file="outputs/400/modoc.rda")
+save(tahoedf, file="outputs/400/tahoe.rda")
+```
+
+```{r, eval=FALSE}
+warner<-readOGR("/Users/mac/github/mccloud-rrt/outputs/1000/huc250k_shp/","huc250k")
+warner <- spTransform(warner, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+warner <- warner[warner@data$HUC_CODE=="17120007",]
+warnerdf <- fortify(warner)
+save(warnerdf, file="outputs/400/warner.rda")
+```
+
+## Wall Creek
+
+```{r, eval=FALSE}
+wall<-readOGR("/Users/mac/github/wall-canyon/outputs/400/NHD_H_Nevada_State_Shape/Shape/WBDHU12.shp","WBDHU12")
+wallWGS <- spTransform(wall, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+qallWGS[str_detect(wallWGS@data$huc12, "16040204"),]$name
+```
+ [1] "Powell Reservoir"                       "Tuledad Creek"                          "Mason Spring-Duck Lake"                
+ [4] "Nut Spring"                             "Massacre Creek"                         "Massacre Lake-Middle Lake"             
+ [7] "Upper East Creek"                       "South Creek"                            "Lower East Creek"                      
+[10] "Lone Spring Mountain"                   "Lords Lake"                             "Secret Creek-Fortynine Lake"           
+[13] "Calcutta Lake"                          "Mosquito Lake"                          "Middle Lake"                           
+[16] "CC Spring"                              "Long Valley"                            "Boulder Creek"                         
+[19] "Boulder Lake"                           "Headwaters Duck Flat Wash"              "No Savvy Creek"                        
+[22] "Upper Duck Flat Wash"                   "Lone Juniper Canyon"                    "Rye Patch Canyon"                      
+[25] "Middle Duck Flat Wash"                  "Lower Duck Flat Wash-Frontal Duck Lake" "Upper Wall Creek"                      
+[28] "Evans Camp"                             "Bordwell Creek"                         "Middle Wall Creek"                     
+[31] "Pegleg Canyon"                          "Mountain View Creek"                    "Lower Wall Creek-Frontal Duck Lake"    
+[34] "Lost Creek-Frontal Duck Lake"
+```{r, eval=FALSE}
+wall2 <- wallWGS[wallWGS@data$name %in% c("Upper Wall Creek","Middle Wall Creek","Lower Wall Creek-Frontal Duck Lake", 
+                                          "Mountain View Creek"),]
+walldf<-fortify(wall2)
+save(walldf, file="outputs/400/wall.rda")
+ggplot() +geom_polygon(data=walldf,aes(x=long, y=lat, group=group), fill="black", alpha=0.5) +
+    coord_fixed(ratio=1.3)
+```
+
+## More refined Owens Sucker
+Pisces data base    
+```{r, eval=FALSE}
+owens<-readOGR("/Users/mac/github/wall-canyon/outputs/400/owens/Catostomus_fumeiventris_CCF01_historical_expert_16.shp",
+               "Catostomus_fumeiventris_CCF01_historical_expert_16")
+owens <- spTransform(owens, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+owensdf<-fortify(owens)
+save(owensdf, file="outputs/400/owens.rda")
+```
+    
+
+Klamath Suckers    
+
+```{r, eval=FALSE}
+lost<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Lost river sucker (Deltistes luxatus) distribution and status by HUC8/data/commondata/data0/Deltistes_luxatus.shp","Deltistes_luxatus")
+lostWGS <- spTransform(lost, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+lostdf<-fortify(lostWGS)
+
+short<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Shortnose sucker (Chasmistes brevirostris) distribution and status by HUC8/data/commondata/data0/Chasmistes_brevirostris.shp","Chasmistes_brevirostris")
+shortWGS <- spTransform(short, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+shortdf<-fortify(shortWGS)
+
+large<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Klamath largescale sucker (Catostomus snyderi) distribution and status by HUC8/data/commondata/data0/Catostomus_snyderi.shp","Catostomus_snyderi")
+largeWGS <- spTransform(large, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+largedf<-fortify(largeWGS)
+
+small<-readOGR("/Users/mac/github/wall-canyon/outputs/400/Klamath smallscale sucker (Catostomus rimiculus) distribution and status by HUC8/data/commondata/data0/Catostomus_rimiculus.shp","Catostomus_rimiculus")
+smallWGS <- spTransform(small, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+smalldf<-fortify(smallWGS)
+
+save(lostdf, file="outputs/400/lost.rda")
+save(shortdf, file="outputs/400/short.rda")
+save(largedf, file="outputs/400/large.rda")
+save(smalldf, file="outputs/400/small.rda")
+
+```
+
+
+
+## All together
+```{r}
+load("/Users/mac/github/wall-canyon/outputs/400/warner.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/owens.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/sac.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/modoc.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/tahoe.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/wall.rda")
+
+load("/Users/mac/github/wall-canyon/outputs/400/lost.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/short.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/large.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/small.rda")
+
+load("/Users/mac/github/wall-canyon/outputs/401/goosedf.rda")
+load("/Users/mac/github/wall-canyon/outputs/401/modocdf2.rda")
+
+map<-ggplot() + 
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE)  +
+  geom_polygon(data=sacdf,aes(x=long, y=lat, group=group), fill="orange", alpha=0.5) +
+  geom_polygon(data=lostdf,aes(x=long, y=lat, group=group), fill="grey50", alpha=0.5) +
+  geom_polygon(data=shortdf,aes(x=long, y=lat, group=group), fill="grey50", alpha=0.5) +
+  geom_polygon(data=largedf,aes(x=long, y=lat, group=group), fill="grey50", alpha=0.5) +
+  geom_polygon(data=smalldf,aes(x=long, y=lat, group=group), fill="grey50", alpha=0.5) +
+  geom_polygon(data=tahoedf,aes(x=long, y=lat, group=group), fill="brown", alpha=0.5) +
+  geom_polygon(data=owensdf,aes(x=long, y=lat, group=group), fill="red", alpha=0.5) +
+  geom_polygon(data=warnerdf,aes(x=long, y=lat, group=group), fill="blue", alpha=0.5) +
+  geom_polygon(data=goosedf,aes(x=long, y=lat, group=group), fill="orange", alpha=0.5) +
+  geom_polygon(data=modocdf,aes(x=long, y=lat, group=group), fill="purple", alpha=0.75) +
+  geom_polygon(data=modocdf2,aes(x=long, y=lat, group=group), fill="purple", alpha=0.75) +
+  geom_polygon(data=walldf,aes(x=long, y=lat, group=group), fill="black", alpha=1.0) +
+  coord_fixed(ratio=1.3) +
+  theme_bw() +
+  theme(panel.grid=element_blank())+
+  xlab("Longitude")+
+  ylab("Latitude")
+
+map
+ggsave("/Users/mac/github/TAFS-wall-canyon/outputs/400/starting-map.pdf")
+save(map, file="outputs/400/map.rda")
+```
+
+## Points
+
+## Legend
+
+```{r}
+x<-seq(from=1, to=1, length=7)
+y<-seq(from=1, to=7, by=1)
+z<-c("Klamath Suckers","Tahoe Sucker","Owens Sucker", "Warner Sucker","Sacramento Sucker", "Modoc Sucker","Wall Canyon Sucker")
+a<-c("grey50","brown","red","blue","orange","purple","black")
+
+legend<-tibble(z,x,y,a)
+```
+
+```{r}
+legend$z<-as.factor(legend$z)
+leg<-ggplot(legend) +
+  geom_point(aes(x=x, y=y), fill=a, pch=21, size=8, alpha=c(0.5,0.5,0.5,0.5,0.5,0.75,1)) +
+  geom_text(aes(x=x+.25, y=y, label=z), size=5) +
+  xlim(0.95,1.4) +
+  ylim(-0,8) +
+  scale_fill_manual(values=legend$a) +
+  theme_bw() +
+  theme(legend.position = "none") +
+  theme(panel.grid = element_blank(), axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank()) 
+
+leg
+```
+
+```{r}
+blank <- grid.rect(gp=gpar(col="white"))
+```
+
+```{r}
+ggarrange(map,arrangeGrob(blank,leg,blank, ncol=1, heights=c(2,3,4)), ncol=2, widths = c(2,1))
+
+ggsave("~/github/TAFS-wall-canyon/outputs/400/starting-map-2.pdf", width=8, height=11)
+```
+
+## Wall Canyon panel
+
+
+```{r}
+colls<-read_csv("meta/additional-meta.csv") %>% filter(`Common Name` %in% c("Wall Canyon Sucker","Warner Sucker")) %>%
+   separate(Coordinates, into=c("Latitude1","Longitude1"), sep=" ") %>% dplyr::select(`Common Name`, `Source Location`,Latitude1,Longitude1) %>%
+  mutate(Latitude=ifelse(`Common Name`=="Wall Canyon Sucker",41.18004547, Latitude1 )) %>%
+  mutate(Longitude=ifelse(`Common Name`=="Wall Canyon Sucker",-119.8003539, Longitude1 )) %>%
+  group_by(`Common Name`,`Source Location`,Latitude, Longitude) %>% summarize(SampleSize=n())
+
+colls$Latitude<-as.numeric(colls$Latitude)
+colls$Longitude<-as.numeric(colls$Longitude)
+```
+
+
+```{r}
+owens<-read_csv("meta/2021_July_OSKR_fin_clips.csv") %>% filter(`Vial #` != 41) %>% dplyr::select(`Source water`, Latitude, Longitude) %>%
+  group_by(`Source water`,Latitude, Longitude) %>% summarize(SampleSize=n()) %>% mutate(`Common Name`="Owens Sucker") %>%
+  rename(`Source Location`=`Source water`)
+```
+
+```{r}
+sites<-bind_rows(colls,owens)
+
+samples<-ggplot(sites, aes(x=Longitude, y=Latitude, fill=`Common Name`)) +
+  geom_point(pch=21, alpha=0.75, aes(size=SampleSize)) +
+  scale_fill_manual(values=c("red","black","blue")) +
+  coord_fixed(ratio=1.3) +
+  theme_bw()
+
+samples
+```
+
+
+```{r}
+avg<-sites %>% group_by(`Common Name`, `Source Location`) %>% mutate(Samples=sum(SampleSize), newlat=mean(Latitude), newlong=mean(Longitude)) %>%
+  dplyr::select(`Common Name`, `Source Location`, Samples, newlat, newlong) %>% unique()
+avg$`Source Location`<-gsub(", OR","",avg$`Source Location`)
+avg$`Source Location`<-gsub(", NV","",avg$`Source Location`)
+
+```
+
+```{r}
+ggplot() +
+  geom_point(data=avg, aes(x=newlong, y=newlat, fill=`Source Location`, size=Samples), pch=21) +
+  geom_text_repel(data=avg, aes(x=newlong, y=newlat, label=paste0(`Source Location`, " n=",Samples))) +
+  scale_fill_viridis_d(option="turbo") +
+  theme(legend.position = "none") 
+  
+```
+
+
+## Get Map and plot
+
+```{r}
+load("outputs/400/rast.table.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/warner.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/owens.rda")
+load("/Users/mac/github/wall-canyon/outputs/400/wall.rda")
+
+```
+
+```{r}
+ggplot() + 
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE)  +
+  geom_polygon(data=owensdf,aes(x=long, y=lat, group=group), fill="red", alpha=0.5) +
+  geom_polygon(data=warnerdf,aes(x=long, y=lat, group=group), fill="blue", alpha=0.5) +
+  geom_polygon(data=walldf,aes(x=long, y=lat, group=group), fill="black", alpha=1.0) +
+  geom_point(data=avg, aes(x=newlong, y=newlat, fill=`Source Location`, size=Samples), pch=21) +
+  geom_text_repel(data=avg, aes(x=newlong, y=newlat, label=paste0(`Source Location`, " n=",Samples))) +
+  scale_fill_viridis_d(option="turbo") +
+  theme_bw() +
+  theme(panel.grid=element_blank())+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme(legend.position = "none") +
+  coord_fixed(1.3, xlim=c(-122.5, -117.5), ylim=c(37,43))
+
+ggsave("outputs/401/wow-sampling.pdf", width=8, height=8)
+```
+
+
+```{r}
+#Pleistocene Map
+pluv<-readOGR("/Users/mac/github/wall-canyon/outputs/401/Extent of Pleistocene Lakes in the Western Great Basin/data/commondata/pleistocenelakeviewer/GreatBasinPleistoceneLakes.shp")
+pluv <- spTransform(pluv, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+pluvdf<-fortify(pluv[pluv$LATE_PL_ID!="81",])
+
+lahontan<-pluv[pluv$LATE_PL_ID=="81",]
+ldf<-fortify(lahontan)
+```
+
+```{r}
+ggplot() + 
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE)  +
+  geom_polygon(data=pluvdf,aes(x=long, y=lat, group=group), fill="cornflowerblue", alpha=.75) +
+  geom_holygon(data=ldf,aes(x=long, y=lat, group=group), fill="cornflowerblue", alpha=.75) +
+  geom_polygon(data=owensdf,aes(x=long, y=lat, group=group), fill="red", alpha=0.5) +
+  geom_polygon(data=warnerdf,aes(x=long, y=lat, group=group), fill="blue", alpha=0.5) +
+  geom_polygon(data=walldf,aes(x=long, y=lat, group=group), fill="black", alpha=1.0) +
+  theme_bw() +
+  theme(panel.grid=element_blank())+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme(legend.position = "none") +
+  coord_fixed(1.3, xlim=c(-122.5, -117.5), ylim=c(37,43))
+
+ggsave("outputs/401/wow-pluvial-lakes.pdf", width=8, height=8)
+
+```
+
+```{r}
+ggplot() + 
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE)  +
+  geom_polygon(data=pluvdf,aes(x=long, y=lat, group=group), fill="cornflowerblue", alpha=.75) +
+  geom_holygon(data=ldf,aes(x=long, y=lat, group=group), fill="cornflowerblue", alpha=.75) +
+  geom_polygon(data=owensdf,aes(x=long, y=lat, group=group), fill="red", alpha=0.5) +
+  geom_polygon(data=warnerdf,aes(x=long, y=lat, group=group), fill="blue", alpha=0.5) +
+  geom_polygon(data=walldf,aes(x=long, y=lat, group=group), fill="black", alpha=1.0) +
+  geom_point(data=avg, aes(x=newlong, y=newlat, fill=`Source Location`, size=Samples), pch=21) +
+  geom_text_repel(data=avg, aes(x=newlong, y=newlat, label=paste0(`Source Location`, " n=",Samples))) +
+  scale_fill_viridis_d(option="turbo") +
+  theme_bw() +
+  theme(panel.grid=element_blank())+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  theme(legend.position = "none") +
+  coord_fixed(1.3, xlim=c(-122.5, -117.5), ylim=c(37,43))
+
+ggsave("outputs/401/wow-samplingpluvial.pdf", width=8, height=8)
+```

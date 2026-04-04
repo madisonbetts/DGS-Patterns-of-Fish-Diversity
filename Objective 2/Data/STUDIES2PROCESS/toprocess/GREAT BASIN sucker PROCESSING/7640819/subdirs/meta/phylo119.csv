@@ -1,0 +1,120 @@
+Sample ID,Species Common Name,Location,Counts,NewPath
+MS_PC_01,Mountain Sucker,"Poore Creek, CA",5579873,data/reduced/MS_PC_01_RA.reduced.bam
+MS_PC_06,Mountain Sucker,"Poore Creek, CA",3763407,data/reduced/MS_PC_06_RA.reduced.bam
+S_TR_17,Tahoe Sucker,"Truckee River, NV",2860036,data/reduced/S_TR_17_RA.reduced.bam
+S_TR_01,Tahoe Sucker,"Truckee River, NV",2604930,data/reduced/S_TR_01_RA.reduced.bam
+MS_PC_03,Mountain Sucker,"Poore Creek, CA",1097093,data/mapped/MS_PC_03_RA.sort.flt.bam
+MS_PC_02,Mountain Sucker,"Poore Creek, CA",1011398,data/mapped/MS_PC_02_RA.sort.flt.bam
+S_TR_09,Mountain Sucker,"Truckee River, NV",3048887,data/reduced/S_TR_09_RA.reduced.bam
+S_TR_10,Mountain Sucker,"Truckee River, NV",2240969,data/reduced/S_TR_10_RA.reduced.bam
+TS_EFCR_13,Tahoe Sucker,"East Fork Carson River, NV",3094758,data/reduced/TS_EFCR_13_RA.reduced.bam
+TS_EFCR_15,Tahoe Sucker,"East Fork Carson River, NV",2771782,data/reduced/TS_EFCR_15_RA.reduced.bam
+1272-017,Sacremento Sucker,"Upper Pit, CA & OR",1247123,data/mapped/1272-017_RA.sort.flt.bam
+1272-012,Sacremento Sucker,"Upper Pit, CA & OR",1226706,data/mapped/1272-012_RA.sort.flt.bam
+934-003,Sacremento Sucker,"Upper Pit, CA & OR",295844,data/mapped/934-003_RA.sort.flt.bam
+934-002,Sacremento Sucker,"Upper Pit, CA & OR",148173,data/mapped/934-002_RA.sort.flt.bam
+1208-058,Modoc Sucker,"Upper Pit, CA & OR",1271946,data/mapped/1208-058_RA.sort.flt.bam
+1208-011,Modoc Sucker,"Upper Pit, CA & OR",1080857,data/mapped/1208-011_RA.sort.flt.bam
+1208-059,Modoc Sucker,"Upper Pit, CA & OR",807413,data/mapped/1208-059_RA.sort.flt.bam
+1208-064,Modoc Sucker,"Upper Pit, CA & OR",537133,data/mapped/1208-064_RA.sort.flt.bam
+KLS_3228-047,Klamath Largescale Sucker,"Klamath basin, OR",2023262,data/reduced/KLS_3228-047_RA.reduced.bam
+KLS_2897-059,Klamath Largescale Sucker,"Klamath basin, OR",1959341,data/reduced/KLS_2897-059_RA.reduced.bam
+KSS_3734-008,Klamath Smallscale Sucker,"Klamath basin, OR",2335767,data/reduced/KSS_3734-008_RA.reduced.bam
+KSS_3734-002,Klamath Smallscale Sucker,"Klamath basin, OR",2148051,data/reduced/KSS_3734-002_RA.reduced.bam
+LRS_2735-077,Lost River Sucker,"Klamath basin, OR",3821816,data/reduced/LRS_2735-077_RA.reduced.bam
+LRS_2728-012,Lost River Sucker,"Klamath basin, OR",3639466,data/reduced/LRS_2728-012_RA.reduced.bam
+SNS_2894-073,Shortnose Sucker,"Klamath basin, OR",2447681,data/reduced/SNS_2894-073_RA.reduced.bam
+SNS_2801-025,Shortnose Sucker,"Klamath basin, OR",1754011,data/reduced/SNS_2801-025_RA.reduced.bam
+OSKR_44,Owens Sucker,"Lower Horton Creek, Bishop,CA",4355885,data/reduced/OSKR_44_RA.reduced.bam
+OSKR_15,Owens Sucker,"Lower Rock Creek, Bishop, CA",4211365,data/reduced/OSKR_15_RA.reduced.bam
+OSKR_19,Owens Sucker,"Horton Creek,  Bishop, CA",4174957,data/reduced/OSKR_19_RA.reduced.bam
+OSKR_23,Owens Sucker,"Lower Hot Creek, Bishop, CA",4024997,data/reduced/OSKR_23_RA.reduced.bam
+OSKR_22,Owens Sucker,"Lower Hot Creek, Bishop, CA",3718683,data/reduced/OSKR_22_RA.reduced.bam
+OSKR_11,Owens Sucker,"Lower Rock Creek, Bishop, CA",3588278,data/reduced/OSKR_11_RA.reduced.bam
+OSKR_21,Owens Sucker,"Lower Hot Creek, Bishop, CA",3476364,data/reduced/OSKR_21_RA.reduced.bam
+OSKR_27,Owens Sucker,"Lower Hot Creek, Bishop, CA",3384020,data/reduced/OSKR_27_RA.reduced.bam
+OSKR_16,Owens Sucker,"Lower Rock Creek, Bishop, CA",3300715,data/reduced/OSKR_16_RA.reduced.bam
+OSKR_9,Owens Sucker,"Lower Rock Creek, Bishop, CA",3240759,data/reduced/OSKR_9_RA.reduced.bam
+OSKR_34,Owens Sucker,"Lower Hot Creek, Bishop, CA",3120031,data/reduced/OSKR_34_RA.reduced.bam
+OSKR_10,Owens Sucker,"Lower Rock Creek, Bishop, CA",2966978,data/reduced/OSKR_10_RA.reduced.bam
+OSKR_17,Owens Sucker,"Lower Rock Creek, Bishop, CA",2944195,data/reduced/OSKR_17_RA.reduced.bam
+OSKR_36,Owens Sucker,"Lower Hot Creek, Bishop, CA",2924147,data/reduced/OSKR_36_RA.reduced.bam
+OSKR_24,Owens Sucker,"Lower Hot Creek, Bishop, CA",2854155,data/reduced/OSKR_24_RA.reduced.bam
+OSKR_42,Owens Sucker,"Lower Horton Creek, Bishop,CA",2793220,data/reduced/OSKR_42_RA.reduced.bam
+OSKR_5,Owens Sucker,"Lower Rock Creek, Bishop, CA",2696892,data/reduced/OSKR_5_RA.reduced.bam
+OSKR_35,Owens Sucker,"Lower Hot Creek, Bishop, CA",2560480,data/reduced/OSKR_35_RA.reduced.bam
+WCS_17,Wall Canyon Sucker,"Wall Canyon, NV",2556878,data/reduced/WCS_17_RA.reduced.bam
+OSKR_18,Owens Sucker,"Horton Creek,  Bishop, CA",2508086,data/reduced/OSKR_18_RA.reduced.bam
+WCS_12,Wall Canyon Sucker,"Wall Canyon, NV",2500359,data/reduced/WCS_12_RA.reduced.bam
+OSKR_38,Owens Sucker,"Lower Hot Creek, Bishop, CA",2495445,data/reduced/OSKR_38_RA.reduced.bam
+WCS_14,Wall Canyon Sucker,"Wall Canyon, NV",2495008,data/reduced/WCS_14_RA.reduced.bam
+WCS_13,Wall Canyon Sucker,"Wall Canyon, NV",2484289,data/reduced/WCS_13_RA.reduced.bam
+OSKR_13,Owens Sucker,"Lower Rock Creek, Bishop, CA",2477406,data/reduced/OSKR_13_RA.reduced.bam
+OSKR_41,Owens Sucker,"Lower Hot Creek, Bishop, CA",2472965,data/reduced/OSKR_41_RA.reduced.bam
+WCS_06,Wall Canyon Sucker,"Wall Canyon, NV",2396762,data/reduced/WCS_06_RA.reduced.bam
+WCS_07,Wall Canyon Sucker,"Wall Canyon, NV",2369428,data/reduced/WCS_07_RA.reduced.bam
+OSKR_43,Owens Sucker,"Lower Horton Creek, Bishop,CA",2339180,data/reduced/OSKR_43_RA.reduced.bam
+OSKR_4,Owens Sucker,"Lower Rock Creek, Bishop, CA",2328024,data/reduced/OSKR_4_RA.reduced.bam
+WCS_05,Wall Canyon Sucker,"Wall Canyon, NV",2309982,data/reduced/WCS_05_RA.reduced.bam
+OSKR_20,Owens Sucker,"Horton Creek,  Bishop, CA",2278990,data/reduced/OSKR_20_RA.reduced.bam
+OSKR_7,Owens Sucker,"Lower Rock Creek, Bishop, CA",2210705,data/reduced/OSKR_7_RA.reduced.bam
+OSKR_29,Owens Sucker,"Lower Hot Creek, Bishop, CA",2181486,data/reduced/OSKR_29_RA.reduced.bam
+OSKR_39,Owens Sucker,"Lower Hot Creek, Bishop, CA",2176149,data/reduced/OSKR_39_RA.reduced.bam
+OSKR_2,Owens Sucker,"South Fork, Bishop, CA",2143163,data/reduced/OSKR_2_RA.reduced.bam
+OSKR_30,Owens Sucker,"Lower Hot Creek, Bishop, CA",2066921,data/reduced/OSKR_30_RA.reduced.bam
+OSKR_3,Owens Sucker,"Lower Rock Creek, Bishop, CA",2047672,data/reduced/OSKR_3_RA.reduced.bam
+WCS_26,Wall Canyon Sucker,"Wall Canyon, NV",2036819,data/reduced/WCS_26_RA.reduced.bam
+WCS_11,Wall Canyon Sucker,"Wall Canyon, NV",2030241,data/reduced/WCS_11_RA.reduced.bam
+OSKR_26,Owens Sucker,"Lower Hot Creek, Bishop, CA",2024716,data/reduced/OSKR_26_RA.reduced.bam
+WCS_08,Wall Canyon Sucker,"Wall Canyon, NV",1945006,data/reduced/WCS_08_RA.reduced.bam
+OSKR_32,Owens Sucker,"Lower Hot Creek, Bishop, CA",1936350,data/reduced/OSKR_32_RA.reduced.bam
+WCS_03,Wall Canyon Sucker,"Wall Canyon, NV",1912515,data/reduced/WCS_03_RA.reduced.bam
+OSKR_25,Owens Sucker,"Lower Hot Creek, Bishop, CA",1906021,data/reduced/OSKR_25_RA.reduced.bam
+OSKR_40,Owens Sucker,"Lower Hot Creek, Bishop, CA",1896631,data/reduced/OSKR_40_RA.reduced.bam
+OSKR_8,Owens Sucker,"Lower Rock Creek, Bishop, CA",1887196,data/reduced/OSKR_8_RA.reduced.bam
+OSKR_14,Owens Sucker,"Lower Rock Creek, Bishop, CA",1796966,data/reduced/OSKR_14_RA.reduced.bam
+OSKR_12,Owens Sucker,"Lower Rock Creek, Bishop, CA",1744005,data/reduced/OSKR_12_RA.reduced.bam
+WCS_01,Wall Canyon Sucker,"Wall Canyon, NV",1600732,data/reduced/WCS_01_RA.reduced.bam
+WS_HC5,Warner Sucker,"Honey Creek, OR",1589918,data/reduced/WS_HC5_RA.reduced.bam
+OSKR_31,Owens Sucker,"Lower Hot Creek, Bishop, CA",1586778,data/reduced/OSKR_31_RA.reduced.bam
+WCS_27,Wall Canyon Sucker,"Wall Canyon, NV",1569278,data/reduced/WCS_27_RA.reduced.bam
+WCS_10,Wall Canyon Sucker,"Wall Canyon, NV",1566008,data/reduced/WCS_10_RA.reduced.bam
+WCS_22,Wall Canyon Sucker,"Wall Canyon, NV",1515296,data/reduced/WCS_22_RA.reduced.bam
+WCS_02,Wall Canyon Sucker,"Wall Canyon, NV",1499574,data/mapped/WCS_02_RA.sort.flt.bam
+WS_HC8,Warner Sucker,"Honey Creek, OR",1422084,data/mapped/WS_HC8_RA.sort.flt.bam
+WS_HC2,Warner Sucker,"Honey Creek, OR",1419265,data/mapped/WS_HC2_RA.sort.flt.bam
+WS_HC7,Warner Sucker,"Honey Creek, OR",1340519,data/mapped/WS_HC7_RA.sort.flt.bam
+WCS_04,Wall Canyon Sucker,"Wall Canyon, NV",1339333,data/mapped/WCS_04_RA.sort.flt.bam
+WS_HC4,Warner Sucker,"Honey Creek, OR",1303923,data/mapped/WS_HC4_RA.sort.flt.bam
+WCS_19,Wall Canyon Sucker,"Wall Canyon, NV",1283090,data/mapped/WCS_19_RA.sort.flt.bam
+WCS_21,Wall Canyon Sucker,"Wall Canyon, NV",1281778,data/mapped/WCS_21_RA.sort.flt.bam
+WS_HC6,Warner Sucker,"Honey Creek, OR",1275341,data/mapped/WS_HC6_RA.sort.flt.bam
+WCS_09,Wall Canyon Sucker,"Wall Canyon, NV",1248944,data/mapped/WCS_09_RA.sort.flt.bam
+WCS_25,Wall Canyon Sucker,"Wall Canyon, NV",1205219,data/mapped/WCS_25_RA.sort.flt.bam
+WS_HC1,Warner Sucker,"Honey Creek, OR",1204075,data/mapped/WS_HC1_RA.sort.flt.bam
+OSKR_1,Owens Sucker,"South Fork, Bishop, CA",1177804,data/mapped/OSKR_1_RA.sort.flt.bam
+OSKR_37,Owens Sucker,"Lower Hot Creek, Bishop, CA",1143691,data/mapped/OSKR_37_RA.sort.flt.bam
+OSKR_28,Owens Sucker,"Lower Hot Creek, Bishop, CA",1115679,data/mapped/OSKR_28_RA.sort.flt.bam
+WS_TMC08,Warner Sucker,"Twentymile Creek, OR",1093051,data/mapped/WS_TMC08_RA.sort.flt.bam
+WS_TMC07,Warner Sucker,"Twentymile Creek, OR",1069101,data/mapped/WS_TMC07_RA.sort.flt.bam
+WCS_16,Wall Canyon Sucker,"Wall Canyon, NV",1028121,data/mapped/WCS_16_RA.sort.flt.bam
+OSKR_33,Owens Sucker,"Lower Hot Creek, Bishop, CA",973937,data/mapped/OSKR_33_RA.sort.flt.bam
+WCS_24,Wall Canyon Sucker,"Wall Canyon, NV",972656,data/mapped/WCS_24_RA.sort.flt.bam
+WCS_20,Wall Canyon Sucker,"Wall Canyon, NV",962329,data/mapped/WCS_20_RA.sort.flt.bam
+WS_HC3,Warner Sucker,"Honey Creek, OR",890194,data/mapped/WS_HC3_RA.sort.flt.bam
+OSKR_6,Owens Sucker,"Lower Rock Creek, Bishop, CA",877932,data/mapped/OSKR_6_RA.sort.flt.bam
+WS_TMC14,Warner Sucker,"Twentymile Creek, OR",860448,data/mapped/WS_TMC14_RA.sort.flt.bam
+WS_TMC03,Warner Sucker,"Twentymile Creek, OR",840999,data/mapped/WS_TMC03_RA.sort.flt.bam
+WS_TMC01,Warner Sucker,"Twentymile Creek, OR",809266,data/mapped/WS_TMC01_RA.sort.flt.bam
+WS_TMC10,Warner Sucker,"Twentymile Creek, OR",639629,data/mapped/WS_TMC10_RA.sort.flt.bam
+WCS_15,Wall Canyon Sucker,"Wall Canyon, NV",625955,data/mapped/WCS_15_RA.sort.flt.bam
+WS_DC09,Warner Sucker,"Deep Creek, OR",623166,data/mapped/WS_DC09_RA.sort.flt.bam
+WS_TMC13,Warner Sucker,"Twentymile Creek, OR",565752,data/mapped/WS_TMC13_RA.sort.flt.bam
+WCS_23,Wall Canyon Sucker,"Wall Canyon, NV",545590,data/mapped/WCS_23_RA.sort.flt.bam
+WCS_18,Wall Canyon Sucker,"Wall Canyon, NV",529170,data/mapped/WCS_18_RA.sort.flt.bam
+WS_TMC15,Warner Sucker,"Twentymile Creek, OR",499056,data/mapped/WS_TMC15_RA.sort.flt.bam
+WS_DC01,Warner Sucker,"Deep Creek, OR",477214,data/mapped/WS_DC01_RA.sort.flt.bam
+WS_TMC02,Warner Sucker,"Twentymile Creek, OR",463069,data/mapped/WS_TMC02_RA.sort.flt.bam
+WS_TMC05,Warner Sucker,"Twentymile Creek, OR",436590,data/mapped/WS_TMC05_RA.sort.flt.bam
+WS_TMC12,Warner Sucker,"Twentymile Creek, OR",425411,data/mapped/WS_TMC12_RA.sort.flt.bam
+WS_DC14,Warner Sucker,"Deep Creek, OR",415968,data/mapped/WS_DC14_RA.sort.flt.bam

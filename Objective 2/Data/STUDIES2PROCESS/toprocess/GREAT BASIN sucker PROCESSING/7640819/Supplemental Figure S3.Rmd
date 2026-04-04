@@ -1,0 +1,50 @@
+---
+title: "Supplemental Figure S3"
+author: "Mac Campbell"
+date: "2023-02-13"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggtree)
+library(phytools)
+library(phangorn)
+```
+
+
+```{r}
+dna<-read.dna(file="outputs/602/nd2-renamed.afas", format="fasta")
+```
+
+```{r}
+m<-dist.dna(dna, as.matrix = TRUE)
+t<-nj(m)
+plot(t)
+```
+
+```{r}
+dat<-as.phyDat(dna)
+set.seed(1)
+bs <- bootstrap.phyDat(dat, FUN = function(x)nj(dist.hamming(x)), 
+    bs=1000)
+tree <- midpoint.root(nj(dist.hamming(dat)))
+```
+
+
+```{r}
+btree <- plotBS(tree, bs, "phylogram", digits = 0)
+add.scale.bar()
+```
+
+```{r}
+pdf("outputs/602/nd2-tree.pdf", width=8, height=5)
+btree <- plotBS(tree, bs, "phylogram", digits = 0)
+add.scale.bar()
+dev.off()
+```

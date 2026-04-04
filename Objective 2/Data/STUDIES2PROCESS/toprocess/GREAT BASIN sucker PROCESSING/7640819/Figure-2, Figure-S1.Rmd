@@ -1,0 +1,101 @@
+---
+title: "Figure-2, Supplemental Figure S1"
+author: "Mac Campbell"
+date: "2023-02-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggtree)
+library(ape)
+library(treeio)
+library(ggrepel)
+library(viridis)
+```
+
+```{r}
+tips<-read_csv("meta/time-tree-meta-edited.csv")
+```
+
+```{r}
+tt<-read.beast("outputs/500/allcompat.con.tre")
+
+t3<-ggtree(tt)
+
+t3 + geom_nodelab(aes(label=node)) + geom_tiplab() +
+  xlim(0,70)
+```
+
+```{r}
+nodes<- t3$data %>% filter(node %in% c(76,77,78,79,80)) 
+nodes$age<-round(as.numeric(nodes$age_median),2)
+
+```
+
+```{r}
+up2<-t3 %<+% tips +
+  theme_tree2()+
+  geom_vline(xintercept=c(3,13,23,33,43), lty=2, lwd=0.5, alpha=0.5) +
+  geom_range(range='age_0.95HPD', color='red', alpha=.6, size=2) +
+  geom_tiplab(size=3.5, offset=3, aes(label=Name)) +
+#  geom_tippoint(aes(x=x+.25, fill=`Great Basin`, shape=`Major Basin`), cex=2.5) +
+  scale_x_continuous(name="\nTime in Millions of Years Ago", breaks=c(3,13,23,33,43,53), 
+                     labels=c(50,40,30,20,10,0),
+                     limits=c(0,85))  +
+#  geom_label_repel(data=nodes,aes(x=x,y=y,label=age), alpha=0.75) +
+  theme(axis.text.x = element_text(size=14, face="bold")) +
+  theme(axis.title.x = element_text(size=14)) +
+  scale_fill_viridis_d() +
+ # geom_cladelab(node=90, "Tahoe Sucker\nand relatives", offset=15) +
+  geom_cladelab(node=77, "Wall Canyon Sucker\nand relatives", offset=17) +
+#  geom_cladelab(node=71, "Mountain Sucker\nand relatives", offset=18) +
+  theme(legend.position = "top") +
+  scale_shape_manual(values=c(25,22,23,24,21))+
+  guides(fill = guide_legend(override.aes = list(shape=c(21,21), colour="black", 
+                                     fill=c(viridis(n=2)[1], viridis(n=2)[2])))) 
+
+up2
+ggsave("outputs/500/Supplemental-Figure-S1.pdf", width=8.5, height=11)
+```
+
+```{r}
+uu<-read.beast("outputs/500/allcompat.con.tre")
+uuu<-tree_subset(uu, node=76, levels_back = 0)
+
+ggtree(uuu) +  geom_nodelab(aes(label=node))
+u3<-ggtree(uuu) #+ geom_nodelab(aes(label=node))
+u3
+
+nodesu <- u3$data  %>% filter(node %in% seq(14,25, by=1))
+nodesu$age<-round(as.numeric(nodesu$age_median),2)
+
+xu<-nodesu[3,]$x
+yu<-nodesu[3,]$y
+zu<-round(unlist(nodesu$height_0.95HPD[3]),2)
+lab<-paste0(zu[1],"-",zu[2])
+dflab<-data_frame(xu,yu,lab)
+```
+
+```{r}
+u3 %<+% tips +
+  theme_tree2()+
+  geom_vline(xintercept=c(1.36,6.36,11.36,16.36), lty=2, lwd=0.5, alpha=0.5) +
+  geom_range(range='age_0.95HPD', color='red', alpha=.6, size=2) +
+  geom_tiplab(size=3, aes(label=Name)) +
+  geom_label(data=nodesu,aes(x=x,y=y,label=age), alpha=0.75) +
+#  geom_label_repel(data=dflab, aes(x=xu, y=yu, label=lab), color="red", alpha=0.75) +
+  geom_cladelab(node=15, "Wall Canyon Sucker\nand relatives", offset=8) +
+  geom_cladelab(node=23, "Klamath Lineages", offset=8) +
+  geom_cladelab(node=19, "Sacramento Lineages", offset=8) +
+  scale_x_continuous(name="\nTime in Millions of Years Ago", breaks=c(1.36,6.36,11.36,16.36), 
+                     labels=c(15,10,5,0),
+                     limits=c(0,35))  
+
+
+ggsave("outputs/500/Figure-2.pdf")
+```
