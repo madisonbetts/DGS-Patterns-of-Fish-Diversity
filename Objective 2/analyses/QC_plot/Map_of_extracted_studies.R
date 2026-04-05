@@ -1,8 +1,10 @@
 # -------------------------------
 # Plot all extracted study sites across the U.S. + Canada
 # colored by Family from Study_metadata.xlsx
-# reports only unique spp and unique sites in the lower-right
-# aligned visually with the scale bar and north arrow
+# legend moved inside lower-right of the map panel
+# unique spp / unique sites moved to upper-left
+# keeps panel border, north arrow, and scale bar
+# smaller legend + extra left margin so y-axis labels are not clipped
 # -------------------------------
 library(readxl)
 library(dplyr)
@@ -24,8 +26,8 @@ metadata_file <- file.path(base_dir, "Study_metadata.xlsx")
 out_dir <- "/Users/johnmccall/Library/CloudStorage/OneDrive-TheOhioStateUniversity/Spring_2026/Landgen_DGS/DGS-Patterns-of-Fish-Diversity/DGS-Patterns-of-Fish-Diversity/Objective 2/analyses/QC_plot"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
-png_file <- file.path(out_dir, "all_sites_by_family.png")
-pdf_file <- file.path(out_dir, "all_sites_by_family.pdf")
+png_file <- file.path(out_dir, "all_sites_by_family_inset_legend_small.png")
+pdf_file <- file.path(out_dir, "all_sites_by_family_inset_legend_small.pdf")
 
 # -------------------------------
 # list valid study folders
@@ -207,22 +209,6 @@ sites_df <- sites_df %>%
   left_join(meta2, by = "study_code") %>%
   mutate(Family = ifelse(is.na(Family), "Unknown", Family))
 
-# -------------------------------
-# report unmatched plotted folders
-# -------------------------------
-unmatched <- sites_df %>%
-  filter(Family == "Unknown") %>%
-  distinct(folder_name)
-
-if (nrow(unmatched) > 0) {
-  message("These plotted studies did not match a Family in metadata:")
-  print(unmatched)
-}
-
-# -------------------------------
-# family counts for legend entries
-# dataset-level counts per family
-# -------------------------------
 family_counts <- sites_df %>%
   distinct(study_code, species_code, Family) %>%
   count(Family, name = "n_datasets") %>%
@@ -233,9 +219,6 @@ family_labels <- setNames(
   family_counts$Family
 )
 
-# -------------------------------
-# summary counts
-# -------------------------------
 n_datasets <- sites_df %>%
   distinct(study_code) %>%
   nrow()
@@ -256,17 +239,12 @@ summary_label <- paste(
   sep = "\n"
 )
 
-# keep legend order consistent with counts
 sites_df$Family <- factor(sites_df$Family, levels = family_counts$Family)
 
-# common families plotted first; rarer families stay visible on top
 sites_df <- sites_df %>%
   left_join(family_counts, by = "Family") %>%
   arrange(desc(n_datasets), Family)
 
-# -------------------------------
-# convert sites to sf
-# -------------------------------
 sites_sf <- st_as_sf(
   sites_df,
   coords = c("lon", "lat"),
@@ -274,9 +252,6 @@ sites_sf <- st_as_sf(
   remove = FALSE
 )
 
-# -------------------------------
-# get map layers
-# -------------------------------
 countries_sf <- ne_countries(
   country = c("United States of America", "Canada"),
   scale = "medium",
@@ -296,15 +271,12 @@ states_provinces_sf <- states_provinces_sf %>%
     )
   )
 
-# -------------------------------
-# map extent
-# -------------------------------
 map_xlim <- c(-130, -52)
 map_ylim <- c(23, 60)
 
-# -------------------------------
-# plot
-# -------------------------------
+summary_x <- -128.7
+summary_y <- 59.2
+
 p <- ggplot() +
   geom_sf(
     data = countries_sf,
@@ -327,16 +299,25 @@ p <- ggplot() +
   coord_sf(
     xlim = map_xlim,
     ylim = map_ylim,
-    expand = FALSE
+    expand = FALSE,
+    clip = "on"
   ) +
-  annotate("rect", xmin = -128.2, xmax = -125.7, ymin = 24.4, ymax = 25.6,
-           fill = "black", color = "black") +
-  annotate("rect", xmin = -125.7, xmax = -123.2, ymin = 24.4, ymax = 25.6,
-           fill = "white", color = "black") +
-  annotate("text",
-           x = -122.0, y = 25.0,
-           label = "1000 km",
-           hjust = 0, size = 3.2) +
+  annotate(
+    "rect",
+    xmin = -128.2, xmax = -125.7, ymin = 24.4, ymax = 25.6,
+    fill = "black", color = "black"
+  ) +
+  annotate(
+    "rect",
+    xmin = -125.7, xmax = -123.2, ymin = 24.4, ymax = 25.6,
+    fill = "white", color = "black"
+  ) +
+  annotate(
+    "text",
+    x = -122.0, y = 25.0,
+    label = "1000 km",
+    hjust = 0, size = 3.0
+  ) +
   annotation_north_arrow(
     location = "tr",
     which_north = "true",
@@ -352,25 +333,45 @@ p <- ggplot() +
   ) +
   annotate(
     "text",
-    x = -54.25,
-    y = 24.75,
+    x = summary_x,
+    y = summary_y,
     label = summary_label,
-    hjust = 1,
-    vjust = 0,
-    size = 3.0
+    hjust = 0,
+    vjust = 1,
+    size = 2.9
   ) +
   scale_color_discrete(
     breaks = family_counts$Family,
     labels = family_labels,
     drop = FALSE
   ) +
+  guides(
+    color = guide_legend(
+      ncol = 2,
+      byrow = FALSE,
+      title.position = "top",
+      title.hjust = 0,
+      override.aes = list(size = 1.4, alpha = 1)
+    )
+  ) +
   theme_classic() +
   theme(
-    legend.title = element_text(size = 11),
-    legend.text = element_text(size = 9),
+    legend.position = c(0.985, 0.035),
+    legend.justification = c(1, 0),
+    legend.direction = "vertical",
+    legend.background = element_blank(),
+    legend.box.background = element_blank(),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 8),
+    legend.key = element_blank(),
+    legend.key.height = unit(0.065, "in"),
+    legend.key.width = unit(0.065, "in"),
+    legend.spacing.x = unit(0.03, "in"),
+    legend.spacing.y = unit(0.008, "in"),
+    axis.title = element_text(size = 10.5),
+    axis.text = element_text(size = 8.8),
     panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8),
-    legend.key.size = unit(0.1, "in"),
-    plot.margin = margin(t = 2, r = 4, b = 2, l = 4, unit = "pt")
+    plot.margin = margin(t = 3, r = 4, b = 3, l = 12, unit = "pt")
   ) +
   labs(
     x = "Longitude",
@@ -380,9 +381,6 @@ p <- ggplot() +
 
 print(p)
 
-# -------------------------------
-# save
-# -------------------------------
 ggsave(
   filename = png_file,
   plot = p,
@@ -399,9 +397,6 @@ ggsave(
   device = cairo_pdf
 )
 
-# -------------------------------
-# console summary
-# -------------------------------
 cat("\n==================== SUMMARY ====================\n")
 cat("Datasets: ", n_datasets, "\n", sep = "")
 cat("Unique spp: ", n_species_codes, "\n", sep = "")
