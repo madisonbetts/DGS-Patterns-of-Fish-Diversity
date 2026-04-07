@@ -209,13 +209,23 @@ gen_div_sf <- gen_div_sf %>%
   ) %>%
   left_join(fish_traits, by = c("Spec_Latin_clean" = "ScientificName"))
 
-final_df <- st_drop_geometry(gen_div_sf)
 
+
+#####################
+# Remove weird taxa #
+#####################
+
+taxa_to_remove <- c("Neogobius melanostomus", "Syngnathus scovelli")
+
+gen_div_sf <- gen_div_sf %>%
+  filter(!Spec_Latin_GenDivRange %in% taxa_to_remove)
 
 
 ##########
 # Export #
 ##########
+
+final_df <- st_drop_geometry(gen_div_sf)
 
 write_csv(final_df, "Data/final_fish_dataset.csv")
 
