@@ -12,7 +12,7 @@
 packages <- c(
   "sf","dplyr","readxl","readr","stringr",
   "nhdplusTools","tigris","terra","elevatr",
-  "FedData","units"
+  "FedData","units","tidyverse"
 )
 
 new_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
@@ -161,37 +161,53 @@ ice <- st_read("Data/hist_shp/ice/ice18k.shp") %>%
 ecor <- st_read("Data/hist_shp/Aggr_Ecoregions_2015/Aggr_Ecoregions_2015.shp") %>%
   st_transform(5070)
 
-gen_div_sf <- gen_div_sf %>%
-  st_join(ice) %>%
-  st_join(ecor) %>%
-  mutate(
-    Ice = if_else(SYMB == "ICE","Glaciated","Unglaciated", missing = "Unglaciated"),
-    Tectonic = if_else(WSA9 %in% c("WMT","XER"),"Active","Stable"),
-    SeaLevel = if_else(WSA9 == "CPL" & snapped_lat < 40.8,"Flooded","Unflooded")
-  )
-
-
 elev <- get_elev_point(gen_div_sf, prj = 5070, src = "aws")
 gen_div_sf$elev <- elev$elevation
 
-gen_div_sf$relief <- NA
-for (i in 1:nrow(gen_div_sf)) {
-  x <- get_elev_raster(gen_div_sf[i,], z = 11, prj = 5070, clip = "bbox")
-  x <- rast(x)
-  elev_min <- minmax(x)[1]
-  elev_max <- minmax(x)[2]
-  gen_div_sf$relief[i] <- elev_max - elev_min
-}
-
-gen_div_sf$Topography <- NA
-gen_div_sf$Topography <- ifelse(gen_div_sf$elev > 250, "Highland", "Lowland")
+#q fix
+gen_div_sf$elev[which(is.na(gen_div_sf$elev))] <- get_elev_point(gen_div_sf[which(is.na(gen_div_sf$elev)),],prj = 5070,src = "aws")$elevation
 
 
-gen_div_sf <- gen_div_sf %>%
+#gen_div_sf$relief <- NA
+#for (i in 1:nrow(gen_div_sf)) {
+#  x <- get_elev_raster(gen_div_sf[i,], z = 11, prj = 5070, clip = "bbox")
+#  x <- rast(x)
+#  elev_min <- minmax(x)[1]
+#  elev_max <- minmax(x)[2]
+#  gen_div_sf$relief[i] <- elev_max - elev_min
+#}
+
+
+gen_div_sf <- gen_div_sf |>
+  st_join(ice, join = st_intersects) |>
+  st_join(ecor, join = st_intersects) |>
   mutate(
-    SeaShort = if_else(SeaLevel == "Unflooded","", "- Flooded"),
-    History = paste(Tectonic, Ice, Topography, SeaShort)
+    Ice = if_else(SYMB == "ICE", "Glaciated", "Unglaciated", 
+                  missing = "Unglaciated"),
+    Tectonic = if_else(WSA9 %in% c("WMT", "XER"), 
+                       "Active", "Stable"),
+    SeaLevel = if_else((WSA9 == "CPL" & snapped_lat < 40.8), 
+                       "Flooded", "Unflooded", missing = "Unflooded"),
+    SeaShort = if_else(SeaLevel == "Unflooded", "", "- Flooded"),
+    Topography = if_else(elev > 250 , 
+                         "Highland", "Lowland"),
+    History = paste(Tectonic, Ice, Topography, SeaShort, sep = " "),
+    History = fct_relevel(History, 
+                          c("Stable Unglaciated Lowland ", 
+                            "Stable Unglaciated Highland ",
+                            "Stable Unglaciated Lowland - Flooded",
+                            "Stable Glaciated Lowland ",
+                            "Stable Glaciated Highland ",
+                            "Active Unglaciated Lowland ",
+                            "Active Unglaciated Highland ",
+                            "Active Glaciated Highland ",
+                            "Active Glaciated Lowland "))
   )
+
+
+
+
+
 
 ##############
 # FishTraits #
@@ -211,15 +227,14 @@ gen_div_sf <- gen_div_sf %>%
 
 
 
-#####################
-# Remove weird taxa #
-#####################
+######################
+# Remove weird stuff #
+######################
 
 taxa_to_remove <- c("Neogobius melanostomus", "Syngnathus scovelli")
 
 gen_div_sf <- gen_div_sf %>%
   filter(!Spec_Latin_GenDivRange %in% taxa_to_remove)
-
 
 ##########
 # Export #
