@@ -1,0 +1,294 @@
+INDV,POP,SPECIES,LIB,INDEX,LAT,LONG,CYTB,BODY
+DOC_001,DOC,megalops,1,2,29.885438,-100.993321,N,Devils River
+DOC_002,DOC,megalops,1,2,29.885438,-100.993321,N,Devils River
+DOC_003,DOC,megalops,1,4,29.885438,-100.993321,N,Devils River
+DOC_004,DOC,megalops,1,4,29.885438,-100.993321,N,Devils River
+DOC_005,DOC,megalops,1,4,29.885438,-100.993321,N,Devils River
+DOC_006,DOC,megalops,1,4,29.885438,-100.993321,Y,Devils River
+DOC_007,DOC,megalops,1,7,29.885438,-100.993321,N,Devils River
+DOC_008,DOC,megalops,1,7,29.885438,-100.993321,Y,Devils River
+DOC_009,DOC,megalops,1,7,29.885438,-100.993321,N,Devils River
+DOC_010,DOC,megalops,1,7,29.885438,-100.993321,N,Devils River
+DOC_011,DOC,amabilis,1,7,29.885438,-100.993321,Y,Devils River
+DOC_012,DOC,amabilis,1,10,29.885438,-100.993321,N,Devils River
+DOC_013,DOC,megalops,1,10,29.885438,-100.993321,N,Devils River
+DOC_014,DOC,megalops,1,10,29.885438,-100.993321,N,Devils River
+DOC_015,DOC,megalops,2,2,29.885438,-100.993321,N,Devils River
+DOC_016,DOC,megalops,2,2,29.885438,-100.993321,Y,Devils River
+DOC_017,DOC,megalops,2,2,29.885438,-100.993321,Y,Devils River
+DOC_018,DOC,amabilis,2,4,29.885438,-100.993321,Y,Devils River
+DOC_019,DOC,megalops,2,4,29.885438,-100.993321,Y,Devils River
+DOC_020,DOC,amabilis,2,4,29.885438,-100.993321,Y,Devils River
+DOC_021,DOC,megalops,2,7,29.885438,-100.993321,N,Devils River
+DOC_022,DOC,amabilis,2,7,29.885438,-100.993321,Y,Devils River
+DOC_023,DOC,megalops,2,7,29.885438,-100.993321,N,Devils River
+DOC_024,DOC,megalops,2,7,29.885438,-100.993321,N,Devils River
+DOC_025,DOC,megalops,2,10,29.885438,-100.993321,N,Devils River
+DOC_027,DOC,megalops,2,10,29.885438,-100.993321,N,Devils River
+DRB_001,DRB,amabilis,1,2,29.966411,-101.149364,Y,Devils River
+DRB_002,DRB,amabilis,1,2,29.966411,-101.149364,N,Devils River
+DRB_003,DRB,amabilis,1,2,29.966411,-101.149364,N,Devils River
+DRB_004,DRB,amabilis,1,2,29.966411,-101.149364,N,Devils River
+DRB_005,DRB,amabilis,1,2,29.966411,-101.149364,Y,Devils River
+DRB_006,DRB,amabilis,1,4,29.966411,-101.149364,Y,Devils River
+DRB_007,DRB,megalops,1,4,29.966411,-101.149364,Y,Devils River
+DRB_008,DRB,amabilis,1,4,29.966411,-101.149364,N,Devils River
+DRB_009,DRB,amabilis,1,4,29.966411,-101.149364,Y,Devils River
+DRB_010,DRB,amabilis,1,7,29.966411,-101.149364,N,Devils River
+DRB_011,DRB,amabilis,1,7,29.966411,-101.149364,N,Devils River
+DRB_012,DRB,amabilis,1,7,29.966411,-101.149364,N,Devils River
+DRB_013,DRB,amabilis,1,10,29.966411,-101.149364,Y,Devils River
+DRB_014,DRB,amabilis,1,10,29.966411,-101.149364,N,Devils River
+DRB_015,DRB,amabilis,2,2,29.966411,-101.149364,N,Devils River
+DRB_016,DRB,amabilis,2,2,29.966411,-101.149364,Y,Devils River
+DRB_017,DRB,amabilis,2,4,29.966411,-101.149364,Y,Devils River
+DRB_018,DRB,amabilis,2,4,29.966411,-101.149364,Y,Devils River
+DRB_019,DRB,amabilis,2,7,29.966411,-101.149364,Y,Devils River
+DRB_020,DRB,amabilis,2,10,29.966411,-101.149364,Y,Devils River
+DRP_001,DRP,megalops,1,2,29.684148,-101.002392,N,Devils River
+DRP_002,DRP,megalops,1,2,29.684148,-101.002392,N,Devils River
+DRP_003,DRP,megalops,1,2,29.684148,-101.002392,N,Devils River
+DRP_004,DRP,megalops,1,4,29.684148,-101.002392,N,Devils River
+DRP_005,DRP,megalops,1,4,29.684148,-101.002392,N,Devils River
+DRP_006,DRP,megalops,1,4,29.684148,-101.002392,N,Devils River
+DRP_007,DRP,megalops,1,7,29.684148,-101.002392,N,Devils River
+DRP_008,DRP,megalops,1,10,29.684148,-101.002392,N,Devils River
+DRP_009,DRP,megalops,1,10,29.684148,-101.002392,N,Devils River
+DRP_010,DRP,megalops,1,10,29.684148,-101.002392,N,Devils River
+DRP_011,DRP,megalops,1,10,29.684148,-101.002392,N,Devils River
+DRP_012,DRP,megalops,1,10,29.684148,-101.002392,N,Devils River
+DRP_013,DRP,megalops,2,2,29.684148,-101.002392,Y,Devils River
+DRP_014,DRP,megalops,2,2,29.684148,-101.002392,N,Devils River
+DRP_015,DRP,megalops,2,2,29.684148,-101.002392,N,Devils River
+DRP_016,DRP,megalops,2,2,29.684148,-101.002392,N,Devils River
+DRP_018,DRP,megalops,2,2,29.684148,-101.002392,N,Devils River
+DRP_019,DRP,megalops,2,4,29.684148,-101.002392,Y,Devils River
+DRP_020,DRP,megalops,2,4,29.684148,-101.002392,N,Devils River
+DRP_021,DRP,megalops,2,4,29.684148,-101.002392,N,Devils River
+DRP_022,DRP,megalops,2,4,29.684148,-101.002392,Y,Devils River
+DRP_023,DRP,megalops,2,4,29.684148,-101.002392,N,Devils River
+DRP_024,DRP,megalops,2,4,29.684148,-101.002392,N,Devils River
+DRP_025,DRP,megalops,2,4,29.684148,-101.002392,N,Devils River
+DRP_026,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_027,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_028,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_029,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_030,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_031,DRP,megalops,2,7,29.684148,-101.002392,N,Devils River
+DRP_032,DRP,megalops,2,7,29.684148,-101.002392,Y,Devils River
+DRP_033,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_034,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_035,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_036,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_037,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_038,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+DRP_039,DRP,megalops,2,10,29.684148,-101.002392,Y,Devils River
+DRP_040,DRP,megalops,2,10,29.684148,-101.002392,N,Devils River
+GDL_001,GDL,amabilis,1,2,30.06916,99.32211,Y,Guadalupe River
+GDL_002,GDL,amabilis,1,2,30.06916,99.32211,Y,Guadalupe River
+GDL_003,GDL,amabilis,1,4,30.06916,99.32211,Y,Guadalupe River
+GDL_004,GDL,amabilis,1,7,30.06916,99.32211,Y,Guadalupe River
+GDL_005,GDL,amabilis,1,7,30.06916,99.32211,Y,Guadalupe River
+GDL_006,GDL,amabilis,1,10,30.06916,99.32211,Y,Guadalupe River
+IDC_001,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_002,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_003,IDC,megalops,1,2,30.459716,-101.806407,Y,Pecos River
+IDC_004,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_005,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_006,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_007,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_008,IDC,megalops,1,2,30.459716,-101.806407,N,Pecos River
+IDC_009,IDC,megalops,1,4,30.459716,-101.806407,Y,Pecos River
+IDC_010,IDC,megalops,1,4,30.459716,-101.806407,N,Pecos River
+IDC_011,IDC,megalops,1,4,30.459716,-101.806407,N,Pecos River
+IDC_012,IDC,megalops,1,4,30.459716,-101.806407,Y,Pecos River
+IDC_013,IDC,megalops,1,4,30.459716,-101.806407,N,Pecos River
+IDC_014,IDC,megalops,1,7,30.459716,-101.806407,N,Pecos River
+IDC_015,IDC,megalops,1,7,30.459716,-101.806407,N,Pecos River
+IDC_016,IDC,megalops,1,7,30.459716,-101.806407,N,Pecos River
+IDC_017,IDC,megalops,1,7,30.459716,-101.806407,N,Pecos River
+IDC_018,IDC,megalops,1,7,30.459716,-101.806407,N,Pecos River
+IDC_019,IDC,megalops,1,10,30.459716,-101.806407,N,Pecos River
+IDC_020,IDC,megalops,1,10,30.459716,-101.806407,Y,Pecos River
+IDC_021,IDC,megalops,1,10,30.459716,-101.806407,N,Pecos River
+IDC_022,IDC,megalops,1,10,30.459716,-101.806407,N,Pecos River
+IDC_023,IDC,megalops,1,10,30.459716,-101.806407,Y,Pecos River
+IDC_024,IDC,megalops,2,2,30.459716,-101.806407,N,Pecos River
+IDC_025,IDC,megalops,2,2,30.459716,-101.806407,N,Pecos River
+IDC_026,IDC,megalops,2,2,30.459716,-101.806407,N,Pecos River
+IDC_027,IDC,megalops,2,4,30.459716,-101.806407,N,Pecos River
+IDC_028,IDC,megalops,2,4,30.459716,-101.806407,N,Pecos River
+IDC_029,IDC,megalops,2,4,30.459716,-101.806407,N,Pecos River
+IDC_030,IDC,megalops,2,7,30.459716,-101.806407,N,Pecos River
+IDC_031,IDC,megalops,2,7,30.459716,-101.806407,N,Pecos River
+IDC_032,IDC,megalops,2,10,30.459716,-101.806407,N,Pecos River
+IDC_033,IDC,megalops,2,10,30.459716,-101.806407,N,Pecos River
+PNT_001,PNT,amabilis,1,2,29.370281,-100.490778,N,Pinto Creek
+PNT_002,PNT,amabilis,1,2,29.370281,-100.490778,N,Pinto Creek
+PNT_003,PNT,amabilis,1,2,29.370281,-100.490778,N,Pinto Creek
+PNT_004,PNT,amabilis,1,2,29.370281,-100.490778,Y,Pinto Creek
+PNT_005,PNT,amabilis,1,4,29.370281,-100.490778,Y,Pinto Creek
+PNT_006,PNT,amabilis,1,4,29.370281,-100.490778,N,Pinto Creek
+PNT_007,PNT,amabilis,1,4,29.370281,-100.490778,N,Pinto Creek
+PNT_008,PNT,amabilis,1,7,29.370281,-100.490778,N,Pinto Creek
+PNT_009,PNT,amabilis,1,7,29.370281,-100.490778,N,Pinto Creek
+PNT_010,PNT,amabilis,1,7,29.370281,-100.490778,N,Pinto Creek
+PNT_011,PNT,amabilis,1,7,29.370281,-100.490778,Y,Pinto Creek
+PNT_012,PNT,amabilis,1,10,29.370281,-100.490778,Y,Pinto Creek
+PNT_013,PNT,amabilis,1,10,29.370281,-100.490778,N,Pinto Creek
+PNT_014,PNT,amabilis,1,10,29.370281,-100.490778,N,Pinto Creek
+PR1_001,PR1,megalops,1,2,,,N,Pecos River
+PR1_002,PR1,megalops,1,4,,,N,Pecos River
+PR1_003,PR1,megalops,1,4,,,Y,Pecos River
+PR1_004,PR1,megalops,1,4,,,N,Pecos River
+PR1_005,PR1,megalops,1,4,,,Y,Pecos River
+PR1_006,PR1,megalops,1,7,,,N,Pecos River
+PR1_007,PR1,megalops,1,7,,,Y,Pecos River
+PR1_008,PR1,megalops,1,10,,,N,Pecos River
+PR1_009,PR1,megalops,2,2,,,N,Pecos River
+PR1_010,PR1,megalops,2,7,,,N,Pecos River
+PR2_001,PR2,megalops,1,2,,,N,Pecos River
+PR2_002,PR2,megalops,1,2,,,N,Pecos River
+PR2_003,PR2,megalops,1,4,,,N,Pecos River
+PR2_004,PR2,megalops,1,4,,,N,Pecos River
+PR2_005,PR2,megalops,1,4,,,N,Pecos River
+PR2_006,PR2,megalops,1,7,,,N,Pecos River
+PR2_007,PR2,megalops,1,7,,,N,Pecos River
+PR2_008,PR2,amabilis,1,7,,,Y,Pecos River
+PR2_009,PR2,megalops,1,10,,,Y,Pecos River
+PR2_010,PR2,megalops,2,2,,,N,Pecos River
+PR2_011,PR2,megalops,2,2,,,N,Pecos River
+PR2_012,PR2,megalops,2,2,,,Y,Pecos River
+PR2_013,PR2,megalops,2,2,,,Y,Pecos River
+PR2_014,PR2,megalops,2,2,,,N,Pecos River
+PR2_015,PR2,megalops,2,2,,,N,Pecos River
+PR2_016,PR2,megalops,2,4,,,N,Pecos River
+PR2_017,PR2,megalops,2,4,,,N,Pecos River
+PR2_018,PR2,megalops,2,4,,,N,Pecos River
+PR2_019,PR2,megalops,2,4,,,N,Pecos River
+PR2_020,PR2,megalops,2,4,,,N,Pecos River
+PR2_021,PR2,megalops,2,4,,,N,Pecos River
+PR2_022,PR2,megalops,2,7,,,N,Pecos River
+PR2_023,PR2,megalops,2,7,,,N,Pecos River
+PR2_024,PR2,megalops,2,7,,,N,Pecos River
+PR2_025,PR2,megalops,2,7,,,N,Pecos River
+PR2_026,PR2,megalops,2,7,,,N,Pecos River
+PR2_027,PR2,megalops,2,7,,,N,Pecos River
+PR2_028,PR2,megalops,2,10,,,N,Pecos River
+PR2_029,PR2,megalops,2,10,,,N,Pecos River
+PR2_030,PR2,megalops,2,10,,,N,Pecos River
+PR2_031,PR2,megalops,2,10,,,N,Pecos River
+PR2_033,PR2,amabilis,2,10,,,Y,Pecos River
+PR3_001,PR3,megalops,1,2,,,N,Pecos River
+PR3_002,PR3,megalops,1,4,,,Y,Pecos River
+PR3_003,PR3,megalops,1,7,,,N,Pecos River
+PR3_004,PR3,megalops,1,7,,,N,Pecos River
+PR3_005,PR3,megalops,1,7,,,N,Pecos River
+PR3_007,PR3,megalops,1,10,,,N,Pecos River
+PR3_008,PR3,megalops,1,10,,,N,Pecos River
+PR3_009,PR3,megalops,1,10,,,N,Pecos River
+PR3_010,PR3,megalops,2,2,,,N,Pecos River
+PR3_011,PR3,megalops,2,2,,,N,Pecos River
+PR3_012,PR3,megalops,2,2,,,N,Pecos River
+PR3_013,PR3,megalops,2,2,,,N,Pecos River
+PR3_014,PR3,megalops,2,2,,,N,Pecos River
+PR3_015,PR3,megalops,2,4,,,N,Pecos River
+PR3_016,PR3,megalops,2,4,,,N,Pecos River
+PR3_017,PR3,megalops,2,4,,,N,Pecos River
+PR3_018,PR3,megalops,2,4,,,N,Pecos River
+PR3_019,PR3,megalops,2,4,,,Y,Pecos River
+PR3_020,PR3,megalops,2,7,,,N,Pecos River
+PR3_021,PR3,megalops,2,7,,,N,Pecos River
+PR3_022,PR3,megalops,2,7,,,Y,Pecos River
+PR3_023,PR3,megalops,2,7,,,N,Pecos River
+PR3_024,PR3,megalops,2,7,,,N,Pecos River
+PR3_025,PR3,megalops,2,10,,,N,Pecos River
+PR3_026,PR3,megalops,2,10,,,N,Pecos River
+PR3_027,PR3,megalops,2,10,,,N,Pecos River
+PR3_028,PR3,megalops,2,10,,,N,Pecos River
+PR3_029,PR3,megalops,2,10,,,N,Pecos River
+PR3_030,PR3,megalops,2,10,,,N,Pecos River
+PR4_001,PR4,megalops,1,2,,,N,Pecos River
+PR4_002,PR4,megalops,1,2,,,N,Pecos River
+PR4_003,PR4,megalops,1,4,,,N,Pecos River
+PR4_004,PR4,megalops,1,7,,,Y,Pecos River
+PR4_005,PR4,megalops,1,10,,,N,Pecos River
+PR4_006,PR4,megalops,1,10,,,N,Pecos River
+PR4_007,PR4,megalops,1,10,,,N,Pecos River
+PR4_008,PR4,megalops,2,2,,,N,Pecos River
+PR4_009,PR4,megalops,2,2,,,N,Pecos River
+PR4_010,PR4,megalops,2,4,,,Y,Pecos River
+PR4_011,PR4,megalops,2,4,,,N,Pecos River
+PR4_012,PR4,megalops,2,7,,,N,Pecos River
+PR4_013,PR4,megalops,2,7,,,N,Pecos River
+PR4_014,PR4,megalops,2,10,,,N,Pecos River
+PR4_015,PR4,megalops,2,10,,,N,Pecos River
+PR5_001,PR5,megalops,1,2,,,N,Pecos River
+PR5_002,PR5,megalops,1,4,,,N,Pecos River
+PR5_003,PR5,megalops,1,4,,,N,Pecos River
+PR5_004,PR5,megalops,1,4,,,N,Pecos River
+PR5_005,PR5,megalops,1,7,,,N,Pecos River
+PR5_006,PR5,megalops,1,7,,,N,Pecos River
+PR5_007,PR5,megalops,1,10,,,N,Pecos River
+PR5_008,PR5,megalops,1,10,,,N,Pecos River
+PR5_009,PR5,megalops,2,2,,,N,Pecos River
+PR5_010,PR5,megalops,2,2,,,N,Pecos River
+PR5_011,PR5,megalops,2,2,,,N,Pecos River
+PR5_012,PR5,megalops,2,2,,,N,Pecos River
+PR5_013,PR5,megalops,2,2,,,N,Pecos River
+PR5_014,PR5,megalops,2,2,,,N,Pecos River
+PR5_015,PR5,megalops,2,2,,,N,Pecos River
+PR5_016,PR5,megalops,2,4,,,N,Pecos River
+PR5_017,PR5,megalops,2,4,,,N,Pecos River
+PR5_018,PR5,megalops,2,4,,,Y,Pecos River
+PR5_019,PR5,megalops,2,4,,,N,Pecos River
+PR5_020,PR5,megalops,2,4,,,N,Pecos River
+PR5_021,PR5,megalops,2,4,,,N,Pecos River
+PR5_022,PR5,megalops,2,4,,,N,Pecos River
+PR5_023,PR5,megalops,2,7,,,N,Pecos River
+PR5_024,PR5,megalops,2,7,,,N,Pecos River
+PR5_025,PR5,megalops,2,7,,,N,Pecos River
+PR5_026,PR5,megalops,2,7,,,N,Pecos River
+PR5_027,PR5,megalops,2,7,,,N,Pecos River
+PR5_028,PR5,megalops,2,7,,,N,Pecos River
+PR5_029,PR5,megalops,2,7,,,N,Pecos River
+PR5_030,PR5,megalops,2,7,,,N,Pecos River
+PR5_031,PR5,megalops,2,10,,,N,Pecos River
+PR5_032,PR5,megalops,2,10,,,N,Pecos River
+PR5_033,PR5,megalops,2,10,,,Y,Pecos River
+PR5_034,PR5,megalops,2,10,,,N,Pecos River
+PR5_035,PR5,megalops,2,10,,,N,Pecos River
+PR5_036,PR5,megalops,2,10,,,N,Pecos River
+PR5_037,PR5,megalops,2,10,,,N,Pecos River
+PR5_038,PR5,megalops,2,10,,,N,Pecos River
+SFC_001,SFC,megalops,1,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_002,SFC,megalops,1,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_003,SFC,megalops,1,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_004,SFC,megalops,1,2,29.353946,-100.895738,Y,San Felipe Creek
+SFC_005,SFC,megalops,1,2,29.353946,-100.895738,Y,San Felipe Creek
+SFC_006,SFC,megalops,1,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_007,SFC,megalops,1,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_008,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_009,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_010,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_011,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_012,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_013,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_014,SFC,megalops,1,4,29.353946,-100.895738,N,San Felipe Creek
+SFC_015,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_016,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_017,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_018,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_019,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_020,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_021,SFC,megalops,1,7,29.353946,-100.895738,N,San Felipe Creek
+SFC_022,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_023,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_024,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_025,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_026,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_027,SFC,megalops,1,10,29.353946,-100.895738,N,San Felipe Creek
+SFC_028,SFC,megalops,2,2,29.353946,-100.895738,N,San Felipe Creek
+SFC_029,SFC,megalops,2,4,29.353946,-100.895738,Y,San Felipe Creek
+SFC_030,SFC,megalops,2,7,29.353946,-100.895738,Y,San Felipe Creek
+SFC_031,SFC,megalops,2,10,29.353946,-100.895738,Y,San Felipe Creek

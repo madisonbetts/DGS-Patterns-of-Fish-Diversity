@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 WKT,study_site_no,site_code,site_name,stream,lat,lon,confidence
 POINT (-108.9297125 32.6491908),1,SSC,Gila River below Blue Creek (state line reach),Gila River,32.6491908,-108.9297125,moderate
 POINT (-108.8375535 32.876311),2,BLUC,Blue Creek above Gila River,Blue Creek,32.876311,-108.8375535,high
@@ -14,4 +15,22 @@ POINT (-108.2268551 33.2078035),12,HB,Heart Bar (West Fork Gila River),West Fork
 POINT (-108.2629 33.2289),13,WF,West Fork Gila River (Cliff Dwellings reach),West Fork Gila River,33.2289,-108.2629,high
 POINT (-108.2415 33.2266),14,MF,Middle Fork Gila River (trailhead reach),Middle Fork Gila River,33.2266,-108.2415,high
 POINT (-108.0559579 33.178684),15,BCA,Black Canyon above East Fork Gila River,Black Canyon,33.178684,-108.0559579,high
+=======
+WKT,study_site_no,site_code,site_name,stream,lat,lon,confidence
+POINT (-108.9297125 32.6491908),1,SSC,Gila River below Blue Creek (state line reach),Gila River,32.6491908,-108.9297125,moderate
+POINT (-108.8375535 32.876311),2,BLUC,Blue Creek above Gila River,Blue Creek,32.876311,-108.8375535,high
+POINT (-108.7016474 32.7151752),3,MB,Mogollon Box (Gila River),Gila River,32.7151752,-108.7016474,moderate
+POINT (-108.604221 32.8369826),4,BA,Bird Area (Gila River),Gila River,32.8369826,-108.604221,moderate
+POINT (-108.6068095 32.9503781),5,RS,Riverside (Gila River),Gila River,32.9503781,-108.6068095,moderate
+POINT (-108.5286471 33.0468814),6,GF,Gila Farm (Gila River),Gila River,33.0468814,-108.5286471,moderate
+POINT (-108.504679 33.0629281),7,TURC,Turkey Creek,Turkey Creek,33.0629281,-108.504679,moderate
+POINT (-108.2323509 33.0377742),8,SAP,Sapillo Creek,Sapillo Creek,33.0377742,-108.2323509,moderate
+POINT (-108.2089569 33.1777374),9,GV,Grapevine (East Fork Gila River),East Fork Gila River,33.1777374,-108.2089569,moderate
+POINT (-108.1973349 33.1784196),10,,East Fork Gila River (upper reach above Grapevine),East Fork Gila River,33.1784196,-108.1973349,moderate
+POINT (-108.2302124 33.1920992),11,,Gila River forks confluence (East + West/Middle Forks),Gila River,33.1920992,-108.2302124,moderate
+POINT (-108.2268551 33.2078035),12,HB,Heart Bar (West Fork Gila River),West Fork Gila River,33.2078035,-108.2268551,high
+POINT (-108.2629 33.2289),13,WF,West Fork Gila River (Cliff Dwellings reach),West Fork Gila River,33.2289,-108.2629,high
+POINT (-108.2415 33.2266),14,MF,Middle Fork Gila River (trailhead reach),Middle Fork Gila River,33.2266,-108.2415,high
+POINT (-108.0559579 33.178684),15,BCA,Black Canyon above East Fork Gila River,Black Canyon,33.178684,-108.0559579,high
+>>>>>>> dcffda7f045f6f1bc42e27652fd64776e8ef0bd7
 POINT (-108.1245174 33.3020232),16,,,,33.3020232,-108.1245174,
