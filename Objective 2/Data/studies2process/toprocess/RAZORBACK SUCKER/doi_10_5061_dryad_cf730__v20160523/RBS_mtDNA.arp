@@ -1,0 +1,150 @@
+[Profile]
+Title="Xyrauchen texanus"
+NbSamples=1
+GenotypicData=0
+GameticPhase=0
+LocusSeparator=None
+Datatype=DNA 
+
+
+[Data]
+
+[[HaplotypeDefinition]]
+HaplListName="RBSrlw"
+HaplList=EXTERN "RBS_Haps.txt"
+
+[[Samples]]
+SampleName="Repatriates"
+SampleSize=747
+SampleData= {
+Hap_A     22
+Hap_B     55
+Hap_C     15
+Hap_D     1
+Hap_E     477
+Hap_F     11
+Hap_G     11
+Hap_H     5
+Hap_I     2
+Hap_J     7
+Hap_K     3
+Hap_L     1
+Hap_M     5
+Hap_N     0
+Hap_O     1
+Hap_P     7
+Hap_Q     2
+Hap_R     53
+Hap_S     51
+Hap_T     0
+Hap_U     2
+Hap_V     4
+Hap_W     1
+Hap_X     0
+Hap_Y     0
+Hap_Z     1
+Hap_AA     0
+Hap_BB     3
+Hap_CC     4
+Hap_DD     2
+Hap_EE     0
+Hap_FF     0
+Hap_GG     0
+Hap_HH     1
+}
+
+[[Samples]]
+SampleName="Larvae"
+SampleSize=5893
+SampleData= {
+Hap_A     268
+Hap_B     517
+Hap_C     117
+Hap_D     5
+Hap_E     3627
+Hap_F     131
+Hap_G     44
+Hap_H     51
+Hap_I     17
+Hap_J     54
+Hap_K     35
+Hap_L     5
+Hap_M     27
+Hap_N     3
+Hap_O     5
+Hap_P     56
+Hap_Q     18
+Hap_R     414
+Hap_S     356
+Hap_T     1
+Hap_U     16
+Hap_V     51
+Hap_W     4
+Hap_X     2
+Hap_Y     1
+Hap_Z     19
+Hap_AA     1
+Hap_BB     19
+Hap_CC     15
+Hap_DD     1
+Hap_EE     1
+Hap_FF     4
+Hap_GG     4
+Hap_HH     4
+}
+
+[[Samples]]
+SampleName="RWild"
+SampleSize=301
+SampleData= {
+Hap_A     9
+Hap_B     21
+Hap_C     6
+Hap_D     0
+Hap_E     178
+Hap_F     13
+Hap_G     2
+Hap_H     4
+Hap_I     2
+Hap_J     1
+Hap_K     0
+Hap_L     0
+Hap_M     0
+Hap_N     0
+Hap_O     0
+Hap_P     9
+Hap_Q     0
+Hap_R     34
+Hap_S     14
+Hap_T     0
+Hap_U     2
+Hap_V     1
+Hap_W     1
+Hap_X     1
+Hap_Y     1
+Hap_Z     2
+Hap_AA     0
+Hap_BB     0
+Hap_CC     0
+Hap_DD     0
+Hap_EE     0
+Hap_FF     0
+Hap_GG     0
+Hap_HH     0
+}
+
+
+
+
+	[[Structure]]
+
+		StructureName="New Edited Structure"
+		NbGroups=1
+
+		Group={
+			"Larvae"
+			"Repatriates"
+			"RWild"
+		}
+
+

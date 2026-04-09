@@ -1,0 +1,10 @@
+"site_id","site_name","locality_label","lat","lon"
+1,"Delaware River","Single Delaware River sample near Trenton / lower reach proxy",40.22,-74.93
+2,"Backyard Ponds","Private pond near Collegeville, Pennsylvania",40.17,-75.45
+3,"Schuylkill","Schuylkill River centroid of sampled reach (73–113 km upstream of mouth)",40.12,-75.43
+4,"Lower Susquehanna","Lower Susquehanna centroid of sampled reach",39.62,-76.12
+5,"Lower Susquehanna-Penns","Penns Creek confluence / Lower Susquehanna-Penns proxy",40.54,-76.93
+6,"Lower Susquehanna-Swatara","Swatara Creek confluence / Lower Susquehanna-Swatara proxy",40.37,-76.6
+7,"Lower Juniata","Lower Juniata River centroid of sampled reach",40.51,-77.19
+8,"Upper Susquehanna-Lackawanna","Upper Susquehanna-Lackawanna basin centroid proxy",41.21,-75.86
+9,"Upper Susquehanna-Tunkhannock","Upper Susquehanna-Tunkhannock basin centroid proxy",41.47,-75.78

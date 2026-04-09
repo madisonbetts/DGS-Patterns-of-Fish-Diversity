@@ -1,0 +1,114 @@
+Study_ID,Functional_group_sp,Common_name,Family,functional_group,sil_width,data_quality
+AGCH-1,Agosia chrysogaster,Longfin dace,Leuciscidae,FG1,0.39199399665175316,ok
+AMNA-1,Ameiurus natalis,Yellow Bullhead,Ictaluridae,FG1,0.2994711688492423,ok
+AMPE-1,Ammocrypta pellucida,Eastern Sand Darter,Leuciscidae,FG3,0.29537855103991073,ok
+AMRU-1,Ambloplites rupestris,Nothern Rockbass,Centrarchidae,FG2,0.32530067146808084,ok
+APGR-1,Aplodinotus grunniens,Freshwater Drum,Sciaenidae,FG2,0.25522048570072864,ok
+ARIN-1,Archoplites interruptus,Sacromento Perch,Centrarchidae,FG2,0.211070597419457,ok
+CAAN-1,Campostoma anomalum,Central Stoneroller,Leuciscidae,FG1,0.19853810101986125,ok
+CADI-1,Pantosteus discobolus,Bluehead Sucker,Catostomidae,FG1,NA,manual_assignment
+CAIN-1,Catostomus insignis,Sonora sucker,Catostomidae,FG1,0.19373277596367022,ok
+CAMI-1,Catostomus microps,Modoc Sucker,Catostomidae,FG1,0.16011758965202227,ok
+CAOC-1,Moxostoma occidentalis,Sacramento Sucker,Catostomidae,FG1,0.1597126862452818,ok
+CARI-1,Catostomus rimiculus,Klamath Smallscale Sucker,Catostomidae,FG1,0.14346292514286674,ok
+CASA-1,Catostomus santaanae,Santa Ana Sucker,Catostomidae,FG4,0.10946610629747966,ok
+COAS-1,Cottus asper,Prickly Sculpin,Cottidae,FG2,0.07102465937783842,ok
+COBA-1,Cottus bairdii,Mottled Sculpin,Cottidae,FG3,0.06881051908656322,ok
+COBA-2,Cottus bairdii,Mottled Sculpin,Cottidae,FG3,0.06881051908656322,ok
+COGR-1,Cottus greenei,Shoshone sculpin,Cottidae,FG3,-0.05245014490602862,negative_silhouette
+CYGI-1,Cyprinella gibbsi,Tallapoosa Shiner,Leuciscidae,FG3,-0.05319863877820252,negative_silhouette
+CYGI-2,Cyprinella gibbsi,Tallapoosa Shiner,Leuciscidae,FG3,-0.05319863877820252,negative_silhouette
+CYLU-1,Cyprinella lutrensis,Red Shiner,Leuciscidae,FG4,0.4321202520265671,ok
+CYSP-1,Cyprinodon diabolis,Pupfish,Cyprinodontidae,FG4,0.4313941690497587,ok
+DOCE-1,Dorosoma cepedianum,Gizzard Shad,Dorosomatidae,FG2,0.4274270780714048,ok
+ETAK-1,Etheostoma akatulo,Bluemask Darter,Percidae,FG3,0.3886436876404743,ok
+ETBO-1,Etheostoma boschungi,Slackwater Darter,Percidae,FG4,0.3196835774265453,ok
+ETCA-1,Etheostoma caeruleum,Rainbow Darter,Percidae,FG3,0.2977542409143218,ok
+ETCA-2,Etheostoma caeruleum,Rainbow Darter,Percidae,FG3,0.2977542409143218,ok
+ETCA-3,Etheostoma caeruleum,Rainbow Darter,Percidae,FG3,0.2977542409143218,ok
+ETCA-4,Etheostoma caeruleum,Rainbow Darter,Percidae,FG3,0.2977542409143218,ok
+ETCH-1,Etheostoma chienense,Relict Darter,Percidae,FG5,NA,manual_assignment
+ETFO-1,Etheostoma fonticola,Fountain Darter,Percidae,FG4,0.21698051868141777,ok
+ETLE-1,Etheostoma lemniscatum,Tuxedo Darter,Percidae,FG5,NA,manual_assignment
+ETNI-1,Etheostoma nigrum,Johnny Darter,Percidae,FG4,0.20026788083334524,ok
+ETNU-1,Etheostoma nuchale,Watercress Darter,Percidae,FG4,0.1924235793855834,ok
+ETOL-1,Etheostoma olmstedi,Tessellated darters,Percidae,FG4,0.160580747989144,ok
+ETOO-1,Etheostoma oophylax,Clarks Darter,Percidae,FG4,0.21795873877947103,ok
+ETRA-1,Etheostoma raneyi,Yazoo Darter,Percidae,FG4,0.15784712369026888,ok
+ETSA-1,Etheostoma sagitta,Kentucky Arrow Darter,Percidae,FG3,0.09375415338302773,ok
+ETSW-1,Etheostoma swaini,Gulf Darter,Percidae,FG3,0.08878051802403586,ok
+ETTA-1,Etheostoma tecumsehi,Tallapoosa Darter,Percidae,FG3,-0.013748262173234771,negative_silhouette
+ETTA-2,Etheostoma tecumsehi,Tallapoosa Darter,Percidae,FG3,-0.013748262173234771,negative_silhouette
+ETTU-1,Etheostoma tuscumbia,Tuscumbia Darter,Percidae,FG4,0.3627551751823821,ok
+FUGR-1,Fundulus grandis,Gulf Killiffish,Fundulidae,FG5,NA,manual_assignment
+FUNO-1,Fundulus notatus,Blackstripe topminnow,Fundulidae,FG4,0.35397402003480916,ok
+FUOL-1,Fundulus olivaceus,Blackspotted topminnow,Fundulidae,FG4,0.33318820975645014,ok
+FUOL-2,Fundulus olivaceus,Blackspotted topminnow,Fundulidae,FG4,0.33318820975645014,ok
+GAAC-1,Gasterosteus aculeatus,Threespine Stickleback,Gasterosteidae,FG4,0.2828922289982605,ok
+GINI-1,Gila nigra,Headwater chub,Leuciscidae,FG1,NA,manual_assignment
+GINI-2,Gila nigra,Headwater chub,Leuciscidae,FG1,NA,manual_assignment
+GIOR-1,Gila orcuttii,Arroyo Chub,Leuciscidae,FG4,0.2445853512428109,ok
+GIRO-1,Gila robusta,Roundtail Chub,Leuciscidae,FG1,0.21479527613218197,ok
+HYPL-1,Hybognathus placitus,Plains Minnow,Leuciscidae,FG4,0.138868426979753,ok
+HYPL-2,Hybognathus placitus,Plains Minnow,Leuciscidae,FG4,0.138868426979753,ok
+ICBU-1,Ictiobus bubalus,Smallmouth Buffalo,Catostomidae,FG2,0.077982223301434,ok
+ICPU-1,Ictalurus punctatus,Channel Catfish,Ictaluridae,FG1,0.12053036194216293,ok
+ICPU-2,Ictalurus punctatus,Channel Catfish,Ictaluridae,FG1,0.12053036194216293,ok
+ICPU-3,Ictalurus punctatus,Channel Catfish,Ictaluridae,FG1,0.12053036194216293,ok
+LARI-1,Lampetra richardsoni,Western Brook Lamprey,Petromyzontidae,FG4,0.060337767606515214,ok
+LEAU-1,Lepomis auritus,Redbreast Sunfish,Centrarchidae,FG2,0.03947694920513367,ok
+LEMA-1,Lepomis macrochirus,Bluegill,Centrarchidae,FG2,0.020427882749126103,ok
+LEOC-1,Lepisosteus oculatus,Spotted Gar,Lepisosteidae,FG2,0.05484632631549713,ok
+LOLO-1,Lota lota,Burbot,Lotidae,FG2,0.00481382358636151,ok
+MAAE-1,Macrhybopsis aestivalis,Speckled Chub,Leuciscidae,FG3,-0.0046580848070070235,negative_silhouette
+MATE-1,Macrhybopsis tetranema,Peppered Chub,Leuciscidae,FG4,NA,manual_assignment
+MEFU-1,Meda fulgida,Spikedace,Leuciscidae,FG3,0.3790801539547852,ok
+MEFU-2,Meda fulgida,Spikedace,Leuciscidae,FG3,0.3790801539547852,ok
+MICA-1,Micropterus cataractae,Shoal bass,Centrarchidae,FG3,0.3258526231904021,ok
+MIDO-1,Micropterus dolomieu,Smallmouth Bass,Centrarchidae,FG1,0.25490657468572386,ok
+MIDO-2,Micropterus dolomieu,Smallmouth Bass,Centrarchidae,FG1,0.25490657468572386,ok
+MODU-1,Moxostoma duquesnei,Black Redhorse,Catostomidae,FG1,0.24402158198934387,ok
+NOAT-1,Notropis atherinoides,Emerald Shiner,Leuciscidae,FG1,0.20741124247421228,ok
+NOAT-2,Notropis atherinoides,Emerald Shiner,Leuciscidae,FG1,0.20741124247421228,ok
+NOGI-1,Notropis girardi,Arkansas River Chub,Leuciscidae,FG4,0.19712883365309797,ok
+NOHU-1,Novumbra hubbsi,Olympic Mudminnow,Esocidae,FG2,0.1726568669405305,ok
+NOJE-1,Notropis jemezanus,Rio Grande Shiner,Leuciscidae,FG1,0.18148237240761944,ok
+NORU-1,Etheostoma rubrum,Bayou Darter,Percidae,FG3,0.2085612293699468,ok
+ONCL-1,Oncorhynchus clarkii,Westslope Cutthroat Trout,Salmonidae,FG2,0.16673048647957756,ok
+ONCL-2,Oncorhynchus clarkii,Lahontan cutthroat trout,Salmonidae,FG2,0.16673048647957756,ok
+ONCL-3,Oncorhynchus clarkii,Cutthroat Trout,Salmonidae,FG2,0.16673048647957756,ok
+ONCL-4,Oncorhynchus clarkii,Rio Grande Cutthroat Trout,Salmonidae,FG2,0.16673048647957756,ok
+ONCL-5,Oncorhynchus clarkii,Cutthroat Trout,Salmonidae,FG2,0.16673048647957756,ok
+ONMY-1,Oncorhynchus mykiss,Redband Trout,Salmonidae,FG3,0.12549069020214432,ok
+ONMY-2,Oncorhynchus mykiss,Steelhead Trout,Salmonidae,FG3,0.12549069020214432,ok
+ONMY-3,Oncorhynchus mykiss,California Golden Trout,Salmonidae,FG3,0.12549069020214432,ok
+PACL-1,Pantosteus clarkii,Desert Sucker,Catostomidae,FG1,NA,manual_assignment
+PEFL-1,Perca flavescens,Yellow Perch,Percidae,FG2,0.1088298274303513,ok
+PEFL-2,Perca flavescens,Yellow Perch,Percidae,FG2,0.1088298274303513,ok
+PEFL-3,Perca flavescens,Yellow Perch,Percidae,FG2,0.1088298274303513,ok
+PIVI-1,Pimephales vigilax,Bullhead Minnow,Leuciscidae,FG1,0.10522598227260105,ok
+POSP-1,Polyodon spathula,Paddlefish,Polyodontidae,FG2,0.09934038622709951,ok
+POSP-2,Polyodon spathula,Paddlefish,Polyodontidae,FG2,0.09934038622709951,ok
+RHCA-1,Rhinichthys cataractae,Longnose Dace,Leuciscidae,FG1,0.06678507121316235,ok
+RHOS-1,Rhinichthys osculus,Speckled Dace,Leuciscidae,FG1,0.043594829079884656,ok
+RHOS-2,Rhinichthys osculus,Speckled Dace,Leuciscidae,FG1,0.043594829079884656,ok
+RHOS-3,Rhinichthys osculus,Speckled Dace,Leuciscidae,FG1,0.043594829079884656,ok
+RHOS-4,Rhinichthys osculus,Speckled Dace,Leuciscidae,FG1,0.043594829079884656,ok
+SACO-1,Salvelinus confluentus,Bull trout,Salmonidae,FG3,NA,manual_assignment
+SACO-2,Salvelinus confluentus,Bull trout,Salmonidae,FG3,NA,manual_assignment
+SACO-3,Salvelinus confluentus,Bull trout,Salmonidae,FG3,NA,manual_assignment
+SACO-4,Salvelinus confluentus,Bull trout,Salmonidae,FG3,NA,manual_assignment
+SACO-5,Salvelinus confluentus,Bull Trout,Salmonidae,FG3,0.07997187233548186,ok
+SAFO-1,Salvelinus fontinalis,Brook Trout,Salmonidae,FG3,NA,manual_assignment
+SAFO-2,Salvelinus fontinalis,Brook Trout,Salmonidae,FG3,NA,manual_assignment
+SAFO-3,Salvelinus fontinalis,Brook Trout,Salmonidae,FG3,NA,manual_assignment
+SAFO-4,Salvelinus fontinalis,Brook Trout,Salmonidae,FG3,NA,manual_assignment
+SAFO-5,Salvelinus fontinalis,Brook Trout,Salmonidae,FG3,NA,manual_assignment
+SAVI-1,Sander vitreus,Walleye,Percidae,FG1,0.04287350558930447,ok
+SAVI-2,Sander vitreus,Walleye,Percidae,FG1,0.04287350558930447,ok
+SEAT-1,Semotilus atromaculatus,Creek Chub,Leuciscidae,FG4,-0.03647856325447296,negative_silhouette
+SEAT-2,Semotilus atromaculatus,Creek Chub,Leuciscidae,FG4,-0.03647856325447296,negative_silhouette
+SIBI-1,Gila bicolor,Lahontan tui chub,Leuciscidae,FG2,-0.1611271036911327,negative_silhouette
+SITH-1,Gila bicolor,Tui chub,Leuciscidae,FG2,-0.1611271036911327,negative_silhouette
+TICO-1,Tiaroga cobitis,Loach minnow,Leuciscidae,FG4,NA,manual_assignment
+TICO-2,Tiaroga cobitis,Loach minnow,Leuciscidae,FG4,NA,manual_assignment

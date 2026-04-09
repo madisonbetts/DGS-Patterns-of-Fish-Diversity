@@ -1,0 +1,77 @@
+Species,in_fishtraits,has_diettroph,data_source
+Agosia chrysogaster,TRUE,FALSE,FishTraits only
+Ambloplites rupestris,TRUE,TRUE,FishTraits + rfishbase
+Ameiurus natalis,TRUE,FALSE,FishTraits only
+Ammocrypta pellucida,TRUE,FALSE,FishTraits only
+Aplodinotus grunniens,TRUE,FALSE,FishTraits only
+Archoplites interruptus,TRUE,FALSE,FishTraits only
+Campostoma anomalum,TRUE,TRUE,FishTraits + rfishbase
+Catostomus insignis,TRUE,FALSE,FishTraits only
+Catostomus microps,TRUE,FALSE,FishTraits only
+Moxostoma occidentalis,TRUE,FALSE,FishTraits only
+Catostomus rimiculus,TRUE,FALSE,FishTraits only
+Catostomus santaanae,TRUE,FALSE,FishTraits only
+Salvelinus confluentus,FALSE,FALSE,manually assigned
+Cottus asper,TRUE,TRUE,FishTraits + rfishbase
+Cottus bairdii,TRUE,FALSE,FishTraits only
+Cottus greenei,TRUE,FALSE,FishTraits only
+Cyprinella gibbsi,TRUE,FALSE,FishTraits only
+Cyprinella lutrensis,TRUE,FALSE,FishTraits only
+Cyprinodon diabolis,TRUE,FALSE,FishTraits only
+Dorosoma cepedianum,TRUE,FALSE,FishTraits only
+Etheostoma akatulo,TRUE,FALSE,FishTraits only
+Etheostoma boschungi,TRUE,FALSE,FishTraits only
+Etheostoma caeruleum,TRUE,FALSE,FishTraits only
+Etheostoma oophylax,TRUE,FALSE,FishTraits only
+Etheostoma chienense,FALSE,FALSE,manually assigned
+Etheostoma fonticola,TRUE,FALSE,FishTraits only
+Etheostoma lemniscatum,FALSE,FALSE,manually assigned
+Etheostoma nigrum,TRUE,FALSE,FishTraits only
+Etheostoma nuchale,TRUE,FALSE,FishTraits only
+Etheostoma olmstedi,TRUE,FALSE,FishTraits only
+Etheostoma raneyi,TRUE,FALSE,FishTraits only
+Etheostoma sagitta,TRUE,FALSE,FishTraits only
+Etheostoma swaini,TRUE,FALSE,FishTraits only
+Etheostoma tecumsehi,TRUE,FALSE,FishTraits only
+Etheostoma tuscumbia,TRUE,FALSE,FishTraits only
+Fundulus grandis,FALSE,FALSE,manually assigned
+Fundulus notatus,TRUE,FALSE,FishTraits only
+Fundulus olivaceus,TRUE,FALSE,FishTraits only
+Gasterosteus aculeatus,TRUE,TRUE,FishTraits + rfishbase
+Gila nigra,FALSE,FALSE,manually assigned
+Gila orcuttii,TRUE,FALSE,FishTraits only
+Gila robusta,TRUE,FALSE,FishTraits only
+Hybognathus placitus,TRUE,FALSE,FishTraits only
+Ictalurus punctatus,TRUE,TRUE,FishTraits + rfishbase
+Ictiobus bubalus,TRUE,FALSE,FishTraits only
+Lampetra richardsoni,TRUE,FALSE,FishTraits only
+Lepisosteus oculatus,TRUE,FALSE,FishTraits only
+Lepomis auritus,TRUE,TRUE,FishTraits + rfishbase
+Lepomis macrochirus,TRUE,TRUE,FishTraits + rfishbase
+Lota lota,TRUE,TRUE,FishTraits + rfishbase
+Macrhybopsis aestivalis,TRUE,FALSE,FishTraits only
+Macrhybopsis tetranema,FALSE,FALSE,manually assigned
+Meda fulgida,TRUE,FALSE,FishTraits only
+Micropterus cataractae,TRUE,FALSE,FishTraits only
+Micropterus dolomieu,TRUE,TRUE,FishTraits + rfishbase
+Moxostoma duquesnei,TRUE,FALSE,FishTraits only
+Etheostoma rubrum,TRUE,TRUE,FishTraits + rfishbase
+Notropis atherinoides,TRUE,FALSE,FishTraits only
+Notropis girardi,TRUE,FALSE,FishTraits only
+Notropis jemezanus,TRUE,FALSE,FishTraits only
+Novumbra hubbsi,TRUE,FALSE,FishTraits only
+Oncorhynchus clarkii,TRUE,FALSE,FishTraits only
+Oncorhynchus mykiss,TRUE,TRUE,FishTraits + rfishbase
+Pantosteus clarkii,FALSE,FALSE,manually assigned
+Pantosteus discobolus,FALSE,FALSE,manually assigned
+Perca flavescens,TRUE,TRUE,FishTraits + rfishbase
+Pimephales vigilax,TRUE,FALSE,FishTraits only
+Polyodon spathula,TRUE,TRUE,FishTraits + rfishbase
+Rhinichthys cataractae,TRUE,FALSE,FishTraits only
+Rhinichthys osculus,TRUE,FALSE,FishTraits only
+Salvelinus confluentus,TRUE,FALSE,FishTraits only
+Salvelinus fontinalis,TRUE,TRUE,FishTraits + rfishbase
+Sander vitreus,TRUE,TRUE,FishTraits + rfishbase
+Semotilus atromaculatus,TRUE,TRUE,FishTraits + rfishbase
+Gila bicolor,TRUE,FALSE,FishTraits only
+Tiaroga cobitis,FALSE,FALSE,manually assigned

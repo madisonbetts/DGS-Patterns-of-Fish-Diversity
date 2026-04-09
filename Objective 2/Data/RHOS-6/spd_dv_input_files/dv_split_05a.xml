@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='SNAPP' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.evolution.likelihood" required="SNAPP v1.3.0" version="2.4">
+
+
+    <data
+id="spd_dv_binary"
+dataType="integer"
+name="rawdata">
+					<sequence id="seq_1AMA032" taxon="1AMA032" totalcount="3" value="00000000000001001020020200000000210020001100000012201000020000020021100000120022001102001000012021200000020200001100000200002000000000000100000000001020000000201020001000000020000000200000002000000000"/>
+					<sequence id="seq_1AMA033" taxon="1AMA033" totalcount="3" value="00000000100000002010020200102000220020002010010002101120010000000021200000100000001100002010022002200000010200000000000100002000100100000100000000001120000000201020201000101020100000100000001000000000"/>
+					<sequence id="seq_1AMA034" taxon="1AMA034" totalcount="3" value="00000000100001002010020200100000100020100200010001001000020000000020200000110011001200001000012021200000010100001000000200000000000100000000001000001100000000202020001000000020200200001000002000000000"/>
+					<sequence id="seq_1AMA035" taxon="1AMA035" totalcount="3" value="00000000200000002010020201000000200020002100000001001020020000020022100000000010000100001000021210200000000100002100000100001010000100000100000000001100000000201020101000000000100200100000001000000000"/>
+					<sequence id="seq_1AMA036" taxon="1AMA036" totalcount="3" value="00000000100000002020020200020000210020002010000001201100010000020021200000000010000200002010011110100000000200000100000000001010000000000000000200002100000000200020102000101010100200000000001000000000"/>
+					<sequence id="seq_1AMC001" taxon="1AMC001" totalcount="3" value="00000010000002001020000200220000120000000000001020201000020000020000100000100011001010002010001001210000000100000001010000001000100010000100001000000200001000000010120010200000000000200000001000000000"/>
+					<sequence id="seq_1AMC002" taxon="1AMC002" totalcount="3" value="00000010000002001000000001020000200000000000010010101000010000000020100000100001001000002000021000210020000100000000000000000000000010000200002000001200001000100020100000200020000001102000002000000000"/>
+					<sequence id="seq_1AMC003" taxon="1AMC003" totalcount="3" value="00000000001002000010010101221000210000000000000022101100010000000020200000100001001200001020020100200200000000001101000000000020100010000000000000001100002000102010200010100010000000100000000000000000"/>
+					<sequence id="seq_1AMC004" taxon="1AMC004" totalcount="3" value="00000010000002002000000202221000210000000100001022101200020000020020100000000002001100000010020000100010000100002100110000000000000020000100001000000200002010101010000020200010000000121000001000000000"/>
+					<sequence id="seq_1AMC005" taxon="1AMC005" totalcount="3" value="00000010000002001000010201221000220000000000000020101000020000020011000000100111001200001000020000210010000100002002100010000000200010000100001000001100002000101000110000100010000000100000001000010000"/>
+					<sequence id="seq_1ASR001" taxon="1ASR001" totalcount="3" value="00000000002002000000000000021000200020002000022021001002000000020020020020100200000212000010000002020010000000000000110010000000000100000100000000001100001000100000021000000000000000112000002000020100"/>
+					<sequence id="seq_1ASR003" taxon="1ASR003" totalcount="3" value="00000000002001000000000000021000200010001010002020002002000000000020020020100100000210000010010001020100000000000000000010000000000000000100000000001000001010000000011000100010000000111000001000000100"/>
+					<sequence id="seq_1ASR004" taxon="1ASR004" totalcount="3" value="00000000002002000000000000021000200021002000012022001002000000020020020020100100001200000000020001010110000000000000110020000000000000000100000000001000001020000000021000100000000000102000001000010000"/>
+					<sequence id="seq_1ASR005" taxon="1ASR005" totalcount="3" value="00000000002001001000000000022000200010002000022022001002000000000020020010000000001220000020010001010210000000001002100000000000000000000000000000000100001020200000021000000000000000001000002000020200"/>
+					<sequence id="seq_1ASR006" taxon="1ASR006" totalcount="3" value="00000000002000001000100000021000200012002000022021001001000000020020020020000200001200000020020002020200000000001000200010000000000010000100000000002100001020000000011000100000000000001000002000010100"/>
+					<sequence id="seq_1LVD001" taxon="1LVD001" totalcount="3" value="22001002020200110200201020000021020200200000000000001100201122002202002000002000020000210220200020002021202000200222202002220020000002110020220000220002200222000020000222002200002020000220220202202020"/>
+					<sequence id="seq_1LVD002" taxon="1LVD002" totalcount="3" value="22002002020200221200200020000021020200200002000000001200201122002202002000002000020000210220200020002021202000200222202002220020000002100020220000220002220222000020000222002200002010000220220202202020"/>
+					<sequence id="seq_1LVD003" taxon="1LVD003" totalcount="3" value="22001002020200121200201020000022020200200000000000001100201122002202002000002000020000220220200020002022202001200222202002220020000002220020220000220002210222000020000221002200002020000220220202202020"/>
+					<sequence id="seq_1LVD004" taxon="1LVD004" totalcount="3" value="22002002020200110200202020000021020200200000000000001200202122002202002000002000020000210220200020002022202000200222202002220020000002010020220000220002200222000020000222002200002020000220220202202020"/>
+					<sequence id="seq_1LVD005" taxon="1LVD005" totalcount="3" value="22002002020200121200201020000021020200200000000200001200201222002202002000002000020000210220200020002021202000200222202002220020000002100020220000220002210222000020000222002200002010000220220202202020"/>
+					<sequence id="seq_1PRC001" taxon="1PRC001" totalcount="3" value="01000022022000000002000000010100010100020000000000020020000020220102000200202010020000000000201021000220200000020200210100100122022200000002220011220200000110000100000120000001000000000202200002100020"/>
+					<sequence id="seq_1PRC002" taxon="1PRC002" totalcount="3" value="01000022021000000002000000010210010100020001000000020020000020220102000100200010010000000000200120000020200100010100200000100222001100000001220021220200000100000100000020000011000202000201000102000020"/>
+					<sequence id="seq_1PRC003" taxon="1PRC003" totalcount="3" value="01100022021000000001000000000200002200020000200000020020000020220222000100102020020000000000201020000020200000020200200000100121012100002001220012020200000000000100000020000002000002000202100102000020"/>
+					<sequence id="seq_1PRC004" taxon="1PRC004" totalcount="3" value="01000022020000000002000000010200001200020002200000010020000020020202000200102020020000000000201020000020200100010200220100100211021200000100220011220200000010000200000020000002000200000202200002200020"/>
+					<sequence id="seq_1PRC005" taxon="1PRC005" totalcount="3" value="01000022020000000002000000010210001200020000100000010020000020200212010100202000000000000000202120000220200000020200100100000220021200000000220020120200000000000100000020000002000000000201100202100020"/>
+					<sequence id="seq_1RFO001" taxon="1RFO001" totalcount="3" value="00000000101001000010010200220000010011202220010000201000010010000010100000010010000000001000022010100000000100002100000000001000000000000000000200001210000000200011001000000000200201200000002000000000"/>
+					<sequence id="seq_1RFO003" taxon="1RFO003" totalcount="3" value="00010000100002001010000200220000120002202210010001201000020010000001200000010010000200002000021121200100000100001000000200001000000000000000000100000120000000200002002000000020000000200000002000000000"/>
+					<sequence id="seq_1RFO004" taxon="1RFO004" totalcount="3" value="00000000100000000010000200220000020001102120000000001000020020020010100000000020001000002000021110000000000100002100000200000000000000000000000200101220000000200021001000100000100002100000002000000000"/>
+					<sequence id="seq_1RFO005" taxon="1RFO005" totalcount="3" value="00000000100000000000000200111000010012202110010000201000020020020011200000020021000100002000020000100200000100001200000100002000000000000000000200001220001000200010201000100010200002200000002000000000"/>
+					<sequence id="seq_1RFO006" taxon="1RFO006" totalcount="3" value="00000000200001000010000200220000210012201010010000201000020020000010200000010020000000002000011000100000000100001000000100001000000000000000000200002210000000200020001000200010200000200000002000000000"/>
+					<sequence id="seq_1dhar002" taxon="1dhar002" totalcount="3" value="01220200000000000000000000000020000000000000000000001022000010000000020020000000222020000001002002020200000012000100200200000200000000000000000000200000000000002000000000000020020001001000100022000002"/>
+					<sequence id="seq_1dhar003" taxon="1dhar003" totalcount="3" value="01010200000000000000000000000020000000000000000000001002000010000000020020000000222020000002012002020200000022000001200200010200000000010000000000200000000000002000000000000020020001002000200022000002"/>
+					<sequence id="seq_1dhar004" taxon="1dhar004" totalcount="3" value="00220200000000000000000000000020000000000000000000001002000000020000020010000000222120000002002002020000000022001000200200000200000000010000000000200000000000002000000000000020020002002000200022000001"/>
+					<sequence id="seq_1dhar005" taxon="1dhar005" totalcount="3" value="00220200000000000000000000000020000000000000000000001002000020020000020000000000222100000001002001020200000022001100200200010200000000020000000000200000000000012000000000000020020000001000200022000001"/>
+					<sequence id="seq_1dhar006" taxon="1dhar006" totalcount="3" value="00110200000000000000000000000020000000000000000000001002000000020000020010000000222020000002002002020200000012000101200200010200000000000000000000100000000000012000000000000020020001002000200012000001"/>
+					<sequence id="seq_1dorb001" taxon="1dorb001" totalcount="3" value="00120000002010000000000100010010100000000000000010001001000010000000000000000120002110002011102010020000000000000002000200000000000000000100010000200000000001202110000010000000000001010100000011000000"/>
+					<sequence id="seq_1dorb002" taxon="1dorb002" totalcount="3" value="00020100001000000000000100000000100000100000010000001001000000000010000000100010001020000000111011100010000000000002000200001000000000010100010000001000000010122010000010020020010000011000000000000000"/>
+					<sequence id="seq_1dorb003" taxon="1dorb003" totalcount="3" value="00120000002000000000000100000010220000000010000001001001000000000010010000201020011110000010012002010000000000000001010100001100000000000100000000000000000010001110000000000020010001001100100000000000"/>
+					<sequence id="seq_1dorb004" taxon="1dorb004" totalcount="3" value="00220000001020000000100000000000100000000000000011000001000010000001000001000010011100001000002112010200000000001102010100000000000000000100000000100100000020102110000000011010000000000000001000000000"/>
+					<sequence id="seq_1dorb005" taxon="1dorb005" totalcount="3" value="00020000001010000000000100010010110000000000000011001001000020020001000002100100011110001000012110010010000000000001010000001100000000000100000000200100000011001000000000000010000000010000100011000000"/>
+                </data>
+<map name="Uniform" >beast.math.distributions.Uniform</map>
+<map name="Exponential" >beast.math.distributions.Exponential</map>
+<map name="LogNormal" >beast.math.distributions.LogNormalDistributionModel</map>
+<map name="Normal" >beast.math.distributions.Normal</map>
+<map name="Beta" >beast.math.distributions.Beta</map>
+<map name="Gamma" >beast.math.distributions.Gamma</map>
+<map name="LaplaceDistribution" >beast.math.distributions.LaplaceDistribution</map>
+<map name="prior" >beast.math.distributions.Prior</map>
+<map name="InverseGamma" >beast.math.distributions.InverseGamma</map>
+<map name="OneOnX" >beast.math.distributions.OneOnX</map>
+
+<run spec='beast.inference.PathSampler' chainLength="500000" alpha='0.3' rootdir='//scratch/1471990.torque' burnInPercentage='0' preBurnin="100000" deleteOldLogs='true' nrOfSteps='48'>
+cd $(dir)
+java -cp $(java.class.path) beast.app.beastapp.BeastMain $(resume/overwrite) -java -seed $(seed) beast.xml
+<mcmc id="mcmc" spec="MCMC" chainLength="500000" storeEvery="500">
+    <state id="state" storeEvery="500">
+        <stateNode id="Tree.spd_dv_binary" spec="beast.util.ClusterTree" clusterType="upgma" nodetype="snap.NodeData">
+            <taxa id="snap.spd_dv_binary" spec="snap.Data" dataType="integerdata">
+                <rawdata idref="spd_dv_binary"/>
+                <taxonset id="AMA" spec="TaxonSet">
+                    <taxon id="1AMA036" spec="Taxon"/>
+                    <taxon id="1AMA035" spec="Taxon"/>
+                    <taxon id="1AMA034" spec="Taxon"/>
+                    <taxon id="1AMA033" spec="Taxon"/>
+                    <taxon id="1AMA032" spec="Taxon"/>
+                    <taxon id="1ASR001" spec="Taxon"/>
+                    <taxon id="1ASR006" spec="Taxon"/>
+                    <taxon id="1ASR005" spec="Taxon"/>
+                    <taxon id="1ASR004" spec="Taxon"/>
+                    <taxon id="1ASR003" spec="Taxon"/>
+                    <taxon id="1AMC001" spec="Taxon"/>
+                    <taxon id="1AMC002" spec="Taxon"/>
+                    <taxon id="1AMC003" spec="Taxon"/>
+                    <taxon id="1AMC004" spec="Taxon"/>
+                    <taxon id="1AMC005" spec="Taxon"/>
+                    <taxon id="1RFO001" spec="Taxon"/>
+                    <taxon id="1RFO003" spec="Taxon"/>
+                    <taxon id="1RFO006" spec="Taxon"/>
+                    <taxon id="1RFO005" spec="Taxon"/>
+                    <taxon id="1RFO004" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="dhar" spec="TaxonSet">
+                    <taxon id="1dhar002" spec="Taxon"/>
+                    <taxon id="1dhar003" spec="Taxon"/>
+                    <taxon id="1dhar004" spec="Taxon"/>
+                    <taxon id="1dhar005" spec="Taxon"/>
+                    <taxon id="1dhar006" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="LVD" spec="TaxonSet">
+                    <taxon id="1LVD005" spec="Taxon"/>
+                    <taxon id="1LVD002" spec="Taxon"/>
+                    <taxon id="1LVD001" spec="Taxon"/>
+                    <taxon id="1LVD004" spec="Taxon"/>
+                    <taxon id="1LVD003" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="ORB" spec="TaxonSet">
+                    <taxon id="1dorb001" spec="Taxon"/>
+                    <taxon id="1dorb003" spec="Taxon"/>
+                    <taxon id="1dorb002" spec="Taxon"/>
+                    <taxon id="1dorb005" spec="Taxon"/>
+                    <taxon id="1dorb004" spec="Taxon"/>
+                </taxonset>
+                <taxonset id="PRC" spec="TaxonSet">
+                    <taxon id="1PRC005" spec="Taxon"/>
+                    <taxon id="1PRC002" spec="Taxon"/>
+                    <taxon id="1PRC001" spec="Taxon"/>
+                    <taxon id="1PRC004" spec="Taxon"/>
+                    <taxon id="1PRC003" spec="Taxon"/>
+                </taxonset>
+            </taxa>
+            <parameter id="RealParameter.0" lower="0.0" name="clock.rate" upper="0.0">1.0</parameter>
+        </stateNode>
+        <parameter id="coalescenceRate" name="stateNode">10.0</parameter>
+    </state>
+
+    <distribution id="posterior" spec="util.CompoundDistribution">
+        <distribution id="prior" spec="util.CompoundDistribution">
+            <distribution id="snapprior.spd_dv_binary" spec="snap.likelihood.SnAPPrior" coalescenceRate="@coalescenceRate" rateprior="gamma" tree="@Tree.spd_dv_binary">
+                <parameter id="alpha" estimate="false" lower="0.0" name="alpha">1.0</parameter>
+                <parameter id="beta" estimate="false" lower="0.0" name="beta">72.4155</parameter>
+                <parameter id="kappa" estimate="false" lower="0.0" name="kappa">1.0</parameter>
+                <parameter id="lambda" estimate="false" lower="0.0" name="lambda">181.487</parameter>
+            </distribution>
+        </distribution>
+        <distribution id="likelihood" spec="util.CompoundDistribution">
+            <distribution id="treeLikelihood.spd_dv_binary" spec="snap.likelihood.SnAPTreeLikelihood" data="@snap.spd_dv_binary" non-polymorphic="false" pattern="coalescenceRate" tree="@Tree.spd_dv_binary">
+                <siteModel id="MutationSiteModel.spd_dv_binary" spec="SiteModel">
+                    <parameter id="mutationRate" estimate="false" name="mutationRate">1.0</parameter>
+                    <parameter id="shape" estimate="false" name="shape">2.0</parameter>
+                    <parameter id="proportionInvariant" estimate="false" name="proportionInvariant">0.0</parameter>
+                    <substModel id="MutationModel" spec="snap.likelihood.SnapSubstitutionModel" coalescenceRate="@coalescenceRate">
+                        <parameter id="u" estimate="false" lower="0.0" name="mutationRateU">7.392739273927392</parameter>
+                        <parameter id="v" lower="0.0" name="mutationRateV">0.5362700502753173</parameter>
+                    </substModel>
+                </siteModel>
+            </distribution>
+        </distribution>
+    </distribution>
+
+    <operator id="NodeSwapper" spec="snap.operators.NodeSwapper" tree="@Tree.spd_dv_binary" weight="0.5"/>
+
+    <operator id="NodeBudger" spec="snap.operators.NodeBudger" size="0.5" tree="@Tree.spd_dv_binary" weight="0.5"/>
+
+    <operator id="TreeScaler" spec="snap.operators.ScaleOperator" scaleFactor="0.25" tree="@Tree.spd_dv_binary" weight="0.5"/>
+
+    <operator id="GammaMover" spec="snap.operators.GammaMover" coalescenceRate="@coalescenceRate" scale="0.5" weight="8.0"/>
+
+    <operator id="RateMixer" spec="snap.operators.RateMixer" coalescenceRate="@coalescenceRate" scaleFactors="0.25" tree="@Tree.spd_dv_binary" weight="1.0"/>
+
+    <logger id="tracelog" fileName="dv_split_05a.log" logEvery="500" model="@posterior">
+        <log idref="posterior"/>
+        <log idref="likelihood"/>
+        <log idref="prior"/>
+        <log id="ThetaLogger" spec="snap.ThetaLogger" coalescenceRate="@coalescenceRate"/>
+        <log id="TreeHeightLogger" spec="beast.evolution.tree.TreeHeightLogger" tree="@Tree.spd_dv_binary"/>
+    </logger>
+
+    <logger id="screenlog" logEvery="500">
+        <log idref="posterior"/>
+        <log id="ESS.0" spec="util.ESS" arg="@posterior"/>
+        <log idref="likelihood"/>
+        <log idref="prior"/>
+    </logger>
+
+    <logger id="treelog" fileName="dv_split_05a.trees" logEvery="500" mode="tree">
+        <log id="TreeWithMetaDataLogger.spd_dv_binary" spec="beast.evolution.tree.TreeWithMetaDataLogger" tree="@Tree.spd_dv_binary">
+            <metadata id="theta" spec="snap.RateToTheta" coalescenceRate="@coalescenceRate"/>
+        </log>
+    </logger>
+</mcmc>
+</run>
+
+</beast>

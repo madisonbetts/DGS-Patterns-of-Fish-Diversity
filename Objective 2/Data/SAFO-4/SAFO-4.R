@@ -32,7 +32,7 @@ safo4_raw <- read.csv(geno_file, stringsAsFactors = FALSE)
 # explicit reach coordinates were not tabulated in the paper / README
 # reach order is downstream (1) to upstream (11)
 # -----------------------------
-SAFO_5_coords <- data.frame(
+SAFO_4_coords <- data.frame(
   site = as.character(1:11),
   lat = c(
     40.5954, 40.5880, 40.5802, 40.5721, 40.5600,

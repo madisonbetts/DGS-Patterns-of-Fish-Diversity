@@ -1,0 +1,12 @@
+WKT,site_id,site_code,site_name,lat,lon
+"POINT (-81.016 41.012)",1.0,BER,Berlin Lake, Portage County, Ohio,41.012,-81.016
+"POINT (-81.1183578 39.6100925)",2.0,LMR,Little Muskingum River, Washington County, Ohio,39.6100925,-81.1183578
+"POINT (-83.0945 39.015593)",3.0,SUN,Sunfish Creek, Pike County, Ohio,39.015593,-83.0945
+"POINT (-80.23 38.972)",4.0,BR,Buckhannon River, Upshur County, West Virginia,38.972,-80.23
+"POINT (-81.2088848 38.4997557)",5.0,ELK,Elk River, Kanawha County, West Virginia,38.4997557,-81.2088848
+"POINT (-81.0119047 39.4397877)",6.0,MIC,Middle Island Creek, Pleasants County, West Virginia,39.4397877,-81.0119047
+"POINT (-81.201631 38.1595557)",7.0,NKR,New and Kanawha rivers, Kanawha County, West Virginia,38.1595557,-81.201631
+"POINT (-79.43 42.159)",8.0,NYH,Chautauqua State Fish Hatchery, New York,42.159,-79.43
+"POINT (-83.2624998 39.1007291)",9.0,KH,Kincaid State Fish Hatchery, Ohio,39.1007291,-83.2624998
+"POINT (-83.5105147 39.8967994)",10.0,LH,London State Fish Hatchery, Ohio,39.8967994,-83.5105147
+"POINT (-83.5267855 38.1136375)",11.0,MCH,Minor Clark State Fish Hatchery, Kentucky,38.1136375,-83.5267855

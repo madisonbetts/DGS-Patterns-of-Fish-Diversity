@@ -1,11 +1,11 @@
-#################  need to write
+# prelim plotting cgh
 
 # install/load pacakges
 packages <- c("sf", "dplyr", 
               "readxl", "nhdplusTools", 
               "units", "rnaturalearth",
               "ape", "fishtree", "colorspace",
-              "taxize", "phytools")
+              "taxize", "phytools", "tigris", "ggplot2")
 new_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
 # install new packages
 if (length(new_packages)) {
@@ -14,85 +14,74 @@ if (length(new_packages)) {
 # load all packages
 invisible(lapply(packages, library, character.only = TRUE))
 
-sf::sf_use_s2(TRUE)
+sf::sf_use_s2(FALSE)
 
-dat <- read.csv("Data/filtered_data.csv")
-
+dat <- read.csv("Data/final_fish_dataset.csv")
+dat_sf <- st_read("Data/final_fish_dataset.gpkg")
 
 # some plots quick
-He_lat <- ggplot(dat, aes(x = snapped_lat, y = He)) +
+He_lat <- ggplot(dat, aes(snapped_lat, He)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Expected Heterozygosity (He)") +
   theme_classic()
-ggsave(He_lat, filename = "Figures/He_lat.pdf", width = 6, height = 4, dpi = 300)
+ggsave(He_lat, filename = "Figures/He_lat.pdf", width = 7, height = 5, dpi = 300)
 
-Ho_lat <- ggplot(dat, aes(x = snapped_lat, y = Ho)) +
+Ho_lat <- ggplot(dat, aes(snapped_lat, Ho)) +
   geom_point() +
   geom_smooth(method = "lm") +
   labs(x = "Latitude", y = "Observed Heterozygosity (Ho)") +
   theme_classic()
-ggsave(Ho_lat, filename = "Figures/Ho_lat.pdf", width = 6, height = 4, dpi = 300)
+ggsave(Ho_lat, filename = "Figures/Ho_lat.pdf", width = 7, height = 5, dpi = 300)
 
 
 # shape files for maps
-us_states <- spData::us_states
-us_states <- st_transform(us_states, 4326)
-maj_rivers_sf <- ne_download(scale = 50, type = "rivers_lake_centerlines", 
-                             category = "physical", returnclass = "sf")
-rivers_us <- st_intersection(maj_rivers_sf, st_union(us_states))
+states <- tigris::states(cb = TRUE, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c('HI', 'PR', 'AK', 'MP', 'GU', 'AS', 'VI')) |>
+  st_transform(crs = 5070)
 
-# plot
+
+
 He_gdr <- ggplot() +
-  geom_sf(data = us_states, fill = "white") +
-  geom_sf(data = rivers_us, color = "black") +
-  geom_point(data = dat, aes(x = snapped_lon, y = snapped_lat, color = He))+
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = dat_sf, aes(color = He))+
   scale_color_viridis_c(
     option = "magma",
     limits = c(min(dat$He), max(dat$He)),
     breaks = seq(0.3, 0.7, by = 0.1)
   ) +
-  theme_void()
-ggsave(He_gdr, filename = "Figures/He_gdr.pdf", width = 6, height = 4, dpi = 300)
+  theme_minimal()
+ggsave(He_gdr, filename = "Figures/He_gdr.pdf", width = 7, height = 5, dpi = 300)
 
 # but dont include populations who do not have an Ho value
 Ho_gdr <- ggplot() +
-  geom_sf(data = us_states, fill = "white") +
-  geom_sf(data = rivers_us, color = "black") +
-  geom_point(data = dat %>% filter(!is.na(Ho)), aes(x = snapped_lon, y = snapped_lat, color = Ho))+
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = filter(dat_sf, !is.na(dat_sf$Ho)), aes(color = Ho))+
   scale_color_viridis_c(
     option = "magma",
     breaks = seq(0.3, 0.7, by = 0.1)) +
-  theme_void()
-ggsave(Ho_gdr, filename = "Figures/Ho_gdr.pdf", width = 6, height = 4, dpi = 300)
+  theme_minimal()
+ggsave(Ho_gdr, filename = "Figures/Ho_gdr.pdf", width = 7, height = 5, dpi = 300)
 
 ####################### pull phylogeny and summarize He/Ho ################################################
 
-filt_dat <- dat %>% 
-  filter(!is.na(snapped_lat))
 
-filt_dat$Spec_Latin_GenDivRange <- gsub(" ", "_", filt_dat$Spec_Latin_GenDivRange)
+dat$Spec_Latin_GenDivRange <- gsub(" ", "_", dat$Spec_Latin_GenDivRange)
 
-phy <- fishtree_phylogeny(species = unique(filt_dat$Spec_Latin_GenDivRange))
-
-#plot.phylo(phy, cex = 0.5)
+phy <- read.tree("Data/complete_tree.nwk")
 
 
-########## add missing tips to tree following taxonomy ###########
-# need to write
-
-
-
-summary <-  filt_dat %>% 
+summary <-  dat %>% 
   group_by(Spec_Latin_GenDivRange) %>% 
-  summarise(mean_He = mean(He), sd_He = sd(He), mean_Ho = mean(Ho), sd_Ho = sd(Ho)) %>% 
+  summarise(mean_He = mean(He), sd_He = sd(He), mean_Ho = mean(Ho), sd_Ho = sd(Ho),
+            tax = first(Order_GBIF)) %>% 
   filter(Spec_Latin_GenDivRange %in% phy$tip.label)
 
 # get orders from taxize
-summary$tax <- NA
-for (i in 1:nrow(summary)){
-  summary$tax[i] <- tax_name(summary$Spec_Latin_GenDivRange[i], get = "order", db = "ncbi")$order
-}
+#summary$tax <- NA
+#for (i in 1:nrow(summary)){
+#  summary$tax[i] <- tax_name(summary$Spec_Latin_GenDivRange[i], get = "order", db = "ncbi")$order
+#}
 
 # ensure the order of the summary matches the order of the tips in the phylogeny
 summary <- summary[match(phy$tip.label, summary$Spec_Latin_GenDivRange),]
@@ -137,7 +126,7 @@ names(box_cols) <- phy$tip.label
 
 # boxplot
 # create named he_vec for all obs in dat
-he_vec_all <- setNames(filt_dat$He, filt_dat$Spec_Latin_GenDivRange)
+he_vec_all <- setNames(dat$He, dat$Spec_Latin_GenDivRange)
 
 # open a png for this plot
 png("Figures/phylo_boxplot.png", width = 8, height = 6, units = "in", res = 600)
@@ -150,7 +139,7 @@ plotTree.boxplot(phy, he_vec_all,
                                      xlab = "He",
                                      ylim = c(0, 1)))
 par(mfg=c(1,1))
-plot(phy,cols,ftype = "off",mar=c(5.2, 0.5, 4.25, 0))
+plot(phy,cols,ftype = "off",mar=c(5.2, 0.5, 4.15, 0))
 
 
 
@@ -192,4 +181,31 @@ mtext(
 )
 
 dev.off()
+
+
+
+
+################################################################################
+
+states <- tigris::states(cb = TRUE, progress_bar = FALSE) |>
+  dplyr::filter(!STUSPS %in% c('HI', 'PR', 'AK', 'MP', 'GU', 'AS', 'VI')) |>
+  sf::st_transform(crs = 5070)
+
+# Create vector of colors to use in maps and figures
+Colors <- c("wheat3", "orange", "orange4",  "darkorange", "cadetblue", 
+            "cadetblue1","mediumblue","dodgerblue", "violet")
+
+# Map GenDivCoords and color by combined History
+p <- ggplot() + 
+  geom_sf(data = states, fill = 'white') +
+  geom_sf(data = dat_sf, aes(color = History), alpha = 0.8) +
+  labs(color = "Geologic history") +
+  scale_color_manual(values = Colors) +
+  theme_bw()
+
+ggsave(p, filename = "Figures/geol_hist.pdf", width = 7, height = 5, dpi = 300)
+
+
+
+
 

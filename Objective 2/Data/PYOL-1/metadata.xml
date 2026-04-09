@@ -1,0 +1,630 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Shannon White</origin>
+        <origin>Michael Eackles</origin>
+        <origin>Tyler Wagner</origin>
+        <origin>Megan Schall</origin>
+        <origin>Geoff Smith</origin>
+        <origin>Julian Avery</origin>
+        <origin>David Kazyak</origin>
+        <pubdate>20210804</pubdate>
+        <title>Population genetic data for flathead catfish from the Susquehanna and Delaware River basins in Pennsylvania and Maryland, USA.</title>
+        <geoform>spreadsheet</geoform>
+        <onlink>https://doi.org/10.5066/P98U11RG</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>This dataset includes microsatellite genotypes for 137 flathead catfish from the Susquehanna River and Delaware River basins in Pennslyvania and Maryland, USA. Each individual was genotyped at 13 loci. Additional information about sex, capture date, and size are also provided for most individuals.</abstract>
+      <purpose>Fish were genotyped to establish a novel panel of microsatellite loci for flathead catfish population genetic analyses.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>20200609</begdate>
+          <enddate>20201013</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>ground condition</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-79.8047</westbc>
+        <eastbc>-73.6523</eastbc>
+        <northbc>42.1634</northbc>
+        <southbc>37.5446</southbc>
+      </bounding>
+      <descgeog>World</descgeog>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>environment</themekey>
+      </theme>
+      <theme>
+        <themekt>None</themekt>
+        <themekey>flathead catfish</themekey>
+        <themekey>microsatellite</themekey>
+        <themekey>population genetics</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Metadata Identifier</themekt>
+        <themekey>USGS:6067228bd34edc0435c09b41</themekey>
+      </theme>
+      <place>
+        <placekt>None</placekt>
+        <placekey>Pennsylvania</placekey>
+        <placekey>Maryland</placekey>
+      </place>
+    </keywords>
+    <accconst>None.  Please see 'Distribution Info' for details.</accconst>
+    <useconst>None.  Users are advised to read the dataset's metadata thoroughly to understand appropriate use and data limitations.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>David C Kazyak</cntper>
+          <cntorg>U.S. Geological Survey, NORTHEAST REGION</cntorg>
+        </cntperp>
+        <cntpos>ECOLOGIST</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>11649 Leetown Road</address>
+          <city>Kearneysville</city>
+          <state>WV</state>
+          <postal>25430</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>304-724-4577</cntvoice>
+        <cntemail>dkazyak@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Nick Harris, Sydney Stark, Susquehanna River Basin Commission, Maryland Department of Natural Resources, and Pennsylvania Fish and Boat Commission assisted in tissue collection. Collections of tissues from the Susquehanna River Basin were done in part using funding provided by Pennsylvania Sea Grant to the Pennsylvania Fish and Boat Commission (5826-COPA-NOAA-0074) and Pennsylvania State University and Federal Aid in Sport Fish Restoration (F-57-R) to the Pennsylvania Fish and Boat Commission.</datacred>
+    <taxonomy>
+      <keywtax>
+        <taxonkt>None</taxonkt>
+        <taxonkey>Pylodictis olivaris</taxonkey>
+      </keywtax>
+      <taxoncl>
+        <taxonrn>Kingdom</taxonrn>
+        <taxonrv>Animalia</taxonrv>
+        <taxoncl>
+          <taxonrn>Subkingdom</taxonrn>
+          <taxonrv>Bilateria</taxonrv>
+          <taxoncl>
+            <taxonrn>Infrakingdom</taxonrn>
+            <taxonrv>Deuterostomia</taxonrv>
+            <taxoncl>
+              <taxonrn>Phylum</taxonrn>
+              <taxonrv>Chordata</taxonrv>
+              <taxoncl>
+                <taxonrn>Subphylum</taxonrn>
+                <taxonrv>Vertebrata</taxonrv>
+                <taxoncl>
+                  <taxonrn>Infraphylum</taxonrn>
+                  <taxonrv>Gnathostomata</taxonrv>
+                  <taxoncl>
+                    <taxonrn>Superclass</taxonrn>
+                    <taxonrv>Actinopterygii</taxonrv>
+                    <taxoncl>
+                      <taxonrn>Class</taxonrn>
+                      <taxonrv>Teleostei</taxonrv>
+                      <taxoncl>
+                        <taxonrn>Superorder</taxonrn>
+                        <taxonrv>Ostariophysi</taxonrv>
+                        <taxoncl>
+                          <taxonrn>Order</taxonrn>
+                          <taxonrv>Siluriformes</taxonrv>
+                          <taxoncl>
+                            <taxonrn>Family</taxonrn>
+                            <taxonrv>Ictaluridae</taxonrv>
+                            <taxoncl>
+                              <taxonrn>Genus</taxonrn>
+                              <taxonrv>Pylodictis</taxonrv>
+                              <taxoncl>
+                                <taxonrn>Species</taxonrn>
+                                <taxonrv>Pylodictis olivaris</taxonrv>
+                                <common>TSN: 164029</common>
+                              </taxoncl>
+                            </taxoncl>
+                          </taxoncl>
+                        </taxoncl>
+                      </taxoncl>
+                    </taxoncl>
+                  </taxoncl>
+                </taxoncl>
+              </taxoncl>
+            </taxoncl>
+          </taxoncl>
+        </taxoncl>
+      </taxoncl>
+    </taxonomy>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>Genotyping error rates are expected to be very low. A positive control sample was included on each plate to check for success of PCR amplification and correct binning in fragment analysis software. A negative control sample was included on each plate to check for contamination of PCR products. All microsatellite scoring was automated and then checked by experienced laboratory personnel. PCR was performed again on all samples with missing data due to weak or unamplified alleles. PCR amplifications that had to be repeated were done with single loci and not in a multiplexed PCR.</attraccr>
+    </attracc>
+    <logic>All data are within expected range and were screened for duplication.</logic>
+    <complete>Data includes all individuals collected within a 40-km reach at each of four sampling points in 2020.</complete>
+    <lineage>
+      <procstep>
+        <procdesc>Flathead catfish DNA was isolated from tissue samples using the Qiagen Blood and Tissue extraction kit (Qiagen, Valencia, CA, USA) and DNA was screened against the 25 candidate loci. Primers were modified to include a 19bp M13 tag [15] to the 5” end of each forward marker to facilitate use of the ABI 3500 capillary electrophoresic Genetic Analyzer. All 15µl PCR reactions were caried out with a third dye-labeled M13 primer complimentary to the tagged forward primer.
+
+Of the 25 candidate loci, six loci failed to amplify under varying conditions, including subjection to the 50 °C to 64 °C Gradient program on a Bio-Rad T100 thermal cycler. Another six loci proved to be monomorphic in the individuals analyzed. The remaining 13 loci that successfully amplified were ultimately chosen for our final panel based on clean amplification, free of artifacts and any co-amplification, number of alleles observed, and annealing temperature compatibility. Each of these 13 markers was re-labeled with a fluorescent dye (FAM, NED, VIC or PET) attached to the 5’ end of the forward primer for detection and fragment length analysis on the ABI 3500 as well as accommodating the multiplexing of multiple loci per reaction. Multiplex configurations were determined with the use of Multiplex Manager 1.0 software [17] resulting in three multiplex reactions or ABI 3500 Genetic Analyzer injections per individual.
+
+Multiplex PCR’s were generated on a T100 Thermal Cycler (BIO-RAD) in 96-well semi-skirted plates. Each reaction was 15 µl in total volume and contained 1.5 µl genomic DNA (~25 ng/µl), 4.6 µl of RNase-free water, 7.5 µl Qiagen Multiplex 1X MasterMix, 0.2-0.5µl of each primer. Cycling conditions included an initial activation or denaturing step of 95 °C for 15 min followed by 34 cycles of 94 °C denaturation for 30 sec, 55 °C to 58 °C annealing for 90 sec (MP-1 at 58 °C, MP-2 at 55 °C and MP-3 at 56°C), 72 °C extension step for 60 sec and a final extension of 60 °C for 60 sec. Upon cycling completion and cooling, 1 µl of each reaction was removed and added to 40 µl of RNase-free water. From this dilution, 1.5 µl was added to 12 µl ultra-grade formamide and 0.2 µl of GeneScan 500 LIZ size standard. This mixture was briefly spun to remove any bubbles that would impede capillary electrophoresis and then denatured for 5 min at 95 °C, cooled for 5 min then loaded on an 8-capillary ABI-3500 for fragment length analysis. Allele calling and binning was performed with GeneMapper 4.0 software (Applied Biosystems).</procdesc>
+        <procdate>20210301</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>DataRelease.csv</enttypl>
+        <enttypd>Comma Separated Value (CSV) file containing data.</enttypd>
+        <enttypds>Producer Defined</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>Sample Info</attrlabl>
+        <attrdef>Unique identifer for each fish</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <udom>A unique alphanumeric identifier indicating the sample location and number.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Sample Location</attrlabl>
+        <attrdef>The sample location</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>Schuylkill</edomv>
+            <edomvd>Fish caught in the Schuylkill River, Pennsylvania</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+        <attrdomv>
+          <edom>
+            <edomv>Lower_Susquehanna</edomv>
+            <edomvd>Fish caught in the Lower Susquehanna River in Pennsylvania and Maryland</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+        <attrdomv>
+          <edom>
+            <edomv>Middle_Susquehanna</edomv>
+            <edomvd>Fish caught in the middle Susquehanna River, Pennsylvania</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+        <attrdomv>
+          <edom>
+            <edomv>Upper_Susquehanna</edomv>
+            <edomvd>Fish caught in the upper Susquehanna River, Pennsylvania</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>GY113J02</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>366</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>GY113J02</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>366</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>GY047K03</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>180</rdommin>
+            <rdommax>204</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>GY047K03</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>180</rdommin>
+            <rdommax>198</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG0071</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>132</rdommin>
+            <rdommax>160</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG0071</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>132</rdommin>
+            <rdommax>156</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>71-75</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>114</rdommin>
+            <rdommax>132</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>71-75</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>112</rdommin>
+            <rdommax>130</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip077</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>110</rdommin>
+            <rdommax>124</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip077</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>110</rdommin>
+            <rdommax>124</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG00189</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>217</rdommin>
+            <rdommax>241</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG00189</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>217</rdommin>
+            <rdommax>241</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip271</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>156</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip271</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>156</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip357</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>118</rdommin>
+            <rdommax>133</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip357</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>118</rdommin>
+            <rdommax>127</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip365</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>112</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip365</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>0</rdommin>
+            <rdommax>112</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip372</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>183</rdommin>
+            <rdommax>195</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip372</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>183</rdommin>
+            <rdommax>195</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip554</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>212</rdommin>
+            <rdommax>216</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip554</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>212</rdommin>
+            <rdommax>216</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip591</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>131</rdommin>
+            <rdommax>143</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Ip591</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>131</rdommin>
+            <rdommax>143</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG0001</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>184</rdommin>
+            <rdommax>196</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>IpCG0001</attrlabl>
+        <attrdef>Microsatellite genotype (two scores per locus; "000" denotes a loci that was not scored)</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>184</rdommin>
+            <rdommax>196</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Sample Info.1</attrlabl>
+        <attrdef>Unique identifer for each fish. Repeated from column 1 to assist in data sorting.</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <udom>A unique alphanumeric identifier indicating the sample location and number.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Lat</attrlabl>
+        <attrdef>Latitude for the fish collection site</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>39.69213</rdommin>
+            <rdommax>41.178674</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Long</attrlabl>
+        <attrdef>Longitude for the fish collection site</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <rdom>
+            <rdommin>-76.94668100000001</rdommin>
+            <rdommax>-75.50627778</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Length (mm)</attrlabl>
+        <attrdef>Total length (mm) for each fish</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>&lt;&lt; empty cell &gt;&gt;</edomv>
+            <edomvd>No Data</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+        <attrdomv>
+          <rdom>
+            <rdommin>147.0</rdommin>
+            <rdommax>1066.8</rdommax>
+          </rdom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Capture Date</attrlabl>
+        <attrdef>Date a fish was captured</attrdef>
+        <attrdefs>Producer Defined</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>&lt;&lt; empty cell &gt;&gt;</edomv>
+            <edomvd>No Data</edomvd>
+            <edomvds>Producer defined</edomvds>
+          </edom>
+        </attrdomv>
+        <attrdomv>
+          <udom>Date</udom>
+        </attrdomv>
+      </attr>
+    </detailed>
+    <overview>
+      <eaover>Description of columns in the microsatellite dataset</eaover>
+      <eadetcit>NA</eadetcit>
+    </overview>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey</cntorg>
+          <cntper>GS ScienceBase</cntper>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+          <country>United States</country>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data on any other system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>https://doi.org/10.5066/P98U11RG</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20210804</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Shannon (Contractor) L White</cntper>
+          <cntorg>U.S. Geological Survey, NORTHEAST REGION</cntorg>
+        </cntperp>
+        <cntpos>Contractor</cntpos>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>11649 Leetown Road</address>
+          <city>Kearneysville</city>
+          <state>WV</state>
+          <postal>25430</postal>
+          <country>US</country>
+        </cntaddr>
+        <cntvoice>304-724-4400</cntvoice>
+        <cntemail>slwhite@contractor.usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>
