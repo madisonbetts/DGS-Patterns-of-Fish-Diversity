@@ -43,7 +43,7 @@ car::vif(lm_vif) #snapped_lon & tectonism -> removed snapped_lon
 phylo <- read.tree("Data/complete_tree.nwk")
 
 # phylogenetic variance-covariance matrix
-phylo_varcov <- vcv(phylo)
+phylo_varcov <- vcv(phylo[[1]])
 
 dat_lm$Spec_Latin_GenDivRange <- factor(
   dat_lm$Spec_Latin_GenDivRange,
@@ -85,10 +85,12 @@ lm1 <- glmmTMB(
   family = beta_family(link = "logit"),
   data = dat_lm
 )
+summary(lm1)
 ################### trying phyr###############################
 
 library(phyr)
 library(INLA)
+library(MASS)
 
 
 phyr_pglmm_full <- pglmm(
@@ -101,16 +103,17 @@ phyr_pglmm_full <- pglmm(
     
     # life history
     AREAKM2 + PATCHES +
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
     
     # random effects
     (1 | Study_id) +
     (1 | Spec_Latin_GenDivRange__), 
   data = dat_lm, 
   family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo)
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
 )
 summary(phyr_pglmm_full)
+
 
 
 
@@ -124,7 +127,7 @@ phyr_pglmm_loc <- pglmm(
     (1 | Spec_Latin_GenDivRange__), 
   data = dat_lm, 
   family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo)
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
 )
 summary(phyr_pglmm_loc)
 
@@ -139,7 +142,7 @@ phyr_pglmm_hist <- pglmm(
     (1 | Spec_Latin_GenDivRange__), 
   data = dat_lm, 
   family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo)
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
 )
 summary(phyr_pglmm_hist)
 
@@ -147,7 +150,6 @@ summary(phyr_pglmm_hist)
 phyr_pglmm_lh <- pglmm(
   He ~ 
     # life history
-    AREAKM2 + PATCHES +
     FECUNDITY + LONGEVITY + MAXTL + Anadromy +
     
     # random effects
@@ -155,6 +157,22 @@ phyr_pglmm_lh <- pglmm(
     (1 | Spec_Latin_GenDivRange__), 
   data = dat_lm, 
   family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo)
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
 )
 summary(phyr_pglmm_lh)
+
+
+  
+phyr_pglmm_bg <- pglmm(
+  He ~ 
+    # biogeography
+    AREAKM2 + PATCHES +
+      
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
+)
+summary(phyr_pglmm_bg)
