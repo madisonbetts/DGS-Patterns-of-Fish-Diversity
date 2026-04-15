@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Get the phylogeny for the PGLMM
 # cgh
 
@@ -154,4 +154,4 @@ plot(phy)
 write.tree(phy, file = "Data/complete_tree.nwk")
 
 
->>>>>>> dcffda7f045f6f1bc42e27652fd64776e8ef0bd7
+

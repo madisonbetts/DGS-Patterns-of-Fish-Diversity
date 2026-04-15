@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ######################################
 # Full Dataset Construction Pipeline #
 ######################################
@@ -504,4 +503,4 @@ st_write(
   delete_dsn = TRUE
 )
 
->>>>>>> dcffda7f045f6f1bc42e27652fd64776e8ef0bd7
+

@@ -21,7 +21,12 @@ dat_lm <- dat %>%
          AREAKM2, PATCHES, FECUNDITY, LONGEVITY, MAXTL
     ) %>%
   mutate(
-    Anadromy = ifelse(Habitat_adulthood == "Marine", 1, 0)
+    Anadromy = ifelse(Habitat_adulthood == "Marine", 1, 0),
+    AREAKM2 = ifelse(AREAKM2 %in% c(-555, -1, -999), NA_real_, AREAKM2),
+    PATCHES = ifelse(PATCHES %in% c(-555, -1, -999), NA_real_, PATCHES),
+    FECUNDITY = ifelse(FECUNDITY %in% c(-555, -1, -999), NA_real_, FECUNDITY),
+    LONGEVITY = ifelse(LONGEVITY %in% c(-555, -1, -999), NA_real_, LONGEVITY),
+    MAXTL = ifelse(MAXTL %in% c(-555, -1, -999), NA_real_, MAXTL)
   )
 
 dat_lm$Spec_Latin_GenDivRange <- gsub(" ", "_", dat_lm$Spec_Latin_GenDivRange)
@@ -39,17 +44,291 @@ lm_vif <- lm(
 
 car::vif(lm_vif) #snapped_lon & tectonism -> removed snapped_lon
 
+lm_vif <- lm(
+  He ~ N + N_loci + N_pops +
+    slope + elev + catch_area + stream_order +
+    Ice + Tectonic + Topography + SeaLevel +
+    AREAKM2 + PATCHES +
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+    snapped_lat,
+  data = dat_lm
+)
+car::vif(lm_vif)
+
 # load phylogeny
 phylo <- read.tree("Data/complete_tree.nwk")
 
 # phylogenetic variance-covariance matrix
-phylo_varcov <- vcv(phylo[[1]])
+phylo_varcov <- vcv(phylo)
 
 dat_lm$Spec_Latin_GenDivRange <- factor(
   dat_lm$Spec_Latin_GenDivRange,
   levels = rownames(phylo_varcov)
 )
 
+################### trying phyr###############################
+
+library(phyr)
+library(INLA)
+
+
+#########################
+# null
+phyr_pglmm_null <- pglmm(
+  He ~ 1 +
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(phyr_pglmm_null)
+#########################
+
+#########################
+m1 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # historical factors
+    History + snapped_lat +
+    
+    # Species Biogeography
+    AREAKM2 + PATCHES +
+    
+    # Species Life History
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m1)
+#########################
+
+#########################
+m2 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # historical factors
+    History + snapped_lat +
+    
+    # Species Biogeography
+    AREAKM2 + PATCHES +
+  
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m2)
+#########################
+
+#########################
+m3 <- pglmm(
+  He ~ 
+    # historical factors
+    History + snapped_lat +
+    
+    # Species Biogeography
+    AREAKM2 + PATCHES +
+    
+    # Species Life History
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+  
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m3)
+#########################
+
+#########################
+m4 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+        
+    # Species Biogeography
+    AREAKM2 + PATCHES +
+    
+    # Species Life History
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+  
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(m4)
+#########################
+
+#########################
+m5 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # historical factors
+    History + snapped_lat +
+    
+    # Species Life History
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+  
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(m5)
+#########################
+
+#########################
+m6 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # historical factors
+    History + snapped_lat +
+
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(m6)
+#########################
+
+#########################
+m7 <- pglmm(
+  He ~ 
+    # Species Biogeography
+    AREAKM2 + PATCHES +
+    
+    # Species Life History
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+  
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m7)
+#########################
+
+#########################
+m8 <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m8)
+#########################
+
+#########################
+m9 <- pglmm(
+  He ~ 
+    # historical factors
+    History + snapped_lat +
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(m9)
+
+m10 <- pglmm(
+  He ~ 
+    # biogeography
+    AREAKM2 + PATCHES +
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = F
+)
+summary(m10)
+#########################
+
+#########################
+m11 <- pglmm(
+  He ~ 
+    # life history
+    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo),
+  REML = F
+)
+summary(m11)
+
+
+phyr_pglmm_null$AIC
+m1$AIC
+m2$AIC
+m3$AIC
+m4$AIC
+m5$AIC
+m6$AIC
+m7$AIC
+m8$AIC
+m9$AIC
+m10$AIC
+m11$AIC
+  
+
+
+
+
+################################# an attempt at TMBglmm
 dat_lm$phylo_all <- factor("all")
 
 
@@ -75,7 +354,8 @@ lm1 <- glmmTMB(
     History +
     # life history
     #AREAKM2 + PATCHES +
-    #FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+    #FECUNDITY + LONGEVITY + MAXTL + 
+    Anadromy +
     snapped_lat +
     
     # random effects
@@ -86,93 +366,3 @@ lm1 <- glmmTMB(
   data = dat_lm
 )
 summary(lm1)
-################### trying phyr###############################
-
-library(phyr)
-library(INLA)
-library(MASS)
-
-
-phyr_pglmm_full <- pglmm(
-  He ~ 
-    # local factors
-    slope + elev + catch_area + stream_order +
-    
-    # historical factors
-    History + snapped_lat +
-    
-    # life history
-    AREAKM2 + PATCHES +
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy
-    
-    # random effects
-    (1 | Study_id) +
-    (1 | Spec_Latin_GenDivRange__), 
-  data = dat_lm, 
-  family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
-)
-summary(phyr_pglmm_full)
-
-
-
-
-phyr_pglmm_loc <- pglmm(
-  He ~ 
-    # local factors
-    slope + elev + catch_area + stream_order +
-    
-    # random effects
-    (1 | Study_id) +
-    (1 | Spec_Latin_GenDivRange__), 
-  data = dat_lm, 
-  family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
-)
-summary(phyr_pglmm_loc)
-
-
-phyr_pglmm_hist <- pglmm(
-  He ~ 
-    # historical factors
-    History + snapped_lat +
-    
-    # random effects
-    (1 | Study_id) +
-    (1 | Spec_Latin_GenDivRange__), 
-  data = dat_lm, 
-  family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
-)
-summary(phyr_pglmm_hist)
-
-
-phyr_pglmm_lh <- pglmm(
-  He ~ 
-    # life history
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
-    
-    # random effects
-    (1 | Study_id) +
-    (1 | Spec_Latin_GenDivRange__), 
-  data = dat_lm, 
-  family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
-)
-summary(phyr_pglmm_lh)
-
-
-  
-phyr_pglmm_bg <- pglmm(
-  He ~ 
-    # biogeography
-    AREAKM2 + PATCHES +
-      
-    # random effects
-    (1 | Study_id) +
-    (1 | Spec_Latin_GenDivRange__), 
-  data = dat_lm, 
-  family = "gaussian", 
-  cov_ranef = list(Spec_Latin_GenDivRange = phylo[[1]])
-)
-summary(phyr_pglmm_bg)
