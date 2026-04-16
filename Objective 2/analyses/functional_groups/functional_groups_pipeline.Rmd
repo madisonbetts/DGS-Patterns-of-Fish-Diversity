@@ -491,11 +491,14 @@ lda_scores <- as.data.frame(lda_pred$x)
 lda_scores$Functional_Group <- lda_data$Functional_Group
 lda_scores$Species <- rownames(lda_data)
 
-# Extract trait loadings on LD axes
-lda_loadings <- as.data.frame(lda_result$scaling) %>%
-  tibble::rownames_to_column("Trait") %>%
-  mutate(LD1_scaled = LD1 * 0.3,
-         LD2_scaled = LD2 * 0.3)
+# Get the range of the LDA scores to scale arrows appropriately
+lda_range <- max(abs(c(lda_scores$LD1, lda_scores$LD2)))
+
+lda_loadings <- lda_loadings %>%
+  mutate(arrow_length = sqrt(LD1^2 + LD2^2)) %>%
+  filter(arrow_length > quantile(arrow_length, 0.4)) %>%
+  mutate(LD1_scaled = LD1 / max(abs(LD1)) * lda_range * 0.4,
+         LD2_scaled = LD2 / max(abs(LD2)) * lda_range * 0.4)
 
 # LDA plot with ellipses and trait arrows
 lda_loadings <- lda_loadings %>%
