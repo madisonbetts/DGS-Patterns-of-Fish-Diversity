@@ -324,6 +324,25 @@ m9$AIC
 m10$AIC
 m11$AIC
   
+# Best model with REML for fixed effect terms
+m6_REML <- pglmm(
+  He ~ 
+    # local factors
+    slope + elev + catch_area + stream_order +
+    
+    # historical factors
+    History + snapped_lat +
+    
+    # random effects
+    (1 | Study_id) +
+    (1 | Spec_Latin_GenDivRange__), 
+  data = dat_lm, 
+  family = "gaussian", 
+  cov_ranef = list(Spec_Latin_GenDivRange = phylo), 
+  REML = T
+)
+summary(m6_REML)
+summary(m6)
 
 
 
