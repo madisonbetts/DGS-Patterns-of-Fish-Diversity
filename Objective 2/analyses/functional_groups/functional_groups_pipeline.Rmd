@@ -58,7 +58,7 @@ fish_traits_df <- read_excel(fish_traits)
 
 
 
-```{r data-cleaning}
+```{r data-cleaning, check species with FishTraits}
 #Make sure all metadata species names are in correct format
 fix_species_name <- function(name) {
   name <- str_trim(name)
@@ -113,13 +113,66 @@ if (nrow(flagged) > 0) {
 } else {
   cat("All species matched successfully.\n")
 }
+```
 
-# Get the matched species list
+```{r merge-new-species}
+new_species_path <- "C:/Users/mmbet/Documents/GitHub/DGS-Patterns-of-Fish-Diversity/Objective 2/analyses/functional_groups/fishtraits_newspecies.xlsx"
+new_species_df <- read_excel(new_species_path)
+
+# Coerce to numeric separately for each dataframe using only columns that exist in each
+fish_traits_numeric_cols <- setdiff(names(fish_traits_df), c("GENUS", "SPECIES"))
+new_species_numeric_cols <- setdiff(names(new_species_df), c("GENUS", "SPECIES", "Source"))
+
+fish_traits_df <- fish_traits_df %>%
+  dplyr::mutate(across(all_of(fish_traits_numeric_cols), ~ suppressWarnings(as.numeric(.))))
+
+new_species_df <- new_species_df %>%
+  dplyr::mutate(across(all_of(new_species_numeric_cols), ~ suppressWarnings(as.numeric(.))))
+
+# Check column alignment
+col_diff_new  <- setdiff(names(new_species_df), names(fish_traits_df))
+col_diff_orig <- setdiff(names(fish_traits_df), names(new_species_df))
+if (length(col_diff_new) > 0)  cat("Columns in new file but not FishTraits:", paste(col_diff_new, collapse = ", "), "\n")
+if (length(col_diff_orig) > 0) cat("Columns in FishTraits but not new file:", paste(col_diff_orig, collapse = ", "), "\n")
+
+# Merge — bind_rows fills missing columns with NA automatically
+fish_traits_df <- bind_rows(fish_traits_df, new_species_df)
+cat("New species added:", nrow(new_species_df), "\n")
+cat("Combined FishTraits total:", nrow(fish_traits_df), "\n")
+```
+
+```{r data-cleaning-final}
+# Rebuild FishTraits species list with merged data
+fish_traits_sp <- fish_traits_df %>%
+  dplyr::filter(!is.na(GENUS) & !is.na(SPECIES)) %>%
+  dplyr::mutate(
+    FishTraits_sp = paste0(
+      toupper(substr(GENUS, 1, 1)), tolower(substr(GENUS, 2, nchar(GENUS))),
+      " ",
+      tolower(SPECIES)
+    )
+  ) %>%
+  dplyr::distinct(FishTraits_sp)
+
+# Re-check matching against merged FishTraits
+abbr_sp_metadata <- abbr_sp_metadata %>%
+  dplyr::mutate(
+    In_FishTraits = Abbr_sp_metadata %in% fish_traits_sp$FishTraits_sp,
+    Flag = ifelse(!In_FishTraits, "NOT FOUND in FishTraits", "")
+  )
+
+cat("After merge — unmatched species:", sum(!abbr_sp_metadata$In_FishTraits), "\n")
+flagged_remaining <- abbr_sp_metadata %>% dplyr::filter(Flag != "")
+if (nrow(flagged_remaining) > 0) {
+  cat("Still unmatched (check name formatting in fishtraits_newspecies.xlsx):\n")
+  cat(paste(flagged_remaining$Abbr_sp_metadata, collapse = ", "), "\n")
+}
+
+# matched_species now includes original FishTraits matches + newly added species
 matched_species <- abbr_sp_metadata %>%
   dplyr::filter(In_FishTraits == TRUE) %>%
   dplyr::pull(Abbr_sp_metadata)
 
-# Build FishTraits metadata for matched species
 fishtraits_metadata <- fish_traits_df %>%
   dplyr::mutate(
     FishTraits_sp = paste0(
@@ -130,33 +183,27 @@ fishtraits_metadata <- fish_traits_df %>%
   ) %>%
   dplyr::filter(FishTraits_sp %in% matched_species) %>%
   dplyr::mutate(
-    # Combine fine sediment columns into one binary
-    FINESED   = ifelse(MUCK == 1 | CLAYSILT == 1 | SAND == 1, 1, 0),
-    # Combine coarse sediment columns into one binary
-    COARSESED = ifelse(GRAVEL == 1 | COBBLE == 1 | BOULDER == 1 | BEDROCK == 1, 1, 0),
-    # Combine debris/vegetation columns into one binary
-    DEBRIS    = ifelse(VEGETAT == 1 | DEBRDETR == 1 | LWD == 1, 1, 0)
+    # Only recalculate from raw columns if they exist for that row,
+    # otherwise preserve the pre-computed values from fishtraits_newspecies
+    FINESED   = ifelse(!is.na(MUCK) | !is.na(CLAYSILT) | !is.na(SAND),
+                       ifelse(MUCK == 1 | CLAYSILT == 1 | SAND == 1, 1, 0),
+                       FINESED),
+    COARSESED = ifelse(!is.na(GRAVEL) | !is.na(COBBLE) | !is.na(BOULDER) | !is.na(BEDROCK),
+                       ifelse(GRAVEL == 1 | COBBLE == 1 | BOULDER == 1 | BEDROCK == 1, 1, 0),
+                       COARSESED),
+    DEBRIS    = ifelse(!is.na(VEGETAT) | !is.na(DEBRDETR) | !is.na(LWD),
+                       ifelse(VEGETAT == 1 | DEBRDETR == 1 | LWD == 1, 1, 0),
+                       DEBRIS)
   ) %>%
   dplyr::select(
     FishTraits_sp,
-    MAXTL, LONGEVITY, MATUAGE, FECUNDITY, 
+    MAXTL, LONGEVITY, MATUAGE, FECUNDITY,
     SLOWCURR, MODCURR, FASTCURR,
     LARGERIV, SMALLRIV, SPRGSUBT, CREEK,
     SURWCOL, BENTHIC,
     FINESED, COARSESED, DEBRIS
-  )
-# Replace FishTraits missing data codes with NA
-fishtraits_metadata <- fishtraits_metadata %>%
+  ) %>%
   dplyr::mutate(across(-FishTraits_sp, ~ ifelse(. %in% c(-555, -999, -1), NA, .)))
-
-#check continuous variables for NAs
-cat("Summary of continuous traits:\n")
-print(summary(fishtraits_metadata[, c("LONGEVITY", "MATUAGE", "FECUNDITY")]))
-
-# Report how many NAs per column after replacement
-cat("Missing values per trait after replacing FishTraits codes:\n")
-print(colSums(is.na(fishtraits_metadata %>% dplyr::select(-FishTraits_sp))))
-print(fishtraits_metadata)
 ```
 
 Compute Gower Distance and Run PCoA
