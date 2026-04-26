@@ -345,6 +345,16 @@ summary(m6_REML)
 summary(m6)
 
 
+fixef_df <- data.frame(
+  term = rownames(m6_REML$B),
+  estimate = as.numeric(m6_REML$B),
+  se = as.numeric(m6_REML$B.se)
+) %>%
+  mutate(
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se
+  )
+
 
 
 ################################# an attempt at TMBglmm
