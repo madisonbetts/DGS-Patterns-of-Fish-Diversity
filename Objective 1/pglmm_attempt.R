@@ -348,13 +348,89 @@ summary(m6)
 fixef_df <- data.frame(
   term = rownames(m6_REML$B),
   estimate = as.numeric(m6_REML$B),
-  se = as.numeric(m6_REML$B.se)
+  se = as.numeric(m6_REML$B.se),
+  pval = as.numeric(m6_REML$B.pvalue)
 ) %>%
   mutate(
     lower = estimate - 1.96 * se,
     upper = estimate + 1.96 * se
   )
 
+fixef_df <- fixef_df %>%
+  mutate(
+    sig = case_when(
+      pval < 0.001 ~ "***",
+      pval < 0.01  ~ "**",
+      pval < 0.05  ~ "*",
+      TRUE ~ "ns"
+    ),
+    term_clean = gsub("^History", "", term),
+    term_clean = gsub("\\(Intercept\\)", "Intercept", term_clean)
+  )
+
+
+fixef_df <- fixef_df %>%
+  arrange(estimate) %>%
+  mutate(term_clean = factor(term_clean, levels = term_clean))
+
+fixef_df <- fixef_df %>%
+  filter(term != "(Intercept)")
+
+fixef_df$group <- ifelse(grepl("History", fixef_df$term),
+                         "History",
+                         "Local / Spatial")
+
+ggplot(filter(fixef_df, group == "History"), aes(x = estimate, y = term_clean)) +
+  # zero reference line
+  geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
+  # confidence intervals
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  # points colored by significance
+  geom_point(size = 3) +
+  geom_text(
+    aes(label = sig),
+    nudge_y = 0.25,
+    size = 4,
+    vjust = 0
+  ) +
+  # labels
+  labs(
+    x = "Effect size (estimate ± 95% CI)",
+    y = "",
+    shape = "Significance",
+    title = "Historical Fixed Effects"
+  ) +
+  # clean theme
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank()
+  )
+
+ggplot(filter(fixef_df, group == "Local / Spatial"), aes(x = estimate, y = term_clean)) +
+  # zero reference line
+  geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
+  # confidence intervals
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  # points colored by significance
+  geom_point(size = 3) +
+  geom_text(
+    aes(label = sig),
+    nudge_y = 0.25,
+    size = 4,
+    vjust = 0
+  ) +
+  # labels
+  labs(
+    x = "Effect size (estimate ± 95% CI)",
+    y = "",
+    shape = "Significance",
+    title = "Local Fixed Effects"
+  ) +
+  # clean theme
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank()
+  )
 
 
 ################################# an attempt at TMBglmm
