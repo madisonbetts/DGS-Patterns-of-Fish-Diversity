@@ -312,18 +312,17 @@ summary(m11)
 
 
 phyr_pglmm_null$AIC
-m1$AIC
-m2$AIC
-m3$AIC
-m4$AIC
-m5$AIC
-m6$AIC
-m7$AIC
-m8$AIC
-m9$AIC
-m10$AIC
-m11$AIC
-  
+aics <- c(phyr_pglmm_null$AIC,m1$AIC,m2$AIC,m3$AIC,m4$AIC,m5$AIC,
+          m6$AIC,m7$AIC,m8$AIC,m9$AIC,m10$AIC,
+          m11$AIC)
+
+delta_aic <- aics - min(aics) 
+
+rel_lik <- exp(-0.5 * delta_aic)
+
+weights <- rel_lik / sum(rel_lik)
+print(weights)
+
 # Best model with REML for fixed effect terms
 m6_REML <- pglmm(
   He ~ 
