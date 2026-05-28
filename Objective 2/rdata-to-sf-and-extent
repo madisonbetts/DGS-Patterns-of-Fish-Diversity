@@ -1,0 +1,17 @@
+#create list of files
+data_files <- list.files(pattern = "*.RData")
+
+#load in the files
+lapply(data_files, load, .GlobalEnv)
+
+#pull just the coordinates out of the data file
+data_list <- list(mget(ls(pattern = "*_coords")))[[1]]
+
+#convert everything in the list to sf object
+data_list <- lapply(data_list, function(df) {
+  st_as_sf(df, coords = c("lon", "lat"), crs = 4326)
+})
+
+#create a list of all extents
+data_extent <- lapply(data_list, function(sf) {
+  ext(data_list$ACOX_1_coords)*2})
