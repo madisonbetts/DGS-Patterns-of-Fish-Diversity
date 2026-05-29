@@ -182,7 +182,7 @@ fish_traits <- read_excel("Data/FishTraits_14.3.xls") %>%
   ) %>%
   select(ScientificName, AREAKM2, PATCHES, FECUNDITY, LONGEVITY, MAXTL)
 
-dat_sf_t <- dat_sf %>%
+dat_sf <- dat_sf %>%
   mutate(
     Spec_Latin_clean = str_to_lower(str_trim(Spec_Latin_GenDivRange))
   ) %>%
@@ -194,10 +194,10 @@ dat_sf_t <- dat_sf %>%
 # Remove weird stuff #
 ######################
 
-#taxa_to_remove <- c("Neogobius melanostomus", "Syngnathus scovelli")
+taxa_to_remove <- c("Neogobius melanostomus", "Syngnathus scovelli")
 
-#dat_sf <- dat_sf %>%
-#  filter(!Spec_Latin_GenDivRange %in% taxa_to_remove)
+dat_sf <- dat_sf %>%
+  filter(!Spec_Latin_GenDivRange %in% taxa_to_remove) # 99 studies, 1016 sites
 
 ##########
 # Export #

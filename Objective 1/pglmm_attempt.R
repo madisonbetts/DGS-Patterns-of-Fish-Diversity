@@ -11,15 +11,6 @@ library(ggplot2)
 dat <- read.csv("Data/final_fish_dataset.csv")
 
 dat_lm <- dat %>%
-  select(
-    Study_id, Spec_Latin_GenDivRange, N_pops, N_loci, 
-         Order_GBIF, Family_GBIF, Habitat_adulthood, Habitat_breeding, 
-         Habitat_fishbase, Pop_id, N, A, A_mean, A_tot, A_eff, A_private, 
-         N_genot, Ar, Ho, He, GD_Nei, D_clonal, F_is, F_is_sig, Ploidy,
-         snapped_lon, snapped_lat, stream_order, catch_area, slope, elev,
-         WSA9, Ice, Tectonic, SeaLevel, SeaShort, Topography, History,
-         AREAKM2, PATCHES, FECUNDITY, LONGEVITY, MAXTL
-    ) %>%
   mutate(
     Anadromy = ifelse(Habitat_adulthood == "Marine", 1, 0),
     AREAKM2 = ifelse(AREAKM2 %in% c(-555, -1, -999), NA_real_, AREAKM2),
@@ -31,29 +22,31 @@ dat_lm <- dat %>%
 
 dat_lm$Spec_Latin_GenDivRange <- gsub(" ", "_", dat_lm$Spec_Latin_GenDivRange)
 
+############################### UNDER CONSTRUCTION #############################
 # testing for multicolinearity
-lm_vif <- lm(
-  He ~ N + N_loci + N_pops +
-    slope + elev + catch_area + stream_order +
-    Ice + Tectonic + Topography + SeaLevel +
-    AREAKM2 + PATCHES +
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
-    snapped_lat + snapped_lon,
-  data = dat_lm
-)
+#lm_vif <- lm(
+#  He ~ N + N_loci + N_pops +
+#    slope + elev + catch_area + stream_order +
+#    Ice + Tectonic + Topography + SeaLevel +
+#    AREAKM2 + PATCHES +
+#    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+#    snapped_lat + snapped_lon,
+#  data = dat_lm
+#)
 
-car::vif(lm_vif) #snapped_lon & tectonism -> removed snapped_lon
+#car::vif(lm_vif) #snapped_lon & tectonism -> removed snapped_lon
 
-lm_vif <- lm(
-  He ~ N + N_loci + N_pops +
-    slope + elev + catch_area + stream_order +
-    Ice + Tectonic + Topography + SeaLevel +
-    AREAKM2 + PATCHES +
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
-    snapped_lat,
-  data = dat_lm
-)
-car::vif(lm_vif)
+#lm_vif <- lm(
+#  He ~ N + N_loci + N_pops +
+#    slope + elev + catch_area + stream_order +
+#    Ice + Tectonic + Topography + SeaLevel +
+#    AREAKM2 + PATCHES +
+#    FECUNDITY + LONGEVITY + MAXTL + Anadromy +
+#    snapped_lat,
+#  data = dat_lm
+#)
+#car::vif(lm_vif)
+############################################################################
 
 # load phylogeny
 phylo <- read.tree("Data/complete_tree.nwk")
@@ -90,17 +83,27 @@ summary(phyr_pglmm_null)
 #########################
 m1 <- pglmm(
   He ~ 
+    # climatic factors
+    lc_j_precip + nc_j_precip +
+    
     # local factors
-    slope + elev + catch_area + stream_order +
+    #fl_slope + 
+    lc_meanelev + nc_areasqkm + streamorder +
+    
+    #lc_urban_combined_2019 + nc_urban_combined_2019 + 
+    #lc_ag_combined_2019 + nc_ag_combined_2019 +
+    #lc_rdxing_length_density + 
+    lc_sarp_barrier_density + lc_rdxing_length_density +
+    lc_nani +
     
     # historical factors
-    History + snapped_lat +
+    Ice + Latitude +
     
     # Species Biogeography
-    AREAKM2 + PATCHES +
+    #AREAKM2 + PATCHES +
     
     # Species Life History
-    FECUNDITY + LONGEVITY + MAXTL + Anadromy
+    #FECUNDITY + LONGEVITY + MAXTL + Anadromy
     
     # random effects
     (1 | Study_id) +
