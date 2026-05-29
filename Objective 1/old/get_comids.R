@@ -1,10 +1,9 @@
 # get comids
 
+setwd("~/grad_research/macrogen/DGS-Patterns-of-Fish-Diversity/Objective 1")
 
 packages <- c(
-  "sf","dplyr","readxl","readr","stringr",
-  "nhdplusTools","tigris","terra","elevatr",
-  "FedData","units","tidyverse", "arrow", "bit64"
+  "sf","dplyr","nhdplusTools", "tigris"
 )
 
 new_packages <- packages[!(packages %in% installed.packages()[,"Package"])]
@@ -24,7 +23,8 @@ dat_sf <- st_as_sf(dat, coords = c("Longitude", "Latitude"), crs = 4326)
 
 
 # loop through all pops to grab comid
-for (i in 277:420){
+# Totally throttles the API but this'll work for now
+for (i in 1:nrow(dat_sf)){
   id <- tryCatch(discover_nhdplus_id(dat_sf[i,], raindrop = T)[1,], 
                  error = function(e) NULL)
   
@@ -41,39 +41,27 @@ for (i in 277:420){
 
 }
 
+# rm rows with NA in comid
+dat_sf <- dat_sf %>%
+  filter(!is.na(comid))
+length(unique(dat_sf$Study_id)) # 103
+length(unique(dat_sf$Pop_id)) # 1156
 
-dat_sf_subset <- dat_sf[277:420, ]
+dat_sf <- dat_sf %>%
+  filter(raindrop_pathDist < 1000)
+length(unique(dat_sf$Study_id)) # 101
+length(unique(dat_sf$Pop_id)) # 1023
 
-file_path <- "../../../../../Downloads/nhdplusv2_landscape_variables_01302026_0952am.csv"
 
-# get column names
-col_names <- names(
-  read_csv(file_path, n_max = 0, show_col_types = FALSE)
-)
+states <- tigris::states(cb = TRUE, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c('HI', 'PR', 'AK', 'MP', 'GU', 'AS', 'VI')) |>
+  st_transform(crs = 5070)
 
-# default everything to float64
-schema_list <- setNames(
-  rep(list(float64()), length(col_names)),
-  col_names
-)
+ggplot() +
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = dat_sf, aes(color = He))
 
-# override character columns
-schema_list[["gnis_name"]] <- string()
-schema_list[["ftype"]] <- string()
-schema_list[["summer_temp_mean_class"]] <- string()
-
-# build schema
-custom_schema <- schema(schema_list)
-
-# open csv
-landsc2 <- open_csv_dataset(
-  file_path,
-  schema = custom_schema,
-  skip = 1
-)
-result <- landsc2 %>%
-  filter(comid %in% dat_sf_subset$comid) %>%
-  collect()
+saveRDS(dat_sf, file = "Data/GDR_w_comids.rds")
 
 
 
