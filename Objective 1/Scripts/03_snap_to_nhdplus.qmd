@@ -1,0 +1,356 @@
+---
+title: "Objective 1 — Snap populations to NHDPlusV2"
+subtitle: "Macrogenetics of US freshwater fishes"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    embed-resources: true
+execute:
+  warning: true
+  message: false
+---
+
+## Purpose
+
+Assigns each population an NHDPlusV2 COMID using a local copy of the
+NHDPlusV2.1 national seamless geodatabase. Everything runs offline against a
+fixed data version, so results are reproducible.
+
+For each population:
+
+1. **Catchment COMID:** the NHDPlusV2 catchment polygon the point falls in.
+   This is the COMID used downstream, because the `lc_` landscape variables
+   summarise the local catchment.
+2. **Offset to its own flowline:** straight-line distance (m) from the point
+   to the flowline of that catchment, used for the distance cutoff.
+3. **Nearest flowline:** the COMID and distance of the closest network
+   flowline, used only to flag points where the nearest stream belongs to a
+   different catchment (usually near confluences or catchment edges).
+
+The output is a lookup table keyed by `Pop_id`. It contains no genetic data
+and is joined to everything else in the final assembly script.
+
+## Setup
+
+```{r}
+#| label: setup
+library(here)
+library(dplyr)
+library(readr)
+library(sf)
+library(nhdplusTools)
+library(tigris)
+library(ggplot2)
+library(knitr)
+
+sf::sf_use_s2(FALSE)               # all geometry work is planar in EPSG:5070
+options(tigris_use_cache = TRUE)
+
+fmt <- function(x) format(x, big.mark = ",")
+pct <- function(x, n) paste0(round(100 * x / n, 1), "%")
+```
+
+```{r}
+#| label: paths
+path_pops    <- here("Data", "interim", "GenDiv_merged.csv")
+dir_nhd      <- here("Data", "external", "nhdplusv2")
+path_out     <- here("Data", "interim", "comid_lookup.csv")
+```
+
+```{r}
+#| label: parameters
+crs_work      <- 5070                    # CONUS Albers, metres
+crs_nhd       <- st_crs(4269)            # NAD83; CRS of the national seamless gdb
+max_offset_m  <- 1000                    # same cutoff as the original pipeline
+search_m      <- 2 * max_offset_m        # search wider than the cutoff to see near misses
+aoi_buffer_m  <- search_m + 1000         # area read from the gdb around each point
+
+# Set to TRUE once to download (~7.8 GB). Extraction uses the archive
+# package, so 7-Zip isn't required.
+download_if_missing <- FALSE
+```
+
+## NHDPlusV2 national data
+
+```{r}
+#| label: locate-gdb
+find_gdb <- function(dir) {
+  if (!dir.exists(dir)) return(character(0))
+  list.files(dir, pattern = "\\.gdb$", recursive = TRUE,
+             include.dirs = TRUE, full.names = TRUE)
+}
+
+find_7z <- function(dir) {
+  if (!dir.exists(dir)) return(character(0))
+  list.files(dir, pattern = "\\.7z$", full.names = TRUE)
+}
+
+gdb <- find_gdb(dir_nhd)
+
+if (length(gdb) == 0) {
+  # Download only if there's no archive already sitting in dir_nhd
+  if (length(find_7z(dir_nhd)) == 0) {
+    if (!download_if_missing) {
+      stop("No NHDPlusV2 geodatabase or archive found in ", dir_nhd,
+           ". Set download_if_missing <- TRUE to download it.")
+    }
+    dir.create(dir_nhd, recursive = TRUE, showWarnings = FALSE)
+    # nhdplusTools also tries to extract with 7-Zip; if 7-Zip isn't
+    # installed it leaves the .7z in place, which is extracted below
+    tryCatch(download_nhdplusv2(outdir = dir_nhd), error = function(e) NULL)
+  }
+
+  archive_7z <- find_7z(dir_nhd)
+  stopifnot("Expected exactly one .7z archive in dir_nhd" = length(archive_7z) == 1)
+
+  # Extract with libarchive; no 7-Zip install needed. Slow and needs free
+  # disk space well beyond the archive's size.
+  archive::archive_extract(archive_7z, dir = dir_nhd)
+  gdb <- find_gdb(dir_nhd)
+}
+
+stopifnot("Expected exactly one .gdb in dir_nhd" = length(gdb) == 1)
+
+layers <- st_layers(gdb)$name
+stopifnot(
+  "Catchment layer not found"           = "Catchment" %in% layers,
+  "NHDFlowline_Network layer not found" = "NHDFlowline_Network" %in% layers
+)
+```
+
+Using **`r basename(gdb)`**.
+
+## Populations
+
+```{r}
+#| label: read-pops
+pops <- read_csv(path_pops, show_col_types = FALSE) |>
+  select(Pop_id, Study_id, Latitude, Longitude)
+
+stopifnot("Pop_id is not unique" = !anyDuplicated(pops$Pop_id))
+
+pops_sf <- st_as_sf(pops, coords = c("Longitude", "Latitude"), crs = 4326,
+                    remove = FALSE) |>
+  st_transform(crs_work)
+```
+
+There are **`r fmt(nrow(pops))`** populations from
+**`r fmt(n_distinct(pops$Study_id))`** studies to snap.
+
+## Read NHDPlusV2 around the populations
+
+Only catchments and flowlines near a population are read. Populations are
+grouped into grid tiles, and each tile is read with a small rectangular
+filter, which the geodatabase's spatial index can answer quickly. (A single
+filter shaped like all the buffered points spans the whole country, so GDAL
+ends up scanning and testing every catchment in the nation.)
+
+```{r}
+#| label: aoi-tiles
+tile_size_deg <- 0.5
+
+# One rectangle (in the gdb's CRS) per occupied tile, covering that tile's
+# buffered points
+tile_boxes <- pops_sf |>
+  mutate(tile = paste(floor(Longitude / tile_size_deg),
+                      floor(Latitude / tile_size_deg))) |>
+  st_buffer(aoi_buffer_m) |>
+  st_transform(crs_nhd) |>
+  split(~tile) |>
+  lapply(\(x) st_as_text(st_as_sfc(st_bbox(x))))
+```
+
+The populations fall in **`r fmt(length(tile_boxes))`** tiles.
+
+```{r}
+#| label: read-nhd
+# Use ring orientation (ESRI convention) to build multipart polygons instead
+# of GDAL's slow default geometric test
+Sys.setenv(OGR_ORGANIZE_POLYGONS = "ONLY_CCW")
+
+read_tiles <- function(layer, id_col) {
+  lapply(tile_boxes, \(b) st_read(gdb, layer = layer, wkt_filter = b,
+                                  quiet = TRUE) |>
+           st_zm()) |>                           # flowlines carry Z/M values
+    do.call(what = rbind) |>
+    distinct(.data[[id_col]], .keep_all = TRUE)   # tiles overlap at edges
+}
+
+catchments <- read_tiles("Catchment", "FEATUREID")
+flowlines  <- read_tiles("NHDFlowline_Network", "COMID")
+
+stopifnot(
+  "Unexpected CRS in gdb; update crs_nhd" = st_crs(catchments) == crs_nhd,
+  "FEATUREID missing from catchments"     = "FEATUREID" %in% names(catchments),
+  "COMID missing from flowlines"          = "COMID" %in% names(flowlines)
+)
+
+catchments <- catchments |>
+  select(comid = FEATUREID) |>
+  st_transform(crs_work) |>
+  st_make_valid()
+
+flowlines <- flowlines |>
+  st_zm() |>
+  select(COMID) |>
+  st_transform(crs_work)
+```
+
+Read **`r fmt(nrow(catchments))`** catchments and
+**`r fmt(nrow(flowlines))`** network flowlines.
+
+## Step 1 — Catchment containing each point
+
+```{r}
+#| label: catchment-join
+catch_hits <- pops_sf |>
+  select(Pop_id) |>
+  st_join(catchments, join = st_intersects, left = TRUE) |>
+  st_drop_geometry() |>
+  group_by(Pop_id) |>
+  summarise(
+    n_catchments = sum(!is.na(comid)),
+    comid        = first(comid),     # points on a shared edge: keep the first
+    .groups      = "drop"
+  )
+```
+
+**`r fmt(sum(catch_hits$n_catchments > 0))`** populations
+(`r pct(sum(catch_hits$n_catchments > 0), nrow(pops))`) fall inside an
+NHDPlusV2 catchment; **`r fmt(sum(catch_hits$n_catchments == 0))`** do not.
+`r fmt(sum(catch_hits$n_catchments > 1))` sit exactly on a boundary between
+catchments and were assigned the first match.
+
+## Step 2 — Distance to flowlines
+
+```{r}
+#| label: flowline-index
+# Nearest network flowline; kept only if within search_m
+i_near <- st_nearest_feature(pops_sf, flowlines)
+
+nearest <- tibble(
+  Pop_id           = pops_sf$Pop_id,
+  comid_nearest    = flowlines$COMID[i_near],
+  offset_nearest_m = as.numeric(st_distance(pops_sf, flowlines[i_near, ],
+                                            by_element = TRUE))
+) |>
+  filter(offset_nearest_m <= search_m)
+
+# Distance to the flowline of the point's own catchment
+own <- catch_hits |>
+  filter(!is.na(comid)) |>
+  mutate(has_flowline = comid %in% flowlines$COMID)
+
+own$offset_own_m <- NA_real_
+i <- own$has_flowline
+own$offset_own_m[i] <- as.numeric(st_distance(
+  pops_sf[match(own$Pop_id[i], pops_sf$Pop_id), ],
+  flowlines[match(own$comid[i], flowlines$COMID), ],
+  by_element = TRUE
+))
+```
+
+`r fmt(sum(!own$has_flowline))` of the catchments containing a population
+have no network flowline (e.g., isolated sinks or coastal catchments), so
+those populations get no offset.
+
+## Classify and apply the distance cutoff
+
+```{r}
+#| label: classify
+lookup <- pops |>
+  select(Pop_id, Study_id) |>
+  left_join(catch_hits, by = "Pop_id") |>
+  left_join(select(own, Pop_id, offset_own_m), by = "Pop_id") |>
+  left_join(nearest, by = "Pop_id") |>
+  mutate(
+    status = case_when(
+      is.na(comid)                     ~ "no_catchment",
+      is.na(offset_own_m)              ~ "no_flowline",
+      offset_own_m > max_offset_m      ~ "too_far",
+      comid != comid_nearest |
+        is.na(comid_nearest)           ~ "nearest_differs",
+      TRUE                             ~ "ok"
+    ),
+    retained = status %in% c("ok", "nearest_differs")
+  )
+
+stopifnot(
+  "Rows lost or duplicated" = nrow(lookup) == nrow(pops),
+  "Pop_id duplicated"       = !anyDuplicated(lookup$Pop_id)
+)
+```
+
+```{r}
+#| label: status-summary
+lookup |>
+  count(status, retained, name = "populations") |>
+  mutate(share = pct(populations, nrow(lookup))) |>
+  kable(format.args = list(big.mark = ","))
+```
+
+**`r fmt(sum(lookup$retained))`** populations
+(`r pct(sum(lookup$retained), nrow(lookup))`) from
+**`r fmt(n_distinct(lookup$Study_id[lookup$retained]))`** studies pass:
+
+- `r fmt(sum(lookup$status == "no_catchment"))` are outside every catchment
+  (typically Great Lakes open water, large estuaries or the coast).
+- `r fmt(sum(lookup$status == "no_flowline"))` are in a catchment without a
+  network flowline.
+- `r fmt(sum(lookup$status == "too_far"))` are more than
+  `r fmt(max_offset_m)` m from their catchment's flowline.
+- `r fmt(sum(lookup$status == "nearest_differs"))` are retained, but the
+  nearest flowline belongs to a different catchment. These are worth checking
+  on a map.
+
+Populations sharing a COMID after snapping:
+`r fmt(sum(table(lookup$comid[lookup$retained]) > 1))` COMIDs hold more than
+one retained population.
+
+## Map
+
+```{r}
+#| label: map
+#| fig-width: 9
+#| fig-height: 5.5
+states <- tigris::states(cb = TRUE, year = 2023, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c("HI", "PR", "AK", "MP", "GU", "AS", "VI")) |>
+  st_transform(crs_work)
+
+map_dat <- pops_sf |>
+  left_join(select(lookup, Pop_id, status), by = "Pop_id")
+
+ggplot() +
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = map_dat, aes(color = status), size = 1.2) +
+  scale_color_manual(values = c(
+    ok              = "grey55",
+    nearest_differs = "#E69F00",
+    too_far         = "#D55E00",
+    no_flowline     = "#CC79A7",
+    no_catchment    = "#0072B2"
+  )) +
+  theme_minimal()
+```
+
+## Write output
+
+```{r}
+#| label: write-output
+lookup |>
+  select(Pop_id, comid, comid_nearest, offset_own_m, offset_nearest_m,
+         n_catchments, status, retained) |>
+  mutate(nhdplus_source = basename(gdb)) |>
+  write_csv(path_out)
+```
+
+Wrote **`r fmt(nrow(lookup))`** rows to `r basename(path_out)`. All
+populations are kept in the lookup, with `retained` marking those that pass;
+the final assembly script filters on it.
+
+

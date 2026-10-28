@@ -1,0 +1,107 @@
+---
+title: "Objective 1 — Merge datasets"
+subtitle: "Macrogenetics of US freshwater fishes"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    embed-resources: true
+execute:
+  warning: true
+  message: false
+---
+
+## Purpose
+
+This document combines the filtered GenDiv populations from
+`01_initial_filtering.qmd` with additional studies compiled externally
+using the same criteria, and writes the merged table for downstream
+Objective 1 analyses.
+
+
+## Setup
+
+```{r}
+#| label: setup
+library(here)
+library(dplyr)
+library(sf)
+library(tigris)
+library(ggplot2)
+
+sf::sf_use_s2(FALSE)
+options(tigris_use_cache = TRUE)
+
+fmt <- function(x) format(x, big.mark = ",")
+```
+
+```{r}
+#| label: paths
+
+path_gendiv <- here("Data", "interim", "GenDiv_filtered.csv")
+path_new    <- here("Data", "external", "new_studies_vYYYY-MM-DD.csv")
+path_out    <- here("Data", "interim", "GenDiv_merged.csv")
+```
+
+## Read data
+
+```{r}
+#| label: read
+gendiv <- read.csv(path_gendiv)
+
+has_new <- file.exists(path_new)
+new_dat <- if (has_new) read.csv(path_new) else gendiv[0, ]
+```
+
+GenDiv has **`r fmt(nrow(gendiv))`** populations from
+**`r fmt(n_distinct(gendiv$Study_id))`** studies and
+**`r fmt(n_distinct(gendiv$Spec_id))`** species.
+`r if (has_new) paste0("The external dataset has **", fmt(nrow(new_dat)), "** populations from **", fmt(n_distinct(new_dat$Study_id)), "** studies and **", fmt(n_distinct(new_dat$Spec_id)), "** species.") else "**No external file found yet**, so the merge below contains GenDiv populations only."`
+
+## Merge
+
+```{r}
+#| label: merge
+merged <- rbind(gendiv, new_dat)
+```
+
+The merged dataset has **`r fmt(nrow(merged))`** populations from
+**`r fmt(n_distinct(merged$Study_id))`** studies and
+**`r fmt(n_distinct(merged$Spec_id))`** species.
+
+## Map of all populations
+
+```{r}
+#| label: map
+#| fig-width: 9
+#| fig-height: 5.5
+states <- tigris::states(cb = TRUE, year = 2023, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c("HI", "PR", "AK", "MP", "GU", "AS", "VI")) |>
+  st_transform(crs = 5070)
+
+merged_sf <- st_as_sf(merged, coords = c("Longitude", "Latitude"), crs = 4326) |>
+  st_transform(crs = 5070)
+
+ggplot() +
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = merged_sf, aes(color = He)) +
+  scale_color_viridis_c(
+    option = "magma",
+    limits = range(merged$He),
+    breaks = seq(0.1, 0.9, by = 0.2)
+  ) +
+  theme_minimal()
+```
+
+## Write output
+
+```{r}
+#| label: write-output
+write.csv(merged, path_out, row.names = FALSE)
+```
+
+Wrote **`r fmt(nrow(merged))`** rows × `r ncol(merged)` columns to
+`r basename(path_out)`.

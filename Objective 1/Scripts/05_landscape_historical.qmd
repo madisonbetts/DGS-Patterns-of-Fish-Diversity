@@ -1,0 +1,259 @@
+---
+title: "Objective 1 — Historical landscape variables"
+subtitle: "Macrogenetics of US freshwater fishes"
+format:
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    embed-resources: true
+execute:
+  warning: true
+  message: false
+---
+
+## Purpose
+
+Classifies each retained population by landscape history:
+
+| Variable | Timescale | Source |
+|---|---|---|
+| `Tectonic` (Active / Stable) | deep time | WSA9 aggregated ecoregion |
+| `Ice` (Glaciated / Unglaciated) | Last Glacial Maximum (~18 ka) | `ice18k` ice-sheet extent |
+| `SeaLevel` (Flooded / Unflooded) | Pleistocene–Holocene sea level | Coastal Plains ecoregion south of 40.8° N |
+| `Topography` (Highland / Lowland) | current | mean catchment elevation from script 04 |
+
+These combine into the `History` category. The output is keyed by `Pop_id`.
+
+## Setup
+
+```{r}
+#| label: setup
+library(here)
+library(dplyr)
+library(readr)
+library(sf)
+library(tigris)
+library(ggplot2)
+library(knitr)
+
+sf::sf_use_s2(FALSE)               # planar work in EPSG:5070
+options(tigris_use_cache = TRUE)
+
+fmt <- function(x) format(x, big.mark = ",")
+```
+
+```{r}
+#| label: paths
+path_pops      <- here("Data", "interim", "GenDiv_merged.csv")
+path_lookup    <- here("Data", "interim", "comid_lookup.csv")
+path_landscape <- here("Data", "interim", "landscape_nhd.csv")
+path_ice       <- here("Data", "external", "hist_shp", "ice", "ice18k.shp")
+path_ecor      <- here("Data", "external", "hist_shp", "Aggr_Ecoregions_2015",
+                       "Aggr_Ecoregions_2015.shp")
+path_out       <- here("Data", "interim", "landscape_hist.csv")
+```
+
+```{r}
+#| label: parameters
+crs_work              <- 5070
+active_ecoregions     <- c("WMT", "XER")   # Western Mountains, Xeric
+flooded_ecoregion     <- "CPL"             # Coastal Plains
+flooded_max_lat       <- 40.8              # northern limit of the flooded coastal plain
+highland_threshold_m  <- 250
+max_ecoregion_dist_m  <- 5000              # nearest-ecoregion fallback for points just outside
+
+history_levels <- c(
+  "Stable Unglaciated Lowland",
+  "Stable Unglaciated Highland",
+  "Stable Unglaciated Lowland - Flooded",
+  "Stable Glaciated Lowland",
+  "Stable Glaciated Highland",
+  "Active Unglaciated Lowland",
+  "Active Unglaciated Highland",
+  "Active Glaciated Highland"
+)
+```
+
+## Sites
+
+```{r}
+#| label: read-sites
+lookup <- read_csv(path_lookup, show_col_types = FALSE) |>
+  filter(retained) |>
+  select(Pop_id, comid)
+
+coords <- read_csv(path_pops, show_col_types = FALSE) |>
+  select(Pop_id, Latitude, Longitude)
+
+elev <- read_csv(path_landscape, col_select = c(comid, lc_meanelev_m),
+                 show_col_types = FALSE)
+
+sites <- lookup |>
+  left_join(coords, by = "Pop_id") |>
+  left_join(elev, by = "comid")
+
+stopifnot(
+  "Pop_id duplicated"   = !anyDuplicated(sites$Pop_id),
+  "Missing coordinates" = !anyNA(sites$Latitude)
+)
+
+sites_sf <- st_as_sf(sites, coords = c("Longitude", "Latitude"), crs = 4326,
+                     remove = FALSE) |>
+  st_transform(crs_work)
+```
+
+**`r fmt(nrow(sites))`** retained populations;
+`r fmt(sum(is.na(sites$lc_meanelev_m)))` have no catchment elevation.
+
+## Glaciation
+
+```{r}
+#| label: ice
+ice <- st_read(path_ice, quiet = TRUE) |>
+  filter(SYMB == "ICE") |>
+  st_transform(crs_work) |>
+  st_make_valid()
+
+# Any overlap with an ice polygon; avoids duplicate rows where polygons overlap
+sites$glaciated <- lengths(st_intersects(sites_sf, ice)) > 0
+```
+
+**`r fmt(sum(sites$glaciated))`** populations
+(`r round(100 * mean(sites$glaciated), 1)`%) are within the ~18 ka ice extent.
+
+## Ecoregion
+
+```{r}
+#| label: ecoregion
+ecor <- st_read(path_ecor, quiet = TRUE) |>
+  select(WSA9) |>
+  st_transform(crs_work) |>
+  st_make_valid()
+
+hits <- st_intersects(sites_sf, ecor)
+sites$WSA9 <- vapply(hits, \(i) if (length(i)) ecor$WSA9[i[1]] else NA_character_,
+                     character(1))
+sites$ecoregion_match <- if_else(is.na(sites$WSA9), NA_character_, "within")
+sites$ecoregion_dist_m <- 0
+
+# Points just outside every polygon (shorelines, generalised boundaries):
+# take the nearest ecoregion if it's close enough
+miss <- which(is.na(sites$WSA9))
+if (length(miss)) {
+  i_near <- st_nearest_feature(sites_sf[miss, ], ecor)
+  d_near <- as.numeric(st_distance(sites_sf[miss, ], ecor[i_near, ],
+                                   by_element = TRUE))
+  close  <- d_near <= max_ecoregion_dist_m
+  sites$WSA9[miss[close]]            <- ecor$WSA9[i_near[close]]
+  sites$ecoregion_match[miss[close]] <- "nearest"
+  sites$ecoregion_dist_m[miss]       <- d_near
+}
+```
+
+`r fmt(sum(sites$ecoregion_match == "within", na.rm = TRUE))` populations fall
+inside an ecoregion polygon. `r fmt(length(miss))` do not;
+`r fmt(sum(sites$ecoregion_match == "nearest", na.rm = TRUE))` of those were
+assigned the nearest ecoregion (within `r fmt(max_ecoregion_dist_m)` m), and
+**`r fmt(sum(is.na(sites$WSA9)))`** remain unassigned.
+
+```{r}
+#| label: ecoregion-table
+count(sites, WSA9, name = "populations") |>
+  kable()
+```
+
+## Classification
+
+Missing inputs give `NA`, rather than defaulting to "Stable" or "Unflooded"
+as in the original pipeline.
+
+```{r}
+#| label: classify
+hist_dat <- sites |>
+  mutate(
+    Ice = if_else(glaciated, "Glaciated", "Unglaciated"),
+    Tectonic = case_when(
+      is.na(WSA9)                    ~ NA_character_,
+      WSA9 %in% active_ecoregions    ~ "Active",
+      TRUE                           ~ "Stable"
+    ),
+    SeaLevel = case_when(
+      is.na(WSA9)                                           ~ NA_character_,
+      WSA9 == flooded_ecoregion & Latitude < flooded_max_lat ~ "Flooded",
+      TRUE                                                  ~ "Unflooded"
+    ),
+    Topography = case_when(
+      is.na(lc_meanelev_m)                  ~ NA_character_,
+      lc_meanelev_m > highland_threshold_m  ~ "Highland",
+      TRUE                                  ~ "Lowland"
+    ),
+    History = if_else(
+      is.na(Tectonic) | is.na(Topography),
+      NA_character_,
+      paste0(Tectonic, " ", Ice, " ", Topography,
+             if_else(SeaLevel == "Flooded", " - Flooded", ""))
+    )
+  )
+
+unexpected <- setdiff(na.omit(unique(hist_dat$History)), history_levels)
+if (length(unexpected)) {
+  warning("History combinations not in history_levels: ",
+          paste(unexpected, collapse = "; "))
+}
+
+hist_dat$History <- factor(hist_dat$History,
+                           levels = c(history_levels, sort(unexpected)))
+```
+
+```{r}
+#| label: history-table
+hist_dat |>
+  count(History, name = "populations", .drop = FALSE) |>
+  mutate(share = paste0(round(100 * populations / nrow(hist_dat), 1), "%")) |>
+  kable()
+```
+
+**`r fmt(sum(hist_dat$Topography == "Highland", na.rm = TRUE))`** populations
+are Highland and **`r fmt(sum(hist_dat$Topography == "Lowland", na.rm = TRUE))`**
+Lowland at the `r highland_threshold_m` m threshold.
+`r fmt(sum(is.na(hist_dat$History)))` have no `History` because of a missing
+ecoregion or elevation.
+
+## Map
+
+```{r}
+#| label: map
+#| fig-width: 9
+#| fig-height: 5.5
+states <- tigris::states(cb = TRUE, year = 2023, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c("HI", "PR", "AK", "MP", "GU", "AS", "VI")) |>
+  st_transform(crs_work)
+
+map_dat <- left_join(select(sites_sf, Pop_id),
+                     select(hist_dat, Pop_id, History), by = "Pop_id")
+
+ggplot() +
+  geom_sf(data = st_crop(ice, st_bbox(states)), fill = "#DCEBF5", colour = NA) +
+  geom_sf(data = states, fill = NA, colour = "grey60") +
+  geom_sf(data = map_dat, aes(colour = History), size = 1.2) +
+  scale_colour_viridis_d(option = "turbo", na.value = "grey30") +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  guides(colour = guide_legend(ncol = 2))
+```
+
+## Write output
+
+```{r}
+#| label: write-output
+hist_dat |>
+  select(Pop_id, WSA9, ecoregion_match, ecoregion_dist_m,
+         Ice, Tectonic, SeaLevel, Topography, History) |>
+  write_csv(path_out)
+```
+
+Wrote **`r fmt(nrow(hist_dat))`** rows to `r basename(path_out)`. CSV doesn't
+store factor order, so the final assembly script should re-apply
+`history_levels`.

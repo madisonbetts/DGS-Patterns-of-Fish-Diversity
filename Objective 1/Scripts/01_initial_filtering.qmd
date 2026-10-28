@@ -1,0 +1,278 @@
+---
+title: "Objective 1 — Initial filtering"
+subtitle: "Macrogenetics of US freshwater fishes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+---
+
+## Purpose
+
+This document filters the MacroPopGen species (`spec_tab`) and population
+(`pop_tab`) tables down to freshwater-breeding fishes sampled in the
+contiguous United States, and writes `GenDiv_filtered.csv` for downstream
+Objective 1 analyses.
+
+## Setup
+
+```{r}
+#| label: setup
+
+library(here)      # project-relative paths
+library(readxl)    # read_xlsx()
+library(dplyr)
+library(sf)
+library(tigris)    # state boundaries for the map
+library(ggplot2)
+library(knitr)     # kable() for the filtering summary
+
+sf::sf_use_s2(FALSE)
+options(tigris_use_cache = TRUE)  # avoid re-downloading boundaries on each render
+
+# Formats counts for inline reporting, e.g. 1,304
+fmt <- function(x) format(x, big.mark = ",")
+```
+
+```{r}
+#| label: paths
+
+path_spec <- here("Data", "external", "spec_tab_v2025-03-31.xlsx")
+path_pop  <- here("Data", "external", "pop_tab_v2025-03-31.xlsx")
+path_out  <- here("Data", "interim", "GenDiv_filtered.csv")
+```
+
+## Species table
+
+```{r}
+#| label: read-species
+sp_raw <- read_xlsx(path_spec)
+```
+
+The species table contains **`r fmt(nrow(sp_raw))`** species–study records
+(one row per `Study_id`).
+
+### Step 1 — Fishes only
+
+```{r}
+#| label: filter-fishes
+sp_fish <- sp_raw |>
+  filter(Life_form == "Fishes")
+```
+
+Keeping `Life_form == "Fishes"` retains **`r fmt(nrow(sp_fish))`** records
+and removes **`r fmt(nrow(sp_raw) - nrow(sp_fish))`**
+(`r round(100 * (1 - nrow(sp_fish) / nrow(sp_raw)), 1)`%).
+
+### Step 2 — Freshwater breeders, excluding bull shark
+
+```{r}
+#| label: filter-freshwater
+sp_fw <- sp_fish |>
+  filter(Habitat_breeding == "Freshwater")
+
+# Bull shark (Carcharhinus leucas) is coded as a freshwater breeder but is a
+# marine/euryhaline elasmobranch. Excluded by its stable species ID rather than
+# by common name, which could change between EOL versions.
+excluded_species <- c("CALE")  # Carcharhinus leucas
+
+sp <- sp_fw |>
+  filter(!Spec_id %in% excluded_species)
+```
+
+Keeping `Habitat_breeding == "Freshwater"` removes
+**`r fmt(nrow(sp_fish) - nrow(sp_fw))`** marine-breeding records, leaving
+`r fmt(nrow(sp_fw))`. Dropping bull shark removes a further
+**`r fmt(nrow(sp_fw) - nrow(sp))`**, leaving **`r fmt(nrow(sp))`** records
+covering `r fmt(n_distinct(sp$Spec_id))` species.
+
+
+## Population table
+
+```{r}
+#| label: read-populations
+pop_raw <- read_xlsx(path_pop)
+
+# Used only for reporting: how many rows at each step belong to the
+# freshwater fish studies retained above (the filters themselves are
+# applied to all taxa, as in the original script).
+n_fish <- function(df) sum(df$Study_id %in% sp$Study_id)
+```
+
+The population table has **`r fmt(nrow(pop_raw))`** populations across all
+taxa, of which **`r fmt(n_fish(pop_raw))`** belong to the
+`r fmt(nrow(sp))` retained fish studies.
+
+### Step 3 — United States only
+
+```{r}
+#| label: filter-usa
+pop_usa <- pop_raw |>
+  filter(Geog_1 == "United States of America")
+```
+
+Restricting to `Geog_1 == "United States of America"` keeps
+`r fmt(nrow(pop_usa))` populations (all taxa), removing
+`r fmt(nrow(pop_raw) - nrow(pop_usa))`. For the fish studies this keeps
+**`r fmt(n_fish(pop_usa))`** and removes
+**`r fmt(n_fish(pop_raw) - n_fish(pop_usa))`** non-US populations.
+
+### Step 4 — Latitude 25–50° N (contiguous US proxy)
+
+```{r}
+#| label: filter-latitude
+# Latitude window drops Alaska (and Hawaii). Preferred over a spatial
+# intersection with state polygons, which would also drop real US sites in
+# open Great Lakes and Delaware Bay waters.
+pop_lat <- pop_usa |>
+  filter(Latitude < 50, Latitude > 25)
+```
+
+The latitude window removes `r fmt(nrow(pop_usa) - nrow(pop_lat))`
+populations across all taxa; for fish studies it removes
+**`r fmt(n_fish(pop_usa) - n_fish(pop_lat))`** (Alaska), leaving
+**`r fmt(n_fish(pop_lat))`**.
+
+### Step 5 — Remove mislabelled populations
+
+```{r}
+#| label: filter-mislabelled
+# Populations whose Geog_1 says USA but whose coordinates are outside it.
+# COCL-1-28 (Geog_2 "O3", 47.87 N, 75.54 W) is in Quebec; the other 29
+# populations in study COCL-1 are labelled Canada. This replaces the earlier
+# bounding box (>= 46 N, 80-72 W), which removed only this population.
+mislabelled_pops <- c("COCL-1-28")
+
+pop <- pop_lat |>
+  filter(!Pop_id %in% mislabelled_pops)
+
+removed_mislabelled <- anti_join(pop_lat, pop, by = "Pop_id")
+stopifnot(
+  "A listed mislabelled Pop_id was not found" =
+    nrow(removed_mislabelled) == length(mislabelled_pops)
+)
+```
+
+This removes `r fmt(nrow(removed_mislabelled))` population(s),
+`r fmt(n_fish(removed_mislabelled))` of them from fish studies:
+
+```{r}
+#| label: show-mislabelled-removed
+removed_mislabelled |>
+  select(Study_id, Pop_id, Geog_1, Geog_2, Latitude, Longitude)
+```
+
+This leaves **`r fmt(nrow(pop))`** populations (all taxa), of which
+**`r fmt(n_fish(pop))`** belong to fish studies.
+
+## Join species and populations
+
+```{r}
+#| label: join
+dat <- inner_join(
+  sp, pop,
+  by = c("Study_id", "Spec_id"),
+  relationship = "one-to-many"
+)
+```
+
+The inner join keeps **`r fmt(nrow(dat))`** populations from
+**`r fmt(n_distinct(dat$Study_id))`** studies and
+**`r fmt(n_distinct(dat$Spec_id))`** species. Of the `r fmt(nrow(sp))`
+freshwater fish studies, `r fmt(nrow(sp) - n_distinct(dat$Study_id))` have no
+populations in the filtered US data and drop out here.
+
+### Sanity checks
+
+```{r}
+#| label: checks
+stopifnot(
+  "Pop_id is not unique"             = !anyDuplicated(dat$Pop_id),
+  "Fish study populations dropped by the species-ID join" =
+    nrow(dat) == n_fish(pop),
+  "Missing He values"                = !anyNA(dat$He),
+  "Missing coordinates"              = !anyNA(dat$Latitude) && !anyNA(dat$Longitude),
+  "He outside [0, 1]"                = all(between(dat$He, 0, 1))
+)
+```
+
+### Filtering summary
+
+```{r}
+#| label: filter-summary
+filter_log <- tibble::tribble(
+  ~step, ~table, ~n_after,
+  "Raw species table",               "species", nrow(sp_raw),
+  "1. Fishes only",                  "species", nrow(sp_fish),
+  "2a. Freshwater breeding",         "species", nrow(sp_fw),
+  "2b. Drop bull shark",             "species", nrow(sp),
+  "Raw population table (fish)",     "pops",    n_fish(pop_raw),
+  "3. United States",                "pops",    n_fish(pop_usa),
+  "4. Latitude 25–50° N",            "pops",    n_fish(pop_lat),
+  "5. Mislabelled populations",      "pops",    n_fish(pop),
+  "Joined (final)",                  "pops",    nrow(dat)
+) |>
+  group_by(table) |>
+  mutate(n_removed = lag(n_after) - n_after) |>
+  ungroup()
+
+kable(filter_log, format.args = list(big.mark = ","))
+```
+
+Population counts in the summary are restricted to rows belonging to the
+retained fish studies so the steps are comparable.
+
+## Map of retained populations
+
+```{r}
+#| label: map
+#| fig-width: 9
+#| fig-height: 5.5
+# Boundary year pinned so the map doesn't change when tigris updates its default
+states <- tigris::states(cb = TRUE, year = 2023, progress_bar = FALSE) |>
+  filter(!STUSPS %in% c("HI", "PR", "AK", "MP", "GU", "AS", "VI")) |>
+  st_transform(crs = 5070)
+
+dat_sf <- st_as_sf(dat, coords = c("Longitude", "Latitude"), crs = 4326) |>
+  st_transform(crs = 5070)
+
+ggplot() +
+  geom_sf(data = states, fill = "white") +
+  geom_sf(data = dat_sf, aes(color = He)) +
+  scale_color_viridis_c(
+    option = "magma",
+    limits = range(dat$He),
+    breaks = seq(0.1, 0.9, by = 0.2)  # spans the observed range (~0.07-0.95)
+  ) +
+  theme_minimal()
+```
+
+## Write output
+
+```{r}
+#| label: write-output
+output_cols <- c(
+  "Data_source", "Spec_id", "Study_id", "Spec_Latin_GenDivRange", "DOI_study",
+  "DOI_data", "Spec_Latin_publication", "N_pops", "N_loci", "Spec_Latin_GBIF",
+  "Genus_GBIF", "Family_GBIF", "Order_GBIF", "Class_GBIF", "Phylum_GBIF",
+  "Spec_common_EOL", "BIOME", "Habitat_fishbase", "Habitat_breeding",
+  "Habitat_adulthood", "Pop_id", "Geog_2", "Latitude", "Longitude",
+  "N", "A", "A_mean", "A_tot", "A_eff", "A_private", "N_genot", "Ar", "Ho", "He"
+)
+
+filt_dat <- dat |>
+  select(all_of(output_cols))
+
+write.csv(filt_dat, path_out, row.names = FALSE)
+```
+
+Wrote **`r fmt(nrow(filt_dat))`** rows × `r ncol(filt_dat)` columns to
+`r basename(path_out)`.
+

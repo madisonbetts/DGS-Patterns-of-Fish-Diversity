@@ -1,0 +1,170 @@
+---
+title: "Objective 1 — Contemporary landscape variables"
+subtitle: "Macrogenetics of US freshwater fishes"
+format:
+  html:
+    toc: true
+    code-fold: show
+    code-tools: true
+    df-print: paged
+    embed-resources: true
+execute:
+  warning: true
+  message: false
+---
+
+## Purpose
+
+Extracts NHDPlusV2 landscape variables for every COMID retained in
+`03_snap_to_nhdplus.qmd`. The output is keyed by `comid` and keeps all
+variables; choosing predictors happens in the final assembly script.
+
+## Setup
+
+```{r}
+#| label: setup
+library(here)
+library(dplyr)
+library(readr)
+library(arrow)
+library(knitr)
+
+fmt <- function(x) format(x, big.mark = ",")
+```
+
+```{r}
+#| label: paths
+path_lookup        <- here("Data", "interim", "comid_lookup.csv")
+path_landscape_csv <- here("Data", "external",
+                           "nhdplusv2_landscape_variables_01302026_0952am.csv")
+dir_landscape_pq   <- here("Data", "interim", "cache", "nhdplusv2_landscape")
+path_out           <- here("Data", "interim", "landscape_nhd.csv")
+```
+
+## One-time conversion to Parquet
+
+The source CSV is about 4.6 GB, and filtering it means scanning the whole
+file every time. It's converted once to a Parquet dataset, streamed so it
+never has to fit in memory. Later renders skip this chunk and query the
+Parquet copy in seconds. Delete `dir_landscape_pq` to rebuild it if the CSV
+changes.
+
+```{r}
+#| label: convert-parquet
+if (!dir.exists(dir_landscape_pq)) {
+  col_names <- names(read_csv(path_landscape_csv, n_max = 0,
+                              show_col_types = FALSE))
+
+  # Everything numeric except the three text columns
+  schema_list <- setNames(rep(list(float64()), length(col_names)), col_names)
+  for (col in c("gnis_name", "ftype", "summer_temp_mean_class")) {
+    schema_list[[col]] <- string()
+  }
+
+  open_csv_dataset(path_landscape_csv,
+                   schema = schema(schema_list),
+                   skip   = 1) |>                  # header replaced by schema
+    write_dataset(dir_landscape_pq, format = "parquet")
+}
+
+landscape_ds <- open_dataset(dir_landscape_pq)
+```
+
+The landscape table has **`r length(names(landscape_ds))`** columns.
+
+## COMIDs to extract
+
+```{r}
+#| label: read-lookup
+lookup <- read_csv(path_lookup, show_col_types = FALSE) |>
+  filter(retained)
+
+comids <- unique(lookup$comid)
+```
+
+`r fmt(nrow(lookup))` retained populations map to
+**`r fmt(length(comids))`** unique COMIDs.
+
+## Extract
+
+```{r}
+#| label: extract
+landscape <- landscape_ds |>
+  filter(comid %in% comids) |>
+  collect()
+
+stopifnot("COMID duplicated in landscape table" = !anyDuplicated(landscape$comid))
+
+missing_comids <- setdiff(comids, landscape$comid)
+pops_missing   <- filter(lookup, comid %in% missing_comids)
+```
+
+**`r fmt(nrow(landscape))`** of `r fmt(length(comids))` COMIDs are in the
+landscape table. `r fmt(length(missing_comids))` are not, affecting
+`r fmt(nrow(pops_missing))` populations.
+
+## Derived variables
+
+NHDPlusV2 elevations are stored in **centimetres**. Metre versions are added
+alongside the originals; the original pipeline compared centimetres against a
+250 m threshold.
+
+```{r}
+#| label: derive
+landscape <- landscape |>
+  mutate(
+    lc_minelev_m  = lc_minelev / 100,
+    lc_maxelev_m  = lc_maxelev / 100,
+    lc_meanelev_m = (lc_minelev_m + lc_maxelev_m) / 2,
+    lc_relief_m   = lc_maxelev_m - lc_minelev_m
+  )
+```
+
+Mean catchment elevation ranges from
+`r round(min(landscape$lc_meanelev_m, na.rm = TRUE))` to
+`r fmt(round(max(landscape$lc_meanelev_m, na.rm = TRUE)))` m (median
+`r round(median(landscape$lc_meanelev_m, na.rm = TRUE))` m).
+
+## Variable groups
+
+```{r}
+#| label: variable-groups
+tibble(variable = names(landscape)) |>
+  mutate(group = case_when(
+    startsWith(variable, "lc_") ~ "lc_  local catchment",
+    startsWith(variable, "nc_") ~ "nc_  network (upstream) catchment",
+    startsWith(variable, "lb_") ~ "lb_  local, land cover / impervious",
+    startsWith(variable, "nb_") ~ "nb_  network, land cover / impervious",
+    TRUE                        ~ "flowline attributes and other"
+  )) |>
+  count(group, name = "variables") |>
+  kable()
+```
+
+The original pipeline kept only the `lc_` and `nc_` variables plus a few
+flowline attributes. All columns are kept here so predictor choice can be
+made once, by hypothesis and timescale, in the final assembly script.
+
+## Missing values
+
+```{r}
+#| label: missingness
+landscape |>
+  summarise(across(everything(), \(x) sum(is.na(x)))) |>
+  tidyr::pivot_longer(everything(), names_to = "variable",
+                      values_to = "comids_missing") |>
+  filter(comids_missing > 0) |>
+  arrange(desc(comids_missing)) |>
+  mutate(share = paste0(round(100 * comids_missing / nrow(landscape), 1), "%")) |>
+  kable(format.args = list(big.mark = ","))
+```
+
+## Write output
+
+```{r}
+#| label: write-output
+write_csv(landscape, path_out)
+```
+
+Wrote **`r fmt(nrow(landscape))`** COMIDs × `r ncol(landscape)` variables to
+`r basename(path_out)`.
